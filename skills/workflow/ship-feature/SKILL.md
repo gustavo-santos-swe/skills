@@ -1,76 +1,76 @@
 ---
 name: ship-feature
-description: Commitar com conventional commits (one-liner), fazer push e abrir PR — nunca mergear na main. Use quando o usuário diz "ship", "abre o PR", "commita e abre PR", "finaliza a feature", "manda pro GitHub", ou quando a implementação está pronta e falta integrar via PR.
+description: Commit with conventional commits (one-liner), push, and open a PR — never merge to main. Use when the user says "ship", "open the PR", "commit and open PR", "finish the feature", "push to GitHub", or when the implementation is ready and needs to be integrated via PR.
 metadata:
   area: workflow
   upstream:
     inspired_by: obra/superpowers
     path: skills/finishing-a-development-branch
     url: https://github.com/obra/superpowers/tree/main/skills/finishing-a-development-branch
-    note: Versão customizada — sem merge local, sem worktrees, foco em commit + PR.
+    note: Custom version — no local merge, no worktrees, focused on commit + PR.
 ---
 
 # Ship Feature
 
-Finalizar uma feature: verificar, commitar, push, abrir PR. **Nunca mergear na main.**
+Finish a feature: verify, commit, push, open PR. **Never merge to main.**
 
-**Anunciar no início:** "Estou usando a skill ship-feature para finalizar o trabalho."
+**Announce at start:** "Using the ship-feature skill to finish the work."
 
-## Regras absolutas
+## Absolute rules
 
-**Nunca fazer** (a menos que o usuário peça explicitamente):
+**Never do** (unless the user explicitly asks):
 
-- `git merge` na `main` ou `master`
-- `git push origin main` (ou qualquer push direto na branch base)
+- `git merge` into `main` or `master`
+- `git push origin main` (or any direct push to the base branch)
 - `gh pr merge`
 - `git checkout main && git merge <feature-branch>`
 
-**Fluxo único:** verificar → commitar → push → abrir PR → reportar URL.
+**Single flow:** verify → commit → push → open PR → report URL.
 
-Não apresentar menu de opções. Não oferecer merge local.
+Do not present option menus. Do not offer local merge.
 
-## Passo 1: Verificar estado
+## Step 1: Check state
 
 ```bash
 git status
 git branch --show-current
 ```
 
-- Se estiver em `main` ou `master` com mudanças não commitadas, **pare** e avise: trabalho deve estar em uma branch de feature.
-- Se a branch atual for `main`/`master` sem mudanças pendentes, **pare** — não há o que shippar.
+- If on `main` or `master` with uncommitted changes, **stop** and warn: work should be on a feature branch.
+- If the current branch is `main`/`master` with no pending changes, **stop** — nothing to ship.
 
-Identificar a branch base (geralmente `main`):
+Identify the base branch (usually `main`):
 
 ```bash
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 ```
 
-## Passo 2: Verificar qualidade
+## Step 2: Check quality
 
-Rodar o que o projeto usa (adaptar ao stack):
+Run whatever the project uses (adapt to the stack):
 
 ```bash
-# exemplos — usar o que existir no repo
+# examples — use whatever exists in the repo
 npm test
 # npm run lint
 # npm run typecheck
 ```
 
-Se falhar: reportar erros e **parar**. Não commitar nem abrir PR com testes quebrados.
+If it fails: report errors and **stop**. Do not commit or open a PR with broken tests.
 
-## Passo 3: Commitar
+## Step 3: Commit
 
-Se houver mudanças não commitadas:
+If there are uncommitted changes:
 
-1. Revisar o diff: `git diff` e `git diff --staged`
-2. Agrupar em commit(s) lógico(s) — preferir **um commit** se a feature for coesa
-3. Mensagem **one-liner** no formato [Conventional Commits](references/conventional-commits.md):
+1. Review the diff: `git diff` and `git diff --staged`
+2. Group into logical commit(s) — prefer **one commit** if the feature is cohesive
+3. **One-liner** message in [Conventional Commits](references/conventional-commits.md) format:
 
 ```
-<type>(<scope>): <descrição imperativa em minúsculas>
+<type>(<scope>): <imperative description in lowercase>
 ```
 
-Exemplos:
+Examples:
 
 ```
 feat(auth): add password reset flow
@@ -78,67 +78,67 @@ fix(api): handle null user on session lookup
 refactor(skills): extract upstream metadata helper
 ```
 
-4. Commitar:
+4. Commit:
 
 ```bash
-git add <arquivos relevantes>
+git add <relevant files>
 git commit -m "$(cat <<'EOF'
-feat(scope): descrição curta e clara
+feat(scope): short and clear description
 
 EOF
 )"
 ```
 
-**Não** usar `--no-verify` a menos que o usuário peça.
+**Do not** use `--no-verify` unless the user asks.
 
-Se o usuário já commitou tudo, pular para o passo 4.
+If the user has already committed everything, skip to step 4.
 
-## Passo 4: Push
+## Step 4: Push
 
 ```bash
 git push -u origin HEAD
 ```
 
-Se o push falhar (branch remota divergiu), reportar e pedir orientação — não force push.
+If push fails (remote branch diverged), report and ask for guidance — do not force push.
 
-## Passo 5: Abrir PR
+## Step 5: Open PR
 
-Verificar se já existe PR para a branch:
+Check whether a PR already exists for the branch:
 
 ```bash
 gh pr view --json url,state 2>/dev/null
 ```
 
-- Se **já existe**: reportar a URL e atualizar descrição se o usuário pediu.
-- Se **não existe**: criar com `gh pr create`.
+- If it **already exists**: report the URL and update the description if the user asked.
+- If it **does not exist**: create with `gh pr create`.
 
-**Título do PR:** mesma linha do commit principal, ou resumo ligeiramente mais legível.
+**PR title:** same line as the main commit, or a slightly more readable summary.
 
-**Corpo:** seguir `references/pr-template.md`.
+**Body:** follow `references/pr-template.md`.
 
 ```bash
-gh pr create --title "feat(scope): descrição" --body "$(cat <<'EOF'
+gh pr create --title "feat(scope): description" --body "$(cat <<'EOF'
 ## Summary
-- <bullet 1: o que mudou>
-- <bullet 2: por quê>
+- <bullet 1: what changed>
+- <bullet 2: why>
 
 ## Test plan
-- [ ] <como verificar>
+- [ ] <how to verify>
 
 EOF
 )"
 ```
 
-## Passo 6: Reportar
+## Step 6: Report
 
-Entregar ao usuário:
+Deliver to the user:
 
 1. Branch name
 2. Commit SHA (`git rev-parse HEAD`)
-3. URL do PR
-4. O que foi verificado (testes rodados)
+3. PR URL
+4. What was verified (tests run)
 
-Exemplo:
+Example:
 
 ```
 Shipped on branch feat/auth-reset (abc1234).
@@ -146,17 +146,17 @@ PR: https://github.com/org/repo/pull/42
 Tests: npm test — passed.
 ```
 
-## Erros comuns
+## Common errors
 
-| Problema | Correção |
-|----------|----------|
-| Commitar na main | Criar branch de feature primeiro |
-| Merge local "mais rápido" | Proibido — sempre PR |
-| PR sem test plan | Preencher checklist no template |
-| Mensagem vaga (`fix stuff`) | Usar type + scope + descrição específica |
-| Múltiplos commits WIP | Squash ou reorganizar antes do PR, se o usuário preferir um commit limpo |
+| Problem | Fix |
+|---------|-----|
+| Committing to main | Create a feature branch first |
+| Local merge "faster" | Forbidden — always use a PR |
+| PR without test plan | Fill in the checklist in the template |
+| Vague message (`fix stuff`) | Use type + scope + specific description |
+| Multiple WIP commits | Squash or reorganize before the PR, if the user prefers a clean commit |
 
-## Referências
+## References
 
-- Formato de commit: `references/conventional-commits.md`
-- Template de PR: `references/pr-template.md`
+- Commit format: `references/conventional-commits.md`
+- PR template: `references/pr-template.md`

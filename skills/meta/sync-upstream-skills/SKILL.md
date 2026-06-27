@@ -1,134 +1,134 @@
 ---
 name: sync-upstream-skills
-description: Verifica e sincroniza skills importadas com os repos upstream via metadata.upstream. Use quando o usuário pede "sync skills", "atualizar skills", "checar upstream", "skills desatualizadas", ou após importar/adaptar uma skill de outro repo.
+description: Check and sync imported skills with upstream repos via metadata.upstream. Use when the user says "sync skills", "update skills", "check upstream", "outdated skills", or after importing/adapting a skill from another repo.
 metadata:
   area: meta
 ---
 
 # Sync Upstream Skills
 
-Manter skills importadas alinhadas com os repos fonte, usando `metadata.upstream` em cada `SKILL.md`.
+Keep imported skills aligned with their source repos, using `metadata.upstream` in each `SKILL.md`.
 
-**Anunciar no início:** "Estou usando a skill sync-upstream-skills."
+**Announce at start:** "Using the sync-upstream-skills skill."
 
-## Quando usar
+## When to use
 
-- Checar se skills importadas estão desatualizadas
-- Sincronizar uma skill **syncable** (sem `note`) após confirmar com o usuário
-- Validar `metadata.upstream` após importar skill nova
-- Antes de adaptar skill upstream — saber o que mudou desde o último sync
+- Check whether imported skills are outdated
+- Sync a **syncable** skill (no `note`) after confirming with the user
+- Validate `metadata.upstream` after importing a new skill
+- Before adapting an upstream skill — know what changed since the last sync
 
-**Quando NÃO usar:** skills custom (`ship-feature`) ou template sem `repo` — são `custom`/`local`.
+**When NOT to use:** custom skills (`ship-feature`) or templates without a `repo` — those are `custom`/`local`.
 
-## Passo 1: Verificar todas as skills
+## Step 1: Check all skills
 
-Na raiz do repo `skills/`:
+From the repo root `skills/`:
 
 ```bash
 python skills/meta/sync-upstream-skills/scripts/check-upstream.py
 ```
 
-Sem autenticação a API do GitHub limita a **60 req/h**. Com muitas skills, exporte um token:
+Without authentication the GitHub API is limited to **60 req/h**. With many skills, export a token:
 
 ```bash
 export GITHUB_TOKEN=ghp_...
 python skills/meta/sync-upstream-skills/scripts/check-upstream.py
 ```
 
-O script lista cada skill com:
+The script lists each skill with:
 
-| Categoria | Significado |
-|-----------|-------------|
-| `syncable` | Tem `repo` + `path` + `commit`, sem `note` — sync automático permitido |
-| `adapted` | Tem `note` — conteúdo local difere do upstream; merge manual |
-| `custom` | `inspired_by` ou sem `repo` — não sincronizar |
-| `local` | Sem upstream — skill nativa/template |
+| Category | Meaning |
+|----------|---------|
+| `syncable` | Has `repo` + `path` + `commit`, no `note` — automatic sync allowed |
+| `adapted` | Has `note` — local content differs from upstream; manual merge required |
+| `custom` | `inspired_by` or no `repo` — do not sync |
+| `local` | No upstream — native/template skill |
 
-Exit code `1` = há skills desatualizadas (útil em CI opcional).
+Exit code `1` = outdated skills found (useful in optional CI).
 
-## Passo 2: Apresentar relatório
+## Step 2: Present report
 
-Resumir para o usuário:
+Summarize for the user:
 
-1. Quantas desatualizadas
-2. Lista por skill: local SHA → upstream SHA
-3. Separar **syncable** vs **adapted** — adapted nunca sync automático sem `--force`
+1. How many are outdated
+2. List per skill: local SHA → upstream SHA
+3. Separate **syncable** vs **adapted** — adapted skills are never auto-synced without `--force`
 
-Para skill adaptada desatualizada, sugerir:
+For an outdated adapted skill, suggest:
 
 ```bash
-# Ver diff upstream vs local (exemplo brainstorming)
+# View diff upstream vs local (example: brainstorming)
 curl -sL "https://api.github.com/repos/obra/superpowers/compare/LOCAL_SHA...UPSTREAM_SHA" | head
 ```
 
-Ou clonar/sparse-checkout temporário e `diff -r`.
+Or clone/sparse-checkout temporarily and `diff -r`.
 
-## Passo 3: Sincronizar (uma skill por vez)
+## Step 3: Sync (one skill at a time)
 
-**Regra:** uma skill por execução. Confirmar com o usuário antes de escrever arquivos.
+**Rule:** one skill per run. Confirm with the user before writing files.
 
-### Skill syncable (sem `note`)
+### Syncable skill (no `note`)
 
 ```bash
 # Preview
-python skills/meta/sync-upstream-skills/scripts/sync-skill.py NOME --dry-run
+python skills/meta/sync-upstream-skills/scripts/sync-skill.py NAME --dry-run
 
-# Aplicar
-python skills/meta/sync-upstream-skills/scripts/sync-skill.py NOME
+# Apply
+python skills/meta/sync-upstream-skills/scripts/sync-skill.py NAME
 ```
 
-O script:
+The script:
 
-1. Resolve o commit mais recente que tocou `metadata.upstream.path`
-2. Baixa todos os arquivos sob esse path
-3. Escreve em `skills/NOME/`
-4. Atualiza `commit` e `synced_at` no frontmatter
+1. Resolves the most recent commit that touched `metadata.upstream.path`
+2. Downloads all files under that path
+3. Writes them to `skills/NAME/`
+4. Updates `commit` and `synced_at` in the frontmatter
 
-### Skill adaptada (com `note`)
+### Adapted skill (with `note`)
 
-1. Mostrar o que mudou no upstream desde `commit` local
-2. Aplicar mudanças **manualmente** preservando adaptações (ex.: remover subagents, worktrees)
-3. Atualizar `commit` e `synced_at` no frontmatter
-4. Só usar `--force` se o usuário aceitar sobrescrever e re-aplicar adaptações depois:
+1. Show what changed upstream since the local `commit`
+2. Apply changes **manually** preserving adaptations (e.g.: removing subagents, worktrees)
+3. Update `commit` and `synced_at` in the frontmatter
+4. Only use `--force` if the user accepts overwriting and re-applying adaptations afterwards:
 
 ```bash
-python skills/meta/sync-upstream-skills/scripts/sync-skill.py NOME --force
+python skills/meta/sync-upstream-skills/scripts/sync-skill.py NAME --force
 ```
 
-## Passo 4: Validar após sync
+## Step 4: Validate after sync
 
 ```bash
 python skills/meta/sync-upstream-skills/scripts/check-upstream.py
 ```
 
-Para skills com scripts (`mcp-builder`), confirmar que `scripts/` e `reference/` vieram junto.
+For skills with scripts (`mcp-builder`), confirm that `scripts/` and `reference/` were included.
 
-Se o usuário pedir ship: usar `ship-feature` com commit tipo:
+If the user asks to ship: use `ship-feature` with a commit like:
 
 ```
-chore(skills): sync NOME from upstream @ abc1234
+chore(skills): sync NAME from upstream @ abc1234
 ```
 
-## Importar skill nova (checklist)
+## Importing a new skill (checklist)
 
-1. Copiar arquivos do upstream para `skills/<area>/<nome>/`
-2. Preencher `metadata.upstream` — ver [references/upstream-schema.md](references/upstream-schema.md)
-3. Se adaptar conteúdo: adicionar `note` explicando o que mudou
-4. Rodar `check-upstream.py` — deve mostrar "Atualizado"
-5. Atualizar `README.md` na seção/área correta
+1. Copy files from upstream to `skills/<area>/<name>/`
+2. Fill in `metadata.upstream` — see [references/upstream-schema.md](references/upstream-schema.md)
+3. If adapting content: add a `note` explaining what changed
+4. Run `check-upstream.py` — should show "Up to date"
+5. Update `README.md` in the correct area section
 
-## Erros comuns
+## Common errors
 
-| Problema | Correção |
-|----------|----------|
-| `path` errado no frontmatter | Apontar para pasta real no upstream, não nome local |
-| Sync sobrescreveu adaptação | Restaurar do git; usar merge manual ou `--force` só com re-aplicação |
-| `stop-slop` com `path: .` | Correto — skill na raiz do repo upstream |
-| Rate limit GitHub API | Esperar ou usar `GITHUB_TOKEN` (futuro) |
-| Branch não é `main` | Script tenta `main` depois `master`; outros branches = sync manual |
+| Problem | Fix |
+|---------|-----|
+| Wrong `path` in frontmatter | Point to the actual folder in upstream, not the local name |
+| Sync overwrote an adaptation | Restore from git; use manual merge or `--force` only with re-application |
+| `stop-slop` with `path: .` | Correct — skill is at the root of the upstream repo |
+| GitHub API rate limit | Wait or use `GITHUB_TOKEN` |
+| Branch is not `main` | Script tries `main` then `master`; other branches = manual sync |
 
-## Referências
+## References
 
-- Schema completo: [references/upstream-schema.md](references/upstream-schema.md)
-- Authoring de skills: `writing-skills`
-- Ship após mudanças: `ship-feature`
+- Full schema: [references/upstream-schema.md](references/upstream-schema.md)
+- Skill authoring: `writing-skills`
+- Ship after changes: `ship-feature`

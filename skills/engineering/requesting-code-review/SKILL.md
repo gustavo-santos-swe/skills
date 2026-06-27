@@ -9,7 +9,7 @@ metadata:
     url: https://github.com/obra/superpowers/tree/main/skills/requesting-code-review
     synced_at: "2026-06-07"
     commit: 6fd4507659784c351abbd2bc264c7162cfd386dc
-    note: Adaptada — self-review na mesma sessão, sem subagents.
+    note: Adapted — self-review in the same session, no subagents.
 ---
 
 # Requesting Code Review
@@ -18,7 +18,7 @@ Self-review your work before it ships. Catch issues while context is fresh.
 
 **Core principle:** Review early, review often.
 
-**Announce at start:** "Estou usando a skill requesting-code-review."
+**Announce at start:** "Using the requesting-code-review skill."
 
 ## When to Request Review
 
@@ -31,16 +31,16 @@ Self-review your work before it ships. Catch issues while context is fresh.
 - Before refactoring (baseline check)
 - After fixing a complex bug
 
-**Escalar para `code-review-and-quality`** quando o diff for grande (~100+ linhas), tocar auth/security, APIs públicas ou performance — review nos 5 eixos completos.
+**Escalate to `code-review-and-quality`** when the diff is large (~100+ lines), touches auth/security, public APIs, or performance — full 5-axis review.
 
 ## How to Review
 
 ### 1. Get git range
 
 ```bash
-# desde a branch base
+# from the base branch
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master
-BASE_SHA=<resultado acima>
+BASE_SHA=<output above>
 HEAD_SHA=$(git rev-parse HEAD)
 
 git diff --stat $BASE_SHA..$HEAD_SHA
@@ -49,8 +49,8 @@ git diff $BASE_SHA..$HEAD_SHA
 
 ### 2. Gather context
 
-- **What was implemented:** resumo em 2-3 frases
-- **Requirements / plan:** caminho do plano, spec, ou requisitos do usuário
+- **What was implemented:** 2-3 sentence summary
+- **Requirements / plan:** path to plan, spec, or user requirements
 
 ### 3. Run self-review
 

@@ -1,48 +1,48 @@
-# Schema `metadata.upstream`
+# `metadata.upstream` schema
 
-Todo skill importado de outro repo deve ter este bloco no frontmatter de `SKILL.md`:
+Every skill imported from another repo must have this block in the `SKILL.md` frontmatter:
 
 ```yaml
 metadata:
-  area: engineering          # opcional — meta, workflow, engineering, product, design, communication, marketing, operations
+  area: engineering          # optional — meta, workflow, engineering, product, design, communication, marketing, operations
   upstream:
-    repo: owner/repo         # obrigatório para sync automático
-    path: skills/nome        # caminho no repo upstream (`.` se a skill é a raiz do repo)
-    url: https://github.com/owner/repo/tree/main/skills/nome
-    commit: "<sha completo do commit sincronizado>"
+    repo: owner/repo         # required for automatic sync
+    path: skills/name        # path in the upstream repo (`.` if the skill is the repo root)
+    url: https://github.com/owner/repo/tree/main/skills/name
+    commit: "<full SHA of the synced commit>"
     synced_at: "YYYY-MM-DD"
-    note: "..."              # opcional — marca skill adaptada; sync exige merge manual
+    note: "..."              # optional — marks adapted skill; sync requires manual merge
 ```
 
-## Categorias de sync
+## Sync categories
 
-| Situação | `repo` | `note` | Comportamento |
-|----------|--------|--------|---------------|
-| **Syncable** | presente | ausente | `sync-skill.py` pode sobrescrever arquivos |
-| **Adapted** | presente | presente | Check reporta desatualização; sync só com `--force` + revisão de diff |
-| **Custom** | ausente | `inspired_by` ou `note` | Não sincronizável — ex.: `ship-feature` |
-| **Local** | ausente | ausente | Template ou skill nativa — ex.: `suggesting-skills` |
+| Situation | `repo` | `note` | Behavior |
+|-----------|--------|--------|----------|
+| **Syncable** | present | absent | `sync-skill.py` can overwrite files |
+| **Adapted** | present | present | Check reports outdated; sync only with `--force` + diff review |
+| **Custom** | absent | `inspired_by` or `note` | Not syncable — e.g.: `ship-feature` |
+| **Local** | absent | absent | Template or native skill — e.g.: `suggesting-skills` |
 
-## Campos
+## Fields
 
-| Campo | Obrigatório | Descrição |
-|-------|-------------|-----------|
-| `repo` | para sync | `owner/repo` no GitHub |
-| `path` | para sync | Pasta da skill no upstream (não o nome local se renomeada) |
-| `url` | recomendado | Link humano para o path no upstream |
-| `commit` | para sync | SHA do commit de onde os arquivos foram copiados |
-| `synced_at` | recomendado | Data da última sincronização (ISO) |
-| `note` | opcional | Explica adaptações locais; bloqueia sync automático |
+| Field | Required | Description |
+|-------|----------|-------------|
+| `repo` | for sync | `owner/repo` on GitHub |
+| `path` | for sync | Skill folder in upstream (not the local name if renamed) |
+| `url` | recommended | Human-readable link to the path in upstream |
+| `commit` | for sync | SHA of the commit from which the files were copied |
+| `synced_at` | recommended | Date of last sync (ISO) |
+| `note` | optional | Explains local adaptations; blocks automatic sync |
 
-## Renomeação local
+## Local renaming
 
-Se a pasta local difere do upstream (ex.: `brainstorm-with-docs` ← `grill-with-docs`), `path` aponta para o **upstream**, não para o nome local.
+If the local folder differs from upstream (e.g.: `brainstorm-with-docs` ← `grill-with-docs`), `path` points to the **upstream** name, not the local one.
 
-## Skills com subpastas
+## Skills with subfolders
 
-Skills como `mcp-builder` incluem `scripts/`, `reference/`, etc. O sync baixa **toda a árvore** em `path` — não só `SKILL.md`.
+Skills like `mcp-builder` include `scripts/`, `reference/`, etc. The sync downloads **the entire tree** at `path` — not just `SKILL.md`.
 
-## Layout do repo
+## Repo layout
 
 ```
 skills/
@@ -56,10 +56,10 @@ skills/
 └── operations/<skill>/
 ```
 
-`metadata.area` deve corresponder à pasta pai da skill.
+`metadata.area` must match the skill's parent folder.
 
-## Após importar ou adaptar
+## After importing or adapting
 
-1. Preencher `metadata.upstream` com commit exato (`git rev-parse` no clone upstream ou SHA da URL raw).
-2. Definir `metadata.area` com a área escolhida.
-3. Rodar `python skills/meta/sync-upstream-skills/scripts/check-upstream.py` para validar.
+1. Fill in `metadata.upstream` with the exact commit (`git rev-parse` in the upstream clone or SHA from the raw URL).
+2. Set `metadata.area` to the chosen area.
+3. Run `python skills/meta/sync-upstream-skills/scripts/check-upstream.py` to validate.

@@ -9,7 +9,7 @@ metadata:
     url: https://github.com/obra/superpowers/tree/main/skills/writing-plans
     synced_at: "2026-06-07"
     commit: 6fd4507659784c351abbd2bc264c7162cfd386dc
-    note: Adaptada — execução via executing-plans apenas, sem subagents.
+    note: Adapted — execution via executing-plans only, no subagents.
 ---
 
 # Writing Plans

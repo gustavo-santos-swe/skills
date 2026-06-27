@@ -1,33 +1,33 @@
 # PR Template
 
-Usar este corpo ao criar PRs com `gh pr create --body`.
+Use this body when creating PRs with `gh pr create --body`.
 
 ```markdown
 ## Summary
-- <1–3 bullets: o que mudou e por quê>
-- <foco no resultado para o usuário/reviewer, não na implementação>
+- <1–3 bullets: what changed and why>
+- <focus on the outcome for the user/reviewer, not the implementation>
 
 ## Test plan
-- [ ] <passo concreto para verificar>
-- [ ] <outro passo, se aplicável>
+- [ ] <concrete step to verify>
+- [ ] <another step, if applicable>
 ```
 
-## Regras
+## Rules
 
-- **Summary:** 1–3 bullets. Cada bullet = uma mudança ou motivo claro.
-- **Test plan:** checklist com ações que o reviewer pode repetir.
-- Se for mudança de UI, adicionar seção opcional:
+- **Summary:** 1–3 bullets. Each bullet = one change or clear reason.
+- **Test plan:** checklist with actions the reviewer can repeat.
+- For UI changes, add an optional section:
 
 ```markdown
 ## Screenshots
-<descrever o que mudou visualmente, ou colar imagem se o usuário forneceu>
+<describe what changed visually, or paste image if the user provided one>
 ```
 
-## Exemplo
+## Example
 
-**Título:** `feat(auth): add password reset flow`
+**Title:** `feat(auth): add password reset flow`
 
-**Corpo:**
+**Body:**
 
 ```markdown
 ## Summary
@@ -41,9 +41,9 @@ Usar este corpo ao criar PRs com `gh pr create --body`.
 - [ ] `npm test` passes
 ```
 
-## O que evitar
+## What to avoid
 
-- Parágrafos longos no Summary
-- "Test plan: tested locally" sem detalhes
-- Copiar o diff inteiro na descrição
-- Deixar Test plan vazio
+- Long paragraphs in Summary
+- "Test plan: tested locally" with no details
+- Pasting the entire diff in the description
+- Leaving Test plan empty

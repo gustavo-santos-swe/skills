@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>skills — Project Documentation &amp; Security Analysis</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --surface: #161b22;
+    --surface-2: #1c2330;
+    --border: #2b3442;
+    --text: #dde3ec;
+    --muted: #8b97a8;
+    --accent: #5cc8a1;
+    --accent-dim: #2e6b56;
+    --amber: #e3b341;
+    --red: #e5604c;
+    --blue: #6cb2f5;
+    --mono: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .layout { display: flex; max-width: 1320px; margin: 0 auto; }
+
+  /* ---------- Sidebar ---------- */
+  nav {
+    width: 250px; flex-shrink: 0;
+    position: sticky; top: 0; height: 100vh;
+    overflow-y: auto;
+    padding: 2rem 1.25rem;
+    border-right: 1px solid var(--border);
+  }
+  nav .logo {
+    font-family: var(--mono); font-size: 1.05rem; font-weight: 700;
+    color: var(--accent); margin-bottom: .25rem;
+  }
+  nav .logo span { color: var(--muted); font-weight: 400; }
+  nav .tagline { font-size: .75rem; color: var(--muted); margin-bottom: 1.75rem; }
+  nav h4 {
+    font-size: .68rem; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--muted); margin: 1.4rem 0 .45rem;
+  }
+  nav a {
+    display: block; color: var(--text); text-decoration: none;
+    font-size: .85rem; padding: .28rem .55rem; border-radius: 6px;
+  }
+  nav a:hover { background: var(--surface-2); color: var(--accent); }
+
+  /* ---------- Main ---------- */
+  main { flex: 1; min-width: 0; padding: 2.5rem 3rem 6rem; }
+  section { margin-bottom: 4rem; }
+  h1 { font-size: 2rem; letter-spacing: -.02em; margin-bottom: .4rem; }
+  h2 {
+    font-size: 1.45rem; margin-bottom: 1.1rem; padding-bottom: .5rem;
+    border-bottom: 1px solid var(--border); letter-spacing: -.01em;
+  }
+  h2 .hash { color: var(--accent-dim); margin-right: .35rem; }
+  h3 { font-size: 1.05rem; margin: 1.6rem 0 .6rem; color: var(--accent); }
+  p { margin-bottom: .9rem; }
+  p.lead { font-size: 1.1rem; color: var(--muted); margin-bottom: 1.6rem; }
+  a { color: var(--blue); }
+  ul, ol { margin: 0 0 1rem 1.4rem; }
+  li { margin-bottom: .35rem; }
+  code {
+    font-family: var(--mono); font-size: .84em;
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: .12em .4em; border-radius: 5px;
+  }
+  pre {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.2rem; overflow-x: auto;
+    margin: 0 0 1.2rem; font-size: .82rem; line-height: 1.55;
+  }
+  pre code { background: none; border: none; padding: 0; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 0 0 1.4rem;
+    font-size: .87rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  th, td { text-align: left; padding: .6rem .85rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th {
+    background: var(--surface-2); font-size: .72rem; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block; font-size: .68rem; font-weight: 700;
+    padding: .15em .6em; border-radius: 999px; letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .b-high { background: #3d1d18; color: var(--red);   border: 1px solid #6b2e24; }
+  .b-med  { background: #3a3012; color: var(--amber); border: 1px solid #6b591f; }
+  .b-low  { background: #14301f; color: var(--accent); border: 1px solid var(--accent-dim); }
+  .b-info { background: #16283d; color: var(--blue);  border: 1px solid #2a4a6b; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: .9rem; margin-bottom: 1.4rem; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.1rem;
+  }
+  .card .num { font-size: 1.7rem; font-weight: 700; color: var(--accent); font-family: var(--mono); }
+  .card .label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+
+  .callout {
+    border-left: 3px solid var(--accent); background: var(--surface);
+    border-radius: 0 10px 10px 0; padding: .85rem 1.1rem; margin: 0 0 1.2rem;
+    font-size: .92rem;
+  }
+  .callout.warn { border-left-color: var(--amber); }
+  .callout.danger { border-left-color: var(--red); }
+  .callout strong:first-child { display: block; margin-bottom: .2rem; }
+
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; margin: 0 0 1.4rem; }
+  .flow .step {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: .35rem .7rem; font-family: var(--mono); font-size: .78rem;
+  }
+  .flow .arrow { color: var(--accent-dim); font-weight: 700; }
+
+  .finding { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.3rem; margin-bottom: 1rem; }
+  .finding header { display: flex; align-items: baseline; gap: .7rem; margin-bottom: .5rem; flex-wrap: wrap; }
+  .finding header .code { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+  .finding header h3 { margin: 0; color: var(--text); font-size: 1rem; }
+  .finding p { font-size: .9rem; margin-bottom: .5rem; }
+  .finding p:last-child { margin-bottom: 0; }
+  .finding .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+
+  footer { color: var(--muted); font-size: .8rem; border-top: 1px solid var(--border); padding-top: 1.4rem; }
+
+  @media (max-width: 880px) {
+    nav { display: none; }
+    main { padding: 1.5rem 1.2rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="logo">skills<span>/</span></div>
+  <div class="tagline">Agent Skills · served over MCP</div>
+  <h4>Project</h4>
+  <a href="#overview">Overview</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#structure">Repository structure</a>
+  <a href="#inventory">Skills inventory</a>
+  <a href="#workflow">Workflow pipeline</a>
+  <a href="#conventions">Coding conventions</a>
+  <h4>Deep analysis</h4>
+  <a href="#scripts">Executable surface</a>
+  <a href="#threat-model">Threat model</a>
+  <a href="#owasp">OWASP Top 10</a>
+  <a href="#findings">Detailed findings</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<main>
+
+<section id="overview">
+  <h1>skills</h1>
+  <p class="lead">Central repository of personal Agent Skills — markdown playbooks that teach AI coding agents how to execute specific workflows. Served live to any MCP client via <a href="https://skillsovermcp.com/">Skills Over MCP</a>: push to <code>main</code> and every connected agent sees the new version.</p>
+
+  <div class="cards">
+    <div class="card"><div class="num">25</div><div class="label">Skills</div></div>
+    <div class="card"><div class="num">8</div><div class="label">Areas</div></div>
+    <div class="card"><div class="num">88</div><div class="label">Files</div></div>
+    <div class="card"><div class="num">~56k</div><div class="label">Words of markdown</div></div>
+    <div class="card"><div class="num">14</div><div class="label">Executable scripts</div></div>
+    <div class="card"><div class="num">0</div><div class="label">npm/pip runtime deps*</div></div>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted)">* The brainstorm server and sync scripts use only Node/Python standard library. The single exception is <code>mcp-builder/scripts/</code> (requires <code>mcp</code> + <code>anthropic</code>), which is tooling for building <em>other</em> projects.</p>
+
+  <div class="callout">
+    <strong>What this repo is</strong>
+    Not a conventional application. It is <em>process documentation that executes</em>: each <code>skills/&lt;area&gt;/&lt;name&gt;/SKILL.md</code> is a playbook an LLM agent loads and follows. A handful of supporting scripts (a local visual-companion web server, upstream sync tooling, code-analysis helpers) make some skills interactive or automatable.
+  </div>
+</section>
+
+<section id="architecture">
+  <h2><span class="hash">#</span>Architecture</h2>
+  <p>The delivery model is intentionally simple — a public GitHub repo acting as the source of truth, with an MCP gateway in front:</p>
+  <pre><code>┌──────────────────────────┐      push to main      ┌─────────────────────────────┐
+│  github.com/             │ ─────────────────────▶ │  mcp.skillsovermcp.com      │
+│  gustavo-santos-swe/     │                        │  /mcp/gustavo-santos-swe/   │
+│  skills  (public)        │                        │  skills  (streamable-http)  │
+└──────────────────────────┘                        └──────────────┬──────────────┘
+                                                                   │ tools = skills
+                                                    ┌──────────────▼──────────────┐
+                                                    │  MCP clients                │
+                                                    │  Cursor · Claude Code ·     │
+                                                    │  Codex · any MCP client     │
+                                                    └─────────────────────────────┘</code></pre>
+  <ul>
+    <li><strong>Distribution:</strong> each skill is exposed as an MCP tool. Agents read the <code>description</code> frontmatter to decide <em>when</em> to load a skill, then read the full body and follow it.</li>
+    <li><strong>Versioning:</strong> git is the only version control. There are no releases — <code>main</code> is production.</li>
+    <li><strong>Provenance:</strong> most skills are synced from upstream repos (<code>obra/superpowers</code>, <code>anthropics/skills</code>, <code>mattpocock/skills</code>, etc.) and carry <code>metadata.upstream</code> frontmatter with repo, path, pinned commit SHA, and sync date. Custom skills (<code>ship-feature</code>) are marked as such.</li>
+  </ul>
+</section>
+
+<section id="structure">
+  <h2><span class="hash">#</span>Repository structure</h2>
+  <pre><code>skills/
+├── meta/            # discover, maintain, sync skills (5 skills)
+│   └── sync-upstream-skills/scripts/   check-upstream.py · sync-skill.py
+├── workflow/        # spec → plan → execution → PR (5 skills)
+│   └── brainstorming/scripts/          server.cjs · helper.js · start/stop-server.sh
+├── engineering/     # code, tests, review, debugging (10 skills)
+│   ├── finding-duplicate-functions/scripts/   4 bash/jq analysis scripts
+│   ├── mcp-builder/scripts/                   connections.py · evaluation.py
+│   └── systematic-debugging/                  find-polluter.sh
+├── product/         # domain language, discovery (1 skill)
+├── design/          # frontend design (1 skill)
+├── communication/   # de-slop writing (2 skills)
+├── marketing/       # reserved, empty
+└── operations/      # bug triage (1 skill)</code></pre>
+  <p>Every skill follows the same anatomy:</p>
+  <table>
+    <tr><th>Component</th><th>Purpose</th></tr>
+    <tr><td><code>SKILL.md</code></td><td>Required. YAML frontmatter (<code>name</code>, <code>description</code>, <code>metadata.area</code>, <code>metadata.upstream</code>) + the playbook body, kept under ~500 lines.</td></tr>
+    <tr><td><code>references/</code></td><td>Heavy reference material loaded on demand (checklists, templates, schemas) — keeps the main file token-cheap.</td></tr>
+    <tr><td><code>scripts/</code></td><td>Executable helpers when the skill needs tooling (servers, sync, analysis).</td></tr>
+  </table>
+</section>
+
+<section id="inventory">
+  <h2><span class="hash">#</span>Skills inventory</h2>
+
+  <h3>meta — maintaining the system itself</h3>
+  <table>
+    <tr><th>Skill</th><th>Purpose</th><th>Origin</th></tr>
+    <tr><td><code>using-superpowers</code></td><td>Check available skills before any response or action; defines instruction priority (user &gt; skills &gt; defaults)</td><td>obra/superpowers (adapted)</td></tr>
+    <tr><td><code>writing-skills</code></td><td>TDD applied to process docs: baseline-fail → write skill → close loopholes</td><td>obra/superpowers</td></tr>
+    <tr><td><code>handoff</code></td><td>Compact a session for the next agent</td><td>—</td></tr>
+    <tr><td><code>sync-upstream-skills</code></td><td>Check and sync skills against upstream repos via GitHub API</td><td>custom</td></tr>
+    <tr><td><code>suggesting-skills</code></td><td>Propose new skills</td><td>—</td></tr>
+  </table>
+
+  <h3>workflow — spec to PR</h3>
+  <table>
+    <tr><th>Skill</th><th>Purpose</th></tr>
+    <tr><td><code>brainstorming</code></td><td>Design and spec before implementing; optional browser-based visual companion (local web server)</td></tr>
+    <tr><td><code>writing-plans</code></td><td>Detailed implementation plan with reviewer-prompt pass</td></tr>
+    <tr><td><code>executing-plans</code></td><td>Execute a plan task by task</td></tr>
+    <tr><td><code>doc-coauthoring</code></td><td>Co-write specs, RFCs, PRDs</td></tr>
+    <tr><td><code>ship-feature</code></td><td>Custom: verify → commit (conventional, one-liner) → push → open PR. <strong>Never merge to main.</strong></td></tr>
+  </table>
+
+  <h3>engineering — code quality discipline</h3>
+  <table>
+    <tr><th>Skill</th><th>Purpose</th></tr>
+    <tr><td><code>test-driven-development</code></td><td>Iron law: no production code without a failing test first</td></tr>
+    <tr><td><code>systematic-debugging</code></td><td>Root-cause before fix; includes bisection script and pressure-test scenarios</td></tr>
+    <tr><td><code>verification-before-completion</code></td><td>Evidence before claiming "done"</td></tr>
+    <tr><td><code>requesting-code-review</code> / <code>receiving-code-review</code> / <code>code-review-and-quality</code></td><td>Self-review checklist, processing feedback with rigor, 5-axis review for large/risky diffs</td></tr>
+    <tr><td><code>code-simplification</code></td><td>Simplify without changing behavior</td></tr>
+    <tr><td><code>zoom-out</code></td><td>Module map of unfamiliar code</td></tr>
+    <tr><td><code>finding-duplicate-functions</code></td><td>Semantic duplication audit (ripgrep + jq pipeline)</td></tr>
+    <tr><td><code>mcp-builder</code></td><td>Build MCP servers in Python/TypeScript, with eval harness</td></tr>
+  </table>
+
+  <h3>other areas</h3>
+  <table>
+    <tr><th>Area</th><th>Skills</th></tr>
+    <tr><td>product</td><td><code>brainstorm-with-docs</code> — brainstorm grounded in domain language (<code>CONTEXT.md</code>, ADRs)</td></tr>
+    <tr><td>design</td><td><code>frontend-design</code> — distinctive, production-grade UI; anti-"AI slop"</td></tr>
+    <tr><td>communication</td><td><code>stop-slop</code>, <code>write-like-a-human</code> — remove AI writing patterns</td></tr>
+    <tr><td>operations</td><td><code>triage-bug</code> — bug report → structured ticket</td></tr>
+    <tr><td>marketing</td><td><em>reserved (empty)</em></td></tr>
+  </table>
+</section>
+
+<section id="workflow">
+  <h2><span class="hash">#</span>Workflow pipeline</h2>
+  <p>The skills compose into one canonical development flow:</p>
+  <div class="flow">
+    <span class="step">brainstorming</span><span class="arrow">→</span>
+    <span class="step">writing-plans</span><span class="arrow">→</span>
+    <span class="step">executing-plans</span><span class="arrow">→</span>
+    <span class="step">TDD / frontend-design / systematic-debugging</span><span class="arrow">→</span>
+    <span class="step">verification-before-completion</span><span class="arrow">→</span>
+    <span class="step">code-simplification</span><span class="arrow">→</span>
+    <span class="step">requesting-code-review</span><span class="arrow">→</span>
+    <span class="step">ship-feature</span>
+  </div>
+  <p>When multiple skills could apply, priority is: <strong>process</strong> skills (how to approach) → <strong>implementation</strong> skills (execution) → <strong>completion</strong> skills (verification, shipping). Skills are typed as <em>rigid</em> (TDD, debugging, verification — follow exactly) or <em>flexible</em> (brainstorming, planning — adapt principles).</p>
+</section>
+
+<section id="conventions">
+  <h2><span class="hash">#</span>Coding conventions (how this codebase works)</h2>
+  <p>Extracted from the skills themselves — these are the house rules any agent or contributor is expected to follow:</p>
+
+  <h3>Process discipline</h3>
+  <ul>
+    <li><strong>Skill check first.</strong> If there is even a 1% chance a skill applies, read it and follow it — before clarifying questions, before exploring code. User instructions always outrank skills.</li>
+    <li><strong>TDD iron law.</strong> No production code without a failing test first. Code written before the test gets deleted, not adapted. The same law applies to skill authoring: no skill without a failed baseline scenario first.</li>
+    <li><strong>Root-cause before fix.</strong> Systematic debugging forbids symptom-patching; trace to the cause, then fix with a test.</li>
+    <li><strong>Evidence before "done".</strong> Verification-before-completion requires running the actual commands and reading the output before claiming success.</li>
+  </ul>
+
+  <h3>Git &amp; shipping</h3>
+  <ul>
+    <li>Conventional commits, one-liner: <code>&lt;type&gt;(&lt;scope&gt;): imperative lowercase description</code>.</li>
+    <li>Feature branches only — never commit to <code>main</code>, never local merge, never <code>gh pr merge</code>, never force-push. Integration happens exclusively via PR.</li>
+    <li>No <code>--no-verify</code> unless explicitly requested. Tests must pass before commit.</li>
+    <li>PRs carry a Summary + Test plan checklist (template in <code>ship-feature/references/</code>).</li>
+  </ul>
+
+  <h3>Skill authoring</h3>
+  <ul>
+    <li>Frontmatter <code>description</code> states only <em>when</em> to trigger ("Use when…"), never the workflow — summarizing the process makes agents skip the body.</li>
+    <li>Token economy: frequently-loaded skills &lt; 200 words; others &lt; 500 lines; heavy reference goes in <code>references/</code>; never <code>@</code>-force-load other files.</li>
+    <li>Verb-first kebab-case names (<code>writing-plans</code>, not <code>plan-writing</code>); one excellent code example beats five mediocre ones.</li>
+    <li>Discipline skills must be bulletproofed: rationalization tables, red-flag lists, explicit loophole closures — tested under pressure with subagents.</li>
+    <li>Upstream provenance is mandatory metadata: <code>repo</code>, <code>path</code>, <code>commit</code> (pinned SHA), <code>synced_at</code>; adapted skills add a <code>note</code>, which blocks automatic sync unless <code>--force</code>.</li>
+  </ul>
+
+  <h3>Script style (observed)</h3>
+  <ul>
+    <li>Bash: <code>set -euo pipefail</code>, array-based arg building to avoid glob expansion, usage functions, stderr for diagnostics.</li>
+    <li>Python: stdlib-only, <code>from __future__ import annotations</code>, dataclasses, type hints, argparse with <code>--dry-run</code> flags.</li>
+    <li>Node: zero-dependency (hand-rolled RFC 6455 WebSocket rather than pulling in <code>ws</code>), explicit lifecycle management (owner PID + idle timeout).</li>
+  </ul>
+</section>
+
+<section id="scripts">
+  <h2><span class="hash">#</span>Deep analysis — executable surface</h2>
+  <p>Although this is mostly a documentation repo, three clusters of code actually run on the user's machine and define the attack surface:</p>
+
+  <h3>1. Brainstorm visual companion (<code>workflow/brainstorming/scripts/</code>)</h3>
+  <p>A zero-dependency Node HTTP + WebSocket server (<code>server.cjs</code>, ~350 lines). The agent writes HTML "screens" into a session directory; the server watches the directory, serves the newest screen at <code>/</code>, injects <code>helper.js</code> for click capture, and streams user choices back over WebSocket. Lifecycle is well-engineered: binds <code>127.0.0.1</code> by default, random high port, 30-minute idle timeout, exits when the owning agent process dies.</p>
+
+  <h3>2. Upstream sync tooling (<code>meta/sync-upstream-skills/scripts/</code>)</h3>
+  <p><code>check-upstream.py</code> compares each skill's pinned commit against the latest upstream commit via the GitHub API (optional <code>GITHUB_TOKEN</code> from env, never hardcoded). <code>sync-skill.py</code> downloads all files of a skill from <code>raw.githubusercontent.com</code> at the latest commit and overwrites the local copy, then updates frontmatter. Skills with an adaptation <code>note</code> refuse to sync without <code>--force</code>.</p>
+
+  <h3>3. Analysis helpers (<code>engineering/*/scripts/</code>)</h3>
+  <p>ripgrep + jq pipelines for function extraction and duplicate reporting; a test-pollution bisection script; the mcp-builder eval harness (Anthropic upstream, requires <code>ANTHROPIC_API_KEY</code> via env).</p>
+</section>
+
+<section id="threat-model">
+  <h2><span class="hash">#</span>Threat model</h2>
+  <p>For an agent-skills repo, the most important risks are not classic web-app bugs — they are <strong>trust-chain risks</strong>. Three trust boundaries matter:</p>
+  <table>
+    <tr><th>Boundary</th><th>Risk</th><th>Current posture</th></tr>
+    <tr>
+      <td>Upstream repos → this repo</td>
+      <td>A compromised upstream (obra/superpowers, etc.) injects malicious instructions that <code>sync-skill.py</code> copies in verbatim — a <em>prompt-injection supply chain</em>.</td>
+      <td>Commits are pinned in metadata, but sync always pulls <em>latest</em>; no diff review is enforced by tooling. Mitigated by the documented manual-review workflow.</td>
+    </tr>
+    <tr>
+      <td>This repo → MCP consumers</td>
+      <td>Push to <code>main</code> = instant deployment to every connected agent. Anyone who can write to the repo can steer agent behavior on all consumer machines. The <code>using-superpowers</code> skill instructs agents that skill use is "not negotiable", amplifying whatever the skills say.</td>
+      <td>Single-owner repo, single contributor. The instruction-priority section explicitly caps skills <em>below</em> user instructions — a good guardrail.</td>
+    </tr>
+    <tr>
+      <td>Agent → local machine (brainstorm server)</td>
+      <td>The server intentionally renders agent-generated HTML in the user's browser and accepts WebSocket input. Exposure depends on bind host and the predictability of the session directory.</td>
+      <td>Localhost-only by default, random port, idle timeout. Risk grows with <code>--host 0.0.0.0</code> (no auth) and the <code>/tmp</code> default on shared machines.</td>
+    </tr>
+  </table>
+  <div class="callout">
+    <strong>Secret scan result: clean.</strong>
+    A repo-wide scan for keys, tokens, passwords, and bearer strings found only documentation examples (<code>ghp_xxx</code>, <code>token123</code>) and proper env-var usage (<code>GITHUB_TOKEN</code>, <code>ANTHROPIC_API_KEY</code>). <code>.gitignore</code> covers <code>.env</code> / <code>.env.local</code>, and the README explicitly states the repo is public and must never hold secrets.
+  </div>
+</section>
+
+<section id="owasp">
+  <h2><span class="hash">#</span>OWASP Top 10 (2021) assessment</h2>
+  <p>Mapped against the actual executable surface and delivery model. Severities are contextual to a personal dev-tool repo.</p>
+  <table>
+    <tr><th style="width:16rem">Category</th><th style="width:5.5rem">Risk</th><th>Assessment</th></tr>
+    <tr>
+      <td><strong>A01</strong> Broken Access Control</td>
+      <td><span class="badge b-med">MEDIUM</span></td>
+      <td>The brainstorm server has <strong>no authentication</strong> on HTTP or WebSocket. Safe while bound to <code>127.0.0.1</code> (default), but <code>start-server.sh --host 0.0.0.0</code> — documented for containers/remote — exposes an unauthenticated screen-viewer + event channel to the network. Path traversal on <code>/files/</code> is correctly blocked via <code>path.basename()</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>A02</strong> Cryptographic Failures</td>
+      <td><span class="badge b-low">LOW</span></td>
+      <td>No secrets stored or transmitted by the repo itself. WebSocket runs over plain <code>ws://</code> — acceptable for localhost; becomes relevant only in the <code>0.0.0.0</code> scenario. Tokens are consumed exclusively from environment variables.</td>
+    </tr>
+    <tr>
+      <td><strong>A03</strong> Injection</td>
+      <td><span class="badge b-med">MEDIUM</span></td>
+      <td>Serving agent-generated HTML is the product's <em>design</em>, so XSS-by-design is accepted. Two real issues: (1) <code>helper.js</code> builds <code>indicator.innerHTML</code> from DOM-derived label text — a screen containing user-influenced content could inject markup; (2) <code>find-polluter.sh</code> iterates unquoted <code>$TEST_FILES</code> (word-splitting on paths with spaces) and interpolates arguments into suggested commands. The jq/ripgrep pipelines correctly use argument arrays.</td>
+    </tr>
+    <tr>
+      <td><strong>A04</strong> Insecure Design</td>
+      <td><span class="badge b-low">LOW</span></td>
+      <td>Design is deliberately minimal and mostly sound: localhost default, random ports, idle timeout, owner-PID lifecycle, masked-frame enforcement per RFC 6455, commit pinning for upstream provenance. The accepted-by-design risk is rendering agent HTML in the browser, which the skill discloses to the user before enabling.</td>
+    </tr>
+    <tr>
+      <td><strong>A05</strong> Security Misconfiguration</td>
+      <td><span class="badge b-med">MEDIUM</span></td>
+      <td>Default session dir <code>/tmp/brainstorm-*</code> is world-readable/writable territory on shared Unix machines — another local user could drop an <code>.html</code> file into the content dir and have it rendered in the victim's browser (the watcher serves the <em>newest</em> file). The <code>--host 0.0.0.0</code> flag carries no warning about the lack of auth.</td>
+    </tr>
+    <tr>
+      <td><strong>A06</strong> Vulnerable &amp; Outdated Components</td>
+      <td><span class="badge b-low">LOW</span></td>
+      <td>Outstanding posture: the server hand-implements WebSocket to keep <strong>zero npm dependencies</strong>; Python scripts are stdlib-only. The only third-party deps (<code>mcp</code>, <code>anthropic</code>) live in the mcp-builder tooling and are unpinned in <code>requirements.txt</code> — minor.</td>
+    </tr>
+    <tr>
+      <td><strong>A07</strong> Identification &amp; Authentication Failures</td>
+      <td><span class="badge b-info">INFO</span></td>
+      <td>No auth exists anywhere by design: the MCP endpoint is intentionally public (documented), and the local server trusts anything that can reach its socket. Consolidated with A01; no separate failure beyond that.</td>
+    </tr>
+    <tr>
+      <td><strong>A08</strong> Software &amp; Data Integrity Failures</td>
+      <td><span class="badge b-high">HIGH</span></td>
+      <td>The most significant category for this project. (1) <code>sync-skill.py</code> downloads upstream files and writes them verbatim with no checksum/signature and no enforced diff review — a compromised upstream becomes instructions agents will execute. (2) Push-to-main is instant, review-gate-free deployment to all MCP consumers. (3) <code>raw.githubusercontent.com</code> fetches use the latest commit rather than the reviewed, pinned SHA.</td>
+    </tr>
+    <tr>
+      <td><strong>A09</strong> Security Logging &amp; Monitoring Failures</td>
+      <td><span class="badge b-low">LOW</span></td>
+      <td>Proportional to the tool: the server logs structured JSON lifecycle and user events to stdout/log file; sync scripts report per-skill status. No sensitive data is logged. No monitoring of who consumes the MCP endpoint — acceptable for a personal repo.</td>
+    </tr>
+    <tr>
+      <td><strong>A10</strong> Server-Side Request Forgery</td>
+      <td><span class="badge b-low">LOW</span></td>
+      <td>Outbound requests are pinned to <code>api.github.com</code> and <code>raw.githubusercontent.com</code>. However, <code>repo</code> and <code>path</code> are interpolated from SKILL.md frontmatter into URLs — <code>path</code> is percent-encoded but <code>repo</code> is not validated against an <code>owner/name</code> pattern, allowing URL-shape manipulation within github.com. Low impact, easy fix.</td>
+    </tr>
+  </table>
+</section>
+
+<section id="findings">
+  <h2><span class="hash">#</span>Detailed findings</h2>
+
+  <div class="finding">
+    <header><span class="badge b-high">HIGH</span><span class="code">F-01 · A08</span><h3>Unverified upstream sync = prompt-injection supply chain</h3></header>
+    <p><code>sync-skill.py</code> resolves the <em>latest</em> upstream commit, downloads every file under the skill path, and overwrites local content byte-for-byte. Skills are instructions that agents on every connected machine will obey (reinforced by <code>using-superpowers</code>' "not negotiable" framing). A compromised or hostile upstream commit flows: upstream → local repo → push → MCP → all agents.</p>
+    <p><span class="label">Recommendation</span> — always run sync on a branch, review the full diff before merging (make this a hard rule in the skill), and consider verifying downloaded content against the GitHub tree API blob SHAs for the pinned commit.</p>
+  </div>
+
+  <div class="finding">
+    <header><span class="badge b-med">MEDIUM</span><span class="code">F-02 · A01/A05</span><h3>Unauthenticated server on non-loopback binds</h3></header>
+    <p><code>start-server.sh --host 0.0.0.0</code> is offered for containers/remote sessions with no authentication and no warning. Anyone on the network can view brainstorm screens (potentially containing project/spec details) and inject WebSocket choice events that the agent will treat as the user's decisions.</p>
+    <p><span class="label">Recommendation</span> — generate a random token at startup, require it as a URL query parameter, and echo a warning whenever the bind host is not loopback.</p>
+  </div>
+
+  <div class="finding">
+    <header><span class="badge b-med">MEDIUM</span><span class="code">F-03 · A05</span><h3>Predictable world-writable session directory</h3></header>
+    <p>Default sessions live in <code>/tmp/brainstorm-$$-&lt;epoch&gt;</code>. On multi-user systems, <code>/tmp</code> is shared; the server renders whichever <code>.html</code> file in the content dir is newest, so another local user who guesses/lists the path can plant a screen that the victim's browser renders with the WebSocket helper attached.</p>
+    <p><span class="label">Recommendation</span> — create the session dir with <code>mkdir -m 700</code>, or default to a user-owned location (e.g. <code>$XDG_RUNTIME_DIR</code> or <code>~/.cache/brainstorm</code>).</p>
+  </div>
+
+  <div class="finding">
+    <header><span class="badge b-low">LOW</span><span class="code">F-04 · A03</span><h3>innerHTML interpolation in helper.js</h3></header>
+    <p>The selection indicator does <code>indicator.innerHTML = '&lt;span&gt;' + label + '…'</code> where <code>label</code> is text content scraped from the rendered screen. Since screens may embed user- or document-derived strings, this is a small second-order injection vector inside an already-trusted page.</p>
+    <p><span class="label">Recommendation</span> — build the indicator with <code>textContent</code> + <code>createElement</code> instead of string-concatenated HTML.</p>
+  </div>
+
+  <div class="finding">
+    <header><span class="badge b-low">LOW</span><span class="code">F-05 · A03</span><h3>Shell quoting gaps in find-polluter.sh</h3></header>
+    <p>The loop <code>for TEST_FILE in $TEST_FILES</code> word-splits on whitespace, breaking (or mis-targeting) on paths with spaces; <code>$POLLUTION_CHECK</code> flows into <code>ls -la</code> and suggested commands unquoted. Exploitability is negligible (developer runs it on their own repo) but it contradicts the repo's own bash standards seen in <code>extract-functions.sh</code>.</p>
+    <p><span class="label">Recommendation</span> — use <code>find … -print0 | while IFS= read -r -d ''</code> and quote all expansions.</p>
+  </div>
+
+  <div class="finding">
+    <header><span class="badge b-low">LOW</span><span class="code">F-06 · A06/A10</span><h3>Hardening nits</h3></header>
+    <p>(1) <code>mcp-builder/scripts/requirements.txt</code> pins no versions. (2) <code>sync-skill.py</code> does not validate <code>repo</code> against <code>^[\w.-]+/[\w.-]+$</code> before URL interpolation. (3) The DoS-hardening of the hand-rolled WebSocket decoder is minimal (no max payload size) — irrelevant on loopback, relevant if F-02 is ever exercised.</p>
+  </div>
+</section>
+
+<section id="recommendations">
+  <h2><span class="hash">#</span>Recommendations &amp; strengths</h2>
+
+  <h3>What is already done well</h3>
+  <ul>
+    <li><strong>Zero-dependency philosophy</strong> — no npm packages to audit, stdlib-only Python; the supply-chain surface for <em>code</em> is essentially nil.</li>
+    <li><strong>Secret hygiene</strong> — clean scan, env-var-only tokens, <code>.env</code> gitignored, public-repo warning in the README.</li>
+    <li><strong>Provenance metadata</strong> — every synced skill pins repo, path, commit SHA, and date; adapted skills are protected from blind overwrite by the <code>note</code> + <code>--force</code> gate.</li>
+    <li><strong>Lifecycle engineering</strong> — owner-PID monitoring, idle timeout, localhost default, random ports, traversal-safe file serving.</li>
+    <li><strong>Instruction priority guardrail</strong> — skills explicitly rank below user instructions, limiting the blast radius of a malicious skill.</li>
+    <li><strong>Process discipline</strong> — never-merge-to-main, conventional commits, TDD-for-docs with adversarial subagent testing.</li>
+  </ul>
+
+  <h3>Priority actions</h3>
+  <ol>
+    <li><strong>Now:</strong> add a mandatory "sync on a branch + review full diff" rule to <code>sync-upstream-skills</code> (F-01).</li>
+    <li><strong>Soon:</strong> token-gate the brainstorm server for non-loopback binds, and warn loudly on <code>0.0.0.0</code> (F-02).</li>
+    <li><strong>Soon:</strong> <code>chmod 700</code> session directories / move default out of <code>/tmp</code> (F-03).</li>
+    <li><strong>Opportunistic:</strong> F-04 → F-06 — small, mechanical fixes next time those files are touched.</li>
+  </ol>
+
+  <footer>
+    Generated June 9, 2026 · analysis of commit <code>ec56620</code> ("feat: initial structure and skills") · 25 skills · 88 files · OWASP Top 10 (2021) framework, adapted to an agent-skills delivery model.
+  </footer>
+</section>
+
+</main>
+</div>
+</body>
+</html>

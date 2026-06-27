@@ -1,141 +1,141 @@
 # skills
 
-Repositório central das minhas [Agent Skills](https://agentskills.io/) — playbooks que ensinam o agente a executar tarefas específicas do meu fluxo de trabalho.
+Central repository for my [Agent Skills](https://agentskills.io/) — playbooks that teach the agent how to execute specific tasks in my workflow.
 
-Servido via [Skills Over MCP](https://skillsovermcp.com/). Push em `main` e qualquer cliente MCP conectado já vê a versão nova.
+Served via [Skills Over MCP](https://skillsovermcp.com/). Push to `main` and any connected MCP client picks up the change immediately.
 
-## URL MCP
+## MCP URL
 
 ```
 https://mcp.skillsovermcp.com/mcp/gustavo-santos-swe/skills
 ```
 
-**Cursor:** Settings → MCP → Add server → colar a URL acima (transport: `streamable-http`).
+**Cursor:** Settings → MCP → Add server → paste the URL above (transport: `streamable-http`).
 
-## Estrutura por área
+## Area structure
 
-Skills organizadas em `skills/<area>/<nome>/`. [Skills Over MCP](https://skillsovermcp.com/) suporta pastas aninhadas.
+Skills organized under `skills/<area>/<name>/`. [Skills Over MCP](https://skillsovermcp.com/) supports nested folders.
 
 ```
 skills/
-├── meta/           # descobrir, manter e sincronizar skills
-├── workflow/       # spec → plano → execução → PR
-├── engineering/    # código, testes, review, MCP, tech debt
-├── product/        # domínio, discovery, posicionamento
+├── meta/           # discover, maintain, and sync skills
+├── workflow/       # spec → plan → execution → PR
+├── engineering/    # code, tests, review, MCP, tech debt
+├── product/        # domain, discovery, positioning
 ├── design/         # UI/UX
-├── communication/  # prosa e copy
-├── marketing/      # pricing, launch, aquisição (reservado)
-└── operations/     # suporte, métricas, deploy ops
+├── communication/  # prose and copy
+├── marketing/      # pricing, launch, acquisition (reserved)
+└── operations/     # support, metrics, deploy ops
 ```
 
-Cada `SKILL.md` inclui `metadata.area` com a área correspondente.
+Each `SKILL.md` includes `metadata.area` with the corresponding area.
 
-## Inventário
+## Inventory
 
 ### meta
 
-| Skill | Para quê |
-|-------|----------|
-| [`using-superpowers`](skills/meta/using-superpowers/) | Checar skills disponíveis antes de agir |
-| [`writing-skills`](skills/meta/writing-skills/) | Criar e manter skills |
-| [`handoff`](skills/meta/handoff/) | Compactar sessão para o próximo agente |
-| [`sync-upstream-skills`](skills/meta/sync-upstream-skills/) | Checar e sincronizar skills com repos upstream |
-| [`suggesting-skills`](skills/meta/suggesting-skills/) | Propor novas skills |
+| Skill | Purpose |
+|-------|---------|
+| [`using-superpowers`](skills/meta/using-superpowers/) | Check available skills before acting |
+| [`writing-skills`](skills/meta/writing-skills/) | Create and maintain skills |
+| [`handoff`](skills/meta/handoff/) | Compact session for the next agent |
+| [`sync-upstream-skills`](skills/meta/sync-upstream-skills/) | Check and sync skills with upstream repos |
+| [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills |
 
 ### workflow
 
-| Skill | Para quê |
-|-------|----------|
-| [`brainstorming`](skills/workflow/brainstorming/) | Design e spec antes de implementar |
-| [`writing-plans`](skills/workflow/writing-plans/) | Plano de implementação detalhado |
-| [`executing-plans`](skills/workflow/executing-plans/) | Executar plano task por task |
-| [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-escrever specs, RFCs, PRDs |
-| [`ship-feature`](skills/workflow/ship-feature/) | Commit, push e abrir PR — nunca merge na main |
+| Skill | Purpose |
+|-------|---------|
+| [`brainstorming`](skills/workflow/brainstorming/) | Design and spec before implementing |
+| [`writing-plans`](skills/workflow/writing-plans/) | Detailed implementation plan |
+| [`executing-plans`](skills/workflow/executing-plans/) | Execute plan task by task |
+| [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-author specs, RFCs, PRDs |
+| [`ship-feature`](skills/workflow/ship-feature/) | Commit, push, and open PR — never merge to main |
 
-Origem workflow: [obra/superpowers](https://github.com/obra/superpowers), [anthropics/skills](https://github.com/anthropics/skills) — custom `ship-feature`.
+Source: [obra/superpowers](https://github.com/obra/superpowers), [anthropics/skills](https://github.com/anthropics/skills) — custom `ship-feature`.
 
 ### engineering
 
-| Skill | Para quê |
-|-------|----------|
-| [`test-driven-development`](skills/engineering/test-driven-development/) | TDD — teste primeiro |
-| [`systematic-debugging`](skills/engineering/systematic-debugging/) | Debug sistemático antes de fix |
-| [`verification-before-completion`](skills/engineering/verification-before-completion/) | Evidência antes de dizer "pronto" |
-| [`requesting-code-review`](skills/engineering/requesting-code-review/) | Self-review rápido do diff antes do PR |
-| [`code-review-and-quality`](skills/engineering/code-review-and-quality/) | Review 5 eixos (correctness, architecture, security, perf) |
-| [`receiving-code-review`](skills/engineering/receiving-code-review/) | Processar feedback de review |
-| [`code-simplification`](skills/engineering/code-simplification/) | Simplificar código sem mudar comportamento |
-| [`zoom-out`](skills/engineering/zoom-out/) | Mapa de módulos em código desconhecido |
-| [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Auditar duplicação semântica |
-| [`mcp-builder`](skills/engineering/mcp-builder/) | Criar MCP servers (Python/TypeScript) |
+| Skill | Purpose |
+|-------|---------|
+| [`test-driven-development`](skills/engineering/test-driven-development/) | TDD — tests first |
+| [`systematic-debugging`](skills/engineering/systematic-debugging/) | Systematic debugging before fixing |
+| [`verification-before-completion`](skills/engineering/verification-before-completion/) | Evidence before claiming "done" |
+| [`requesting-code-review`](skills/engineering/requesting-code-review/) | Quick self-review of the diff before a PR |
+| [`code-review-and-quality`](skills/engineering/code-review-and-quality/) | 5-axis review (correctness, architecture, security, perf) |
+| [`receiving-code-review`](skills/engineering/receiving-code-review/) | Process review feedback |
+| [`code-simplification`](skills/engineering/code-simplification/) | Simplify code without changing behavior |
+| [`zoom-out`](skills/engineering/zoom-out/) | Module map for unfamiliar code |
+| [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
+| [`mcp-builder`](skills/engineering/mcp-builder/) | Create MCP servers (Python/TypeScript) |
 
-Origem: [obra/superpowers](https://github.com/obra/superpowers), [mattpocock/skills](https://github.com/mattpocock/skills), [anthropics/skills](https://github.com/anthropics/skills), [obra/superpowers-lab](https://github.com/obra/superpowers-lab), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
+Source: [obra/superpowers](https://github.com/obra/superpowers), [mattpocock/skills](https://github.com/mattpocock/skills), [anthropics/skills](https://github.com/anthropics/skills), [obra/superpowers-lab](https://github.com/obra/superpowers-lab), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
 
 ### product
 
-| Skill | Para quê |
-|-------|----------|
-| [`brainstorm-with-docs`](skills/product/brainstorm-with-docs/) | Brainstorm + linguagem de domínio (`CONTEXT.md`, ADRs) |
+| Skill | Purpose |
+|-------|---------|
+| [`brainstorm-with-docs`](skills/product/brainstorm-with-docs/) | Brainstorm + domain language (`CONTEXT.md`, ADRs) |
 
-Origem: [mattpocock/skills](https://github.com/mattpocock/skills) — renomeada de `grill-with-docs`.
+Source: [mattpocock/skills](https://github.com/mattpocock/skills) — renamed from `grill-with-docs`.
 
 ### design
 
-| Skill | Para quê |
-|-------|----------|
-| [`frontend-design`](skills/design/frontend-design/) | UI distinta, production-grade, anti-"AI slop" |
+| Skill | Purpose |
+|-------|---------|
+| [`frontend-design`](skills/design/frontend-design/) | Distinctive, production-grade UI, anti-"AI slop" |
 
-Origem: [anthropics/skills](https://github.com/anthropics/skills).
+Source: [anthropics/skills](https://github.com/anthropics/skills).
 
 ### communication
 
-| Skill | Para quê |
-|-------|----------|
-| [`stop-slop`](skills/communication/stop-slop/) | Tirar padrões de escrita de IA |
-| [`write-like-a-human`](skills/communication/write-like-a-human/) | Humanizar texto (template) |
+| Skill | Purpose |
+|-------|---------|
+| [`stop-slop`](skills/communication/stop-slop/) | Remove AI writing patterns |
+| [`write-like-a-human`](skills/communication/write-like-a-human/) | Humanize text (template) |
 
-Origem: [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop).
+Source: [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop).
 
 ### marketing
 
-_Reservado para imports futuros (`pricing-strategy`, `launch-strategy`, etc.)._
+_Reserved for future imports (`pricing-strategy`, `launch-strategy`, etc.)._
 
 ### operations
 
-| Skill | Para quê |
-|-------|----------|
-| [`triage-bug`](skills/operations/triage-bug/) | Bug report → ticket estruturado |
+| Skill | Purpose |
+|-------|---------|
+| [`triage-bug`](skills/operations/triage-bug/) | Bug report → structured ticket |
 
-## Fluxo típico
+## Typical workflow
 
 ```
-brainstorming  (ou brainstorm-with-docs / doc-coauthoring)
+brainstorming  (or brainstorm-with-docs / doc-coauthoring)
   → writing-plans → executing-plans
   → test-driven-development / frontend-design / systematic-debugging
   → verification-before-completion
-  → code-simplification (se o código ficou pesado)
-  → requesting-code-review (ou code-review-and-quality se diff grande / auth / API)
+  → code-simplification (if the code got heavy)
+  → requesting-code-review (or code-review-and-quality for large diffs / auth / API)
   → ship-feature
 ```
 
-Auxiliares: `zoom-out`, `finding-duplicate-functions`, `mcp-builder`, `handoff`, `stop-slop`, `sync-upstream-skills`.
+Helpers: `zoom-out`, `finding-duplicate-functions`, `mcp-builder`, `handoff`, `stop-slop`, `sync-upstream-skills`.
 
-## Criar uma skill nova
+## Adding a new skill
 
-1. Escolher área (`meta`, `workflow`, `engineering`, …)
-2. Criar `skills/<area>/<nome>/SKILL.md`
-3. Frontmatter mínimo:
+1. Choose an area (`meta`, `workflow`, `engineering`, …)
+2. Create `skills/<area>/<name>/SKILL.md`
+3. Minimum frontmatter:
 
 ```markdown
 ---
-name: <nome>
-description: O que faz e quando usar — palavras-chave que eu costumo dizer.
+name: <name>
+description: What it does and when to use it — keywords I typically say.
 metadata:
   area: engineering
   upstream:
     repo: owner/repo
-    path: skills/<nome>
-    url: https://github.com/owner/repo/tree/main/skills/<nome>
+    path: skills/<name>
+    url: https://github.com/owner/repo/tree/main/skills/<name>
     synced_at: "YYYY-MM-DD"
     commit: "<sha>"
 ---
@@ -143,22 +143,82 @@ metadata:
 
 Schema: [`skills/meta/sync-upstream-skills/references/upstream-schema.md`](skills/meta/sync-upstream-skills/references/upstream-schema.md).
 
-Checar upstream:
+Check upstream:
 
 ```bash
 python skills/meta/sync-upstream-skills/scripts/check-upstream.py
 ```
 
-4. Manter o corpo enxuto (< 500 linhas). Detalhes em `references/`.
-5. Atualizar o `README.md` da área e este inventário.
+4. Keep the body concise (< 500 lines). Details go in `references/`.
+5. Update the area `README.md` and this inventory.
 
-## Notas
+## Notes
 
-- Repo **público** — qualquer um com a URL MCP consegue ler as skills.
-- Não colocar segredos, credenciais ou dados sensíveis.
-- A `description` no frontmatter é o que o agente usa para decidir *quando* ativar a skill.
+- Repo is **public** — anyone with the MCP URL can read the skills.
+- Do not store secrets, credentials, or sensitive data.
+- The `description` field in frontmatter is what the agent uses to decide *when* to activate the skill.
 
-## Referências
+## Installing as a plugin
+
+This repo works as an installable plugin in Claude Code and Cursor — no SKILL.md files are moved or duplicated. The manifest points to the [Skills Over MCP](https://skillsovermcp.com/) endpoint as the remote server.
+
+### Claude Code
+
+```bash
+# Single session (does not persist):
+claude --plugin-dir .
+
+# Permanent installation (user-scoped):
+claude plugins install --local "$(pwd)"
+```
+
+### Cursor (Windows / bash)
+
+```bash
+# Option 1 — symlink (requires Developer Mode enabled on Windows):
+mkdir -p ~/.cursor/plugins
+cmd /c mklink /D "%USERPROFILE%\.cursor\plugins\gustavo-santos-skills" "%cd%"
+
+# Option 2 — copy (no permission restrictions):
+cp -r . ~/.cursor/plugins/gustavo-santos-skills
+```
+
+Then enable it under **Cursor → Settings → Plugins → gustavo-santos-skills**.
+
+## Plugin stack
+
+Full list of plugins installed alongside these skills — a reference for reproducing the environment on a new machine.
+
+### cursor-public (Cursor Marketplace + Claude Code)
+
+| Plugin | What it does |
+|--------|--------------|
+| [`compound-engineering`](https://github.com/EveryInc/compound-engineering-plugin) | AI-powered dev tools: code review, research, design, workflow automation |
+| [`superpowers`](https://github.com/obra/superpowers) | Core skills library: TDD, debugging, collaboration patterns |
+| [`cursor-team-kit`](https://github.com/cursor/plugins) | CI, code review, shipping, control-cli/ui, verify-this |
+| [`continual-learning`](https://github.com/cursor/plugins) | Learns preferences and keeps `AGENTS.md` updated from transcripts |
+| [`thermos`](https://github.com/cursor/plugins) | Thermo-nuclear code review and security audit |
+| [`docs-canvas`](https://github.com/cursor/plugins) | Renders architecture docs as a navigable Cursor Canvas |
+| [`pr-review-canvas`](https://github.com/cursor/plugins) | Renders PR diffs as a reviewer-organized Cursor Canvas |
+| [`notion-workspace`](https://www.notion.so/) | Notion skills + MCP server |
+| [`stripe`](https://github.com/stripe/ai) | Stripe best practices + MCP server |
+| [`context7-plugin`](https://context7.com/) | Context7 MCP — version-specific docs from source repos |
+
+### claude-plugins-official (Claude Code only)
+
+| Plugin | What it does |
+|--------|--------------|
+| `compound-engineering` | Same plugin, registered in the Claude Code marketplace |
+| `code-review` | Automated code review with specialized agents and confidence scoring |
+| `code-simplifier` | Code simplification without changing behavior |
+| `feature-dev` | Feature development workflow |
+| `frontend-design` | Production-grade UI generation |
+| `pr-review-toolkit` | PR review toolkit |
+| `linear` | Linear issue tracking MCP |
+| `github` | Official GitHub MCP server |
+| `context7` | Context7 MCP (Claude Code variant) |
+
+## References
 
 - [Agent Skills spec](https://agentskills.io/specification)
 - [Skills Over MCP](https://skillsovermcp.com/)

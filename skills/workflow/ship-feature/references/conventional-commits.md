@@ -1,39 +1,39 @@
 # Conventional Commits (one-liner)
 
-Formato obrigatório para commits neste fluxo:
+Required format for commits in this flow:
 
 ```
-<type>(<scope>): <descrição>
+<type>(<scope>): <description>
 ```
 
 ## Types
 
-| Type | Quando usar |
+| Type | When to use |
 |------|-------------|
-| `feat` | Nova funcionalidade |
-| `fix` | Correção de bug |
-| `refactor` | Mudança de código sem alterar comportamento |
-| `test` | Adicionar ou corrigir testes |
-| `docs` | Só documentação |
-| `chore` | Manutenção (deps, config, CI) |
-| `style` | Formatação, sem mudança lógica |
-| `perf` | Melhoria de performance |
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `refactor` | Code change without altering behavior |
+| `test` | Add or fix tests |
+| `docs` | Documentation only |
+| `chore` | Maintenance (deps, config, CI) |
+| `style` | Formatting, no logic change |
+| `perf` | Performance improvement |
 
 ## Scope
 
-Opcional mas recomendado. Área do código: `auth`, `api`, `ui`, `skills`, etc.
+Optional but recommended. Area of the code: `auth`, `api`, `ui`, `skills`, etc.
 
-Use o scope que um reviewer reconheceria no diff.
+Use the scope a reviewer would recognize in the diff.
 
-## Descrição
+## Description
 
-- Imperativo, presente: "add", "fix", "remove" — não "added", "fixes"
-- Minúsculas (exceto nomes próprios)
-- Sem ponto final
-- Máximo ~72 caracteres
-- Uma linha — sem corpo de commit, salvo se o usuário pedir
+- Imperative, present tense: "add", "fix", "remove" — not "added", "fixes"
+- Lowercase (except proper nouns)
+- No trailing period
+- Max ~72 characters
+- One line — no commit body unless the user asks
 
-## Bons exemplos
+## Good examples
 
 ```
 feat(checkout): add pix payment option
@@ -43,24 +43,24 @@ chore(deps): bump vitest to 3.2
 docs(readme): add MCP setup instructions
 ```
 
-## Maus exemplos
+## Bad examples
 
 ```
-fix bug                    # sem type/scope, vago
-feat: stuff                # descrição inútil
-Fixed the login issue.     # passado, com ponto
-WIP                        # não é conventional commit
+fix bug                    # no type/scope, vague
+feat: stuff                # useless description
+Fixed the login issue.     # past tense, with period
+WIP                        # not a conventional commit
 feat(auth): add password reset flow and also update the readme and fix a typo in comments
-                           # muito longo — dividir em commits ou enxugar
+                           # too long — split into commits or trim
 ```
 
-## Múltiplos commits
+## Multiple commits
 
-Preferir **um commit** por feature coesa. Se o diff mistura concerns não relacionados, separar:
+Prefer **one commit** per cohesive feature. If the diff mixes unrelated concerns, split:
 
 ```
 feat(billing): add stripe webhook handler
 test(billing): cover webhook signature validation
 ```
 
-Não misturar `feat` + `fix` não relacionados no mesmo commit.
+Do not mix unrelated `feat` + `fix` in the same commit.

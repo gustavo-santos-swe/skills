@@ -9,7 +9,7 @@ metadata:
     url: https://github.com/obra/superpowers-lab/tree/main/skills/finding-duplicate-functions
     synced_at: "2026-06-07"
     commit: 51111f74f24058117752d9aa917cb19859f8ec86
-    note: Adaptada — categorização e detecção na mesma sessão, sem subagents.
+    note: Adapted — categorization and detection in the same session, no subagents.
 ---
 
 # Finding Duplicate-Intent Functions

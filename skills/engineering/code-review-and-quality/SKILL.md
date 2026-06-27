@@ -1,6 +1,6 @@
 ---
 name: code-review-and-quality
-description: Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch. Complements requesting-code-review (gate rápido) — use para diffs grandes, auth, APIs ou performance.
+description: Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch. Complements requesting-code-review (quick gate) — use for large diffs, auth, APIs, or performance.
 metadata:
   area: engineering
   upstream:

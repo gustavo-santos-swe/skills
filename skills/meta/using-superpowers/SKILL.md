@@ -30,9 +30,9 @@ Skills override default behavior, but **user instructions always take precedence
 
 ## How to Access Skills
 
-**In Cursor (este repo via MCP):** Skills are expostas como tools MCP em `gustavo-santos-swe/skills`. Quando uma skill pode aplicar, **leia o conteúdo completo** (tool MCP ou `Read` no arquivo local) e siga diretamente.
+**In Cursor (this repo via MCP):** Skills are exposed as MCP tools at `gustavo-santos-swe/skills`. When a skill can apply, **read the full content** (MCP tool or `Read` on the local file) and follow it directly.
 
-**Nunca** assuma que você lembra o conteúdo de uma skill — skills evoluem. Sempre leia a versão atual.
+**Never** assume you remember a skill's content — skills evolve. Always read the current version.
 
 ## The Rule
 
