@@ -51,6 +51,7 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 | [`executing-plans`](skills/workflow/executing-plans/) | Execute plan task by task |
 | [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-author specs, RFCs, PRDs |
 | [`ship-feature`](skills/workflow/ship-feature/) | Commit, push, and open PR — never merge to main |
+| [`git-conventions`](skills/workflow/git-conventions/) | Branch naming (feat/, fix/, chore/…) and conventional commit messages on every git action |
 | [`visual-plan`](skills/workflow/visual-plan/) | Rich interactive plans with diagrams, wireframes, and UI canvases (requires [Agent-Native Plans](https://plan.agent-native.com)) |
 | [`visual-recap`](skills/workflow/visual-recap/) | PR/branch diff — interactive visual recap with annotated diffs and wireframes (requires [Agent-Native Plans](https://plan.agent-native.com)) |
 | [`quick-recap`](skills/workflow/quick-recap/) | Red/yellow/green status block convention at the end of every response |
