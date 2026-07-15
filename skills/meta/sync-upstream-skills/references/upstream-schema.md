@@ -4,7 +4,7 @@ Every skill imported from another repo must have this block in the `SKILL.md` fr
 
 ```yaml
 metadata:
-  area: engineering          # optional — meta, workflow, engineering, product, design, communication, marketing, operations
+  area: engineering          # optional — meta, workflow, engineering, product, design, mobile, communication, marketing, operations
   upstream:
     repo: owner/repo         # required for automatic sync
     path: skills/name        # path in the upstream repo (`.` if the skill is the repo root)
@@ -51,6 +51,7 @@ skills/
 ├── engineering/<skill>/
 ├── product/<skill>/
 ├── design/<skill>/
+├── mobile/<skill>/
 ├── communication/<skill>/
 ├── marketing/<skill>/
 └── operations/<skill>/

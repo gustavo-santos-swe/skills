@@ -1,7 +1,7 @@
 {
   "name": "gustavo-santos-skills",
   "version": "1.0.0",
-  "description": "Personal agent skills — workflow, engineering, product, design, communication, meta, operations",
+  "description": "Personal agent skills — workflow, engineering, product, design, mobile, communication, meta, operations",
   "author": { "name": "Gustavo Santos" },
   "repository": "https://github.com/gustavo-santos-swe/skills",
   "skills": [
@@ -9,6 +9,7 @@
     "./skills/design",
     "./skills/engineering",
     "./skills/meta",
+    "./skills/mobile",
     "./skills/operations",
     "./skills/product",
     "./skills/workflow"

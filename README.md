@@ -23,6 +23,7 @@ skills/
 ├── engineering/    # code, tests, review, MCP, tech debt
 ├── product/        # domain, discovery, positioning
 ├── design/         # UI/UX
+├── mobile/         # React Native / Expo — native feel, performance
 ├── communication/  # prose and copy
 ├── marketing/      # pricing, launch, acquisition (reserved)
 └── operations/     # support, metrics, deploy ops
@@ -90,6 +91,18 @@ Source: [mattpocock/skills](https://github.com/mattpocock/skills) — renamed fr
 | [`frontend-design`](skills/design/frontend-design/) | Distinctive, production-grade UI, anti-"AI slop" |
 
 Source: [anthropics/skills](https://github.com/anthropics/skills).
+
+### mobile
+
+| Skill | Purpose |
+|-------|---------|
+| [`react-native-design`](skills/mobile/react-native-design/) | Native look-and-feel for React Native/Expo — anti-"web port", grounded in the Monetis mobile stack |
+| [`react-native-best-practices`](skills/mobile/react-native-best-practices/) | Animations (Reanimated 4/Skia/GPU), gestures, audio, on-device AI, JSI, multithreading |
+| [`react-native-performance`](skills/mobile/react-native-performance/) | FPS, TTI, bundle size, memory leaks, re-renders |
+| [`ui-ux-pro-max`](skills/mobile/ui-ux-pro-max/) | Searchable style/color/typography/UX-guideline database (incl. React Native stack) |
+| [`react-native-styling-and-navigation`](skills/mobile/react-native-styling-and-navigation/) | Basic StyleSheet/Navigation/Reanimated quick reference |
+
+Source: custom (`react-native-design`), [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills), [callstackincubator/agent-skills](https://github.com/callstackincubator/agent-skills), [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [wshobson/agents](https://github.com/wshobson/agents).
 
 ### communication
 
@@ -233,3 +246,7 @@ Full list of plugins installed alongside these skills — a reference for reprod
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 - [BuilderIO/skills](https://github.com/BuilderIO/skills)
+- [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills)
+- [callstackincubator/agent-skills](https://github.com/callstackincubator/agent-skills)
+- [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+- [wshobson/agents](https://github.com/wshobson/agents)

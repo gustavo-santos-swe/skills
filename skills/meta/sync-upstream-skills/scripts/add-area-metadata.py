@@ -13,6 +13,7 @@ AREAS = {
     "engineering",
     "product",
     "design",
+    "mobile",
     "communication",
     "marketing",
     "operations",
