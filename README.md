@@ -189,16 +189,19 @@ claude plugins install --local "$(pwd)"
 
 ### Cursor (Windows / bash)
 
-```bash
-# Option 1 — symlink (requires Developer Mode enabled on Windows):
-mkdir -p ~/.cursor/plugins
-cmd /c mklink /D "%USERPROFILE%\.cursor\plugins\gustavo-santos-skills" "%cd%"
+Cursor has no CLI installer for local plugins — it loads anything placed (or symlinked) under `~/.cursor/plugins/local/<name>`, matching the `name` in `plugin.json`.
 
-# Option 2 — copy (no permission restrictions):
-cp -r . ~/.cursor/plugins/gustavo-santos-skills
+```bash
+mkdir -p ~/.cursor/plugins/local
+
+# Option 1 — symlink (requires Developer Mode enabled on Windows, or run as Administrator):
+cmd /c mklink /D "%USERPROFILE%\.cursor\plugins\local\gustavo-santos-skills" "%cd%"
+
+# Option 2 — copy (no permission restrictions, but won't auto-update on pull):
+cp -r . ~/.cursor/plugins/local/gustavo-santos-skills
 ```
 
-Then enable it under **Cursor → Settings → Plugins → gustavo-santos-skills**.
+Then run **Developer: Reload Window** from the Command Palette and confirm it loaded under **Customize** in the sidebar.
 
 ## Plugin stack
 
