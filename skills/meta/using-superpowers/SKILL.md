@@ -60,13 +60,13 @@ These thoughts mean STOP — you're rationalizing:
 
 When multiple skills could apply:
 
-1. **Process skills first** (brainstorming, brainstorm-with-docs, systematic-debugging) — HOW to approach
-2. **Implementation skills second** (test-driven-development, frontend-design, writing-plans, mcp-builder) — execution
+1. **Process skills first** (brainstorming, grilling / grill-with-docs, systematic-debugging / diagnosing-bugs) — HOW to approach
+2. **Implementation skills second** (test-driven-development / tdd, frontend-design, writing-plans, implement, mcp-builder) — execution
 3. **Completion skills last** (verification-before-completion, ship-feature)
 
 Examples:
-- "Let's build X" → brainstorming (or brainstorm-with-docs if domain language matters) → writing-plans → executing-plans
-- "Fix this bug" → systematic-debugging → test-driven-development
+- "Let's build X" → brainstorming or grilling (grill-with-docs if domain language matters) → writing-plans / to-tickets → executing-plans / implement
+- "Fix this bug" → systematic-debugging or diagnosing-bugs → test-driven-development / tdd
 - "It's done" → verification-before-completion → ship-feature
 
 ## Skill Types

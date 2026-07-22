@@ -1,57 +1,23 @@
 ---
 name: handoff
-description: Compact the current conversation into a handoff document so a fresh agent can continue. Use when user says "handoff", "pass to next session", "save context for later", or the session is ending with work in progress.
+description: Compact the current conversation into a handoff document for another agent to pick up.
+argument-hint: "What will the next session be used for?"
+disable-model-invocation: true
 metadata:
   area: meta
   upstream:
     repo: mattpocock/skills
     path: skills/productivity/handoff
     url: https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff
-    synced_at: "2026-06-07"
-    commit: be55a7970319ede7965edbb02b5e41cba1ca82c9
+    commit: 697d4ce9742da558fd1ba6697c8e9775e2e302dd
+    synced_at: "2026-07-22"
 ---
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
 
-# Handoff
+Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work.
+Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
-Save to the **OS temp directory** — not the current workspace.
+Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-## Document structure
-
-```markdown
-# Handoff: {topic}
-
-## Goal
-What we're trying to accomplish.
-
-## Done
-- [bullets]
-
-## In progress
-- [bullets]
-
-## Blocked / open questions
-- [bullets]
-
-## Key artifacts
-- `path/to/plan.md` — implementation plan
-- `path/to/spec.md` — design spec
-- PR #42 — https://...
-
-## Suggested skills
-Skills the next agent should invoke first:
-- `executing-plans` — resume plan at Task 3
-- `systematic-debugging` — if blocked on test failure
-
-## Next steps
-1. ...
-2. ...
-```
-
-## Rules
-
-- **Do not duplicate** content already in PRDs, plans, ADRs, issues, commits, or diffs — reference by path or URL.
-- **Redact** API keys, passwords, PII.
-- If the user passed a focus for the next session, tailor the doc accordingly.
-- List skills from **this repo** (`gustavo-santos-swe/skills`) in the suggested skills section.
+If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
