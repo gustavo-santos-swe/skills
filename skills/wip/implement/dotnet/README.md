@@ -4,7 +4,9 @@ C# / .NET stack conventions for Goose’s backends. Lives under **`implement`** 
 
 Path: `skills/wip/implement/dotnet/`. Load from **`implement`** (or by name) when the change touches that concern. Prefer progressive disclosure: keep `SKILL.md` short; put deep examples in `references/`.
 
-Each skill is still a **stub**: `Topics to fill` lists decisions Goose should define later (conventions, defaults, Don'ts). Schema/SQL stays in [`../database/`](../database/).
+**Target repo wins:** if the project already has a clear pattern (Result type, folders, errors, tests), **follow it**. Skills define Goose defaults for **greenfield** or when the user asks to migrate — don’t reinvent a working local convention.
+
+Each skill is still a **stub** until filled: `Topics to fill` (or a full body) holds Goose conventions. Schema/SQL stays in [`../database/`](../database/).
 
 ## Map
 
