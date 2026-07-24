@@ -47,8 +47,8 @@ Self-check of the branch diff lives inside **`implement`** or **`pr-raise`** —
 
 ## On-ramps
 
-- **Incoming bug / raw request** → **`bug-triage`** → then **`create-tickets`** or **`implement`**.
-- **Hard failure in code** (flake, regression, no tight loop yet) → engineering **`diagnosing-bugs`** / **`systematic-debugging`**, then merge back to **`implement`** or **`bug-triage`**.
+- **Something broken / flake / regression / test red** → **`diagnose`** (evidence → fix → lock), then **`git-practices`** / **`pr-raise`** when shipping the fix.
+- **Fuzzy request that isn't a failure** → **`brainstorm`** or **`create-tickets`**, not diagnose.
 
 ## Stack packs (under `implement`)
 

@@ -27,7 +27,7 @@ Self-check of the branch diff lives inside **implement** or **pr-raise** (not a 
 On-ramps:
 
 ```
-bug-triage ──→ create-tickets or implement
+diagnose ──→ fix + lock ──→ git-practices → pr-raise
 ```
 
 Router (always start here when unsure):
@@ -45,7 +45,7 @@ ask  →  picks the skill / flow above
 | — | [`documentation`](./documentation/) | ADR (pre-build) + ship-docs (post-build) — two branches |
 | 2 | [`planning`](./planning/) | Produce the implementation plan |
 | 3 | [`create-tickets`](./create-tickets/) | Plan/spec → tracer-bullet issues (e.g. Linear) + blockers |
-| — | [`bug-triage`](./bug-triage/) | Incoming bug → agent-ready issue (on-ramp) |
+| — | [`diagnose`](./diagnose/) | Failure on-ramp — repro → root cause → fix → lock |
 | 4 | [`implement`](./implement/) | Build the work; packs: [`database/`](./implement/database/), [`dotnet/`](./implement/dotnet/), [`react-native/`](./implement/react-native/), [`frontend/`](./implement/frontend/) |
 | — | [`security-check`](./security-check/) | Optional gate — auth/secrets/boundaries before ship |
 | 5 | [`git-practices`](./git-practices/) | Branch names + commit messages |
