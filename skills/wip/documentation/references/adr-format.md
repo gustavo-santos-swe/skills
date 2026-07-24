@@ -1,50 +1,128 @@
-# ADR format
+# ADR format (Goose)
 
-Formats for the target repo. Owned by **`documentation`** branch **`adr`**. Adapted from Matt Pocock domain-modeling (see skill `inspired_by`).
+Architecture Decision Records for the target repo. Owned by **`documentation`** branch **`adr`**.
 
-Default path: `docs/adr/` with sequential names `0001-slug.md`, `0002-slug.md`, …  
-Create the directory lazily on the first ADR. Repo `AGENTS.md` may override the path.
+Market baseline: [Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) (Context / Decision / Consequences) plus optional trade-off sections in the spirit of [MADR](https://adr.github.io/madr/). Goose default is **Nygard-shaped, short**; expand only when the trade-off needs it.
 
-## Template
+Default path: `docs/adr/` · files `0001-slug.md`, `0002-slug.md`, …  
+Create the directory lazily. `AGENTS.md` in the target repo may override the path.
+
+## Default template
 
 ```md
-# {Short title of the decision}
+# {Short title}
 
-{1–3 sentences: context, what we decided, and why.}
+## Status
+
+Accepted
+
+## Context
+
+{What forces the decision? Constraints, problem, who cares.}
+
+## Decision
+
+{What we chose. Imperative, present tense: "We will …"}
+
+## Consequences
+
+{What becomes easier, harder, or forbidden. Include follow-ups if any.}
 ```
 
-A single paragraph is enough. Value is recording *that* a decision happened and *why*, not filling sections.
+**Status values:** `Proposed` | `Accepted` | `Deprecated` | `Superseded by ADR-NNNN`
 
-## Optional sections
+## When the trade-off is load-bearing
 
-Only when they earn their keep:
+Add sections (MADR-style) only if they earn their keep:
 
-- **Status** (`proposed` | `accepted` | `deprecated` | `superseded by ADR-NNNN`) when decisions get revisited
-- **Considered options** when rejected alternatives are worth remembering
-- **Consequences** when non-obvious downstream effects matter
+```md
+## Drivers
+
+- {force or constraint that shaped the choice}
+
+## Options considered
+
+### {Option A}
+- Good, because …
+- Bad, because …
+
+### {Option B}
+- Good, because …
+- Bad, because …
+
+## Decision
+
+Chosen: **{Option A}**, because {one clear reason tied to drivers}.
+```
+
+Skip empty headings. A thin ADR with four Nygard sections beats a hollow MADR skeleton.
+
+## Tiny escape hatch
+
+If the decision is real but tiny, one short file is fine:
+
+```md
+# {Title}
+
+**Status:** Accepted
+
+{2–4 sentences: context, decision, why, main consequence.}
+```
+
+Still use a numbered file in `docs/adr/`.
 
 ## Numbering
 
-Scan `docs/adr/` for the highest number; increment by one.
+Scan `docs/adr/` for the highest `NNNN`; next file is `NNNN+1`.
 
 ## When to write an ADR
 
-All three must hold:
+All three:
 
-1. **Hard to reverse** — changing your mind later is costly
-2. **Surprising without context** — a future reader will wonder why
-3. **Real trade-off** — genuine alternatives, picked for specific reasons
+1. **Hard to reverse**
+2. **Surprising later** without a written why
+3. **Real trade-off** among alternatives
 
-Skip if easy to reverse, obvious, or there was no real alternative.
+### Usually yes
 
-### What usually qualifies
-
-- Architectural shape (monorepo, event-sourced write model, etc.)
-- Integration between contexts (events vs sync HTTP)
-- Lock-in tech (DB, bus, auth, deploy target), not every library
-- Boundary / ownership (“Customer data lives here; others use IDs only”)
+- Architectural shape (boundaries, sync vs events, mono vs multi-repo)
+- Lock-in platforms (DB, bus, auth, cloud) — not every library
+- Ownership between contexts
 - Deliberate deviation from the obvious path
-- Constraints invisible in code (compliance, partner latency)
-- Non-obvious rejected alternatives (so they are not re-proposed forever)
+- Constraints invisible in code (compliance, partner SLAs)
+- Rejected options that will otherwise keep coming back
 
-Hard decisions that crystallize mid-**brainstorm** hand off here; don’t duplicate the triple gate.
+### Usually no
+
+- Easy to reverse style choices
+- "We did the only sensible thing"
+- Implementation detail that belongs in code or ship-docs
+
+Hard decisions that land mid-**brainstorm** hand off here. Ubiquitous-language terms stay in `CONTEXT.md`, not in ADRs.
+
+## Example (filled)
+
+```md
+# Use Postgres for the write model
+
+## Status
+
+Accepted
+
+## Context
+
+Order intake must survive process restarts and support reporting within minutes.
+We already run Postgres in ops; the team knows it. Event sourcing was proposed
+for auditability.
+
+## Decision
+
+We will persist the write model in Postgres with explicit audit rows for money
+movements. We will not event-source the write path in v1.
+
+## Consequences
+
+- Simpler operational story and one backup strategy.
+- Full temporal rebuild of state is not free; audit tables cover the money path.
+- Revisit if multi-region active-active becomes a hard requirement.
+```

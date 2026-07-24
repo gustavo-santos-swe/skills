@@ -5,7 +5,7 @@ disable-model-invocation: true
 metadata:
   area: wip
   inspired_by:
-    - mattpocock/skills — grilling, grill-with-docs, domain-modeling
+    - mattpocock/skills — grilling, grill-with-docs
     - obra/superpowers — brainstorming
     - compound-engineering — ce-brainstorm
 ---

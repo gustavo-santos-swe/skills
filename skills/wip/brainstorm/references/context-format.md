@@ -1,22 +1,24 @@
-# CONTEXT.md and CONTEXT-MAP.md
+# CONTEXT.md and CONTEXT-MAP.md (Goose)
 
-Formats for the target repo. Owned by **`brainstorm`** when terms crystallize. Adapted from Matt Pocock domain-modeling (see skill `inspired_by`).
+Ubiquitous language for the target repo. Owned by **`brainstorm`** when terms crystallize.
 
-## CONTEXT.md structure
+`CONTEXT.md` is a **glossary of what words mean here**. Not a spec, not ADRs, not implementation notes. Multi-context repos use a root map (bounded contexts) so each glossary stays local.
+
+## CONTEXT.md
 
 ```md
-# {Context Name}
+# {Context name}
 
-{One or two sentences: what this context is and why it exists.}
+{One or two sentences: what this context is for.}
 
 ## Language
 
 **Order**:
-{One or two sentences: what the term *is*}
-_Avoid_: Purchase, transaction
+A customer's request to buy one or more products, accepted by the system.
+_Avoid_: Purchase, transaction, cart
 
 **Invoice**:
-A request for payment sent to a customer after delivery.
+A request for payment sent after delivery.
 _Avoid_: Bill, payment request
 
 **Customer**:
@@ -24,41 +26,49 @@ A person or organization that places orders.
 _Avoid_: Client, buyer, account
 ```
 
-## Rules
+### Rules
 
-- **Opinionated.** Same concept, many words → pick one; put the rest under `_Avoid_`.
-- **Tight.** One or two sentences. Define what it *is*, not what it does in the system.
-- **Domain only.** No general programming terms (timeouts, error types, utils) even if the project uses them a lot. Ask: unique to this context, or general CS? Only the former.
-- **Cluster when natural.** Subheadings for groups; flat list is fine for a small glossary.
-- **No implementation.** No schemas, endpoints, frameworks, or ticket IDs.
+- **One word per concept.** Synonyms go under `_Avoid_`.
+- **Tight definitions.** One or two sentences. What it *is*, not the full behavior of the system.
+- **Domain only.** Skip general CS (timeout, DTO, retry) even if the code is full of them.
+- **Cluster when useful.** Subheadings for natural groups; flat list for small glossaries.
+- **No implementation.** No schemas, endpoints, frameworks, ticket IDs, or library names.
 
-## Single vs multi-context
+Update **inline** when a term is settled. Create the file lazily on the first term.
 
-**Single (usual):** one `CONTEXT.md` at the repo root (unless `AGENTS.md` overrides the path).
+## CONTEXT-MAP.md (multi-context only)
 
-**Multiple:** root `CONTEXT-MAP.md` lists contexts, paths, and relationships:
+Root file. Lists contexts, where each `CONTEXT.md` lives, and how contexts relate.
 
 ```md
-# Context Map
+# Context map
 
 ## Contexts
 
-- [Ordering](./src/ordering/CONTEXT.md) — receives and tracks customer orders
-- [Billing](./src/billing/CONTEXT.md) — generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/CONTEXT.md) — manages warehouse picking and shipping
+- [Ordering](./src/ordering/CONTEXT.md) — intake and lifecycle of customer orders
+- [Billing](./src/billing/CONTEXT.md) — invoices and payment collection
+- [Fulfillment](./src/fulfillment/CONTEXT.md) — pick, pack, ship
 
 ## Relationships
 
-- **Ordering → Fulfillment**: Ordering emits `OrderPlaced` events; Fulfillment consumes them to start picking
-- **Fulfillment → Billing**: Fulfillment emits `ShipmentDispatched` events; Billing consumes them to generate invoices
-- **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
+- **Ordering → Fulfillment**: Ordering publishes `OrderPlaced`; Fulfillment starts picking
+- **Fulfillment → Billing**: Fulfillment publishes `ShipmentDispatched`; Billing invoices
+- **Ordering ↔ Billing**: share `CustomerId` and `Money` meanings; no shared mutable aggregates
 ```
 
-### How to pick the structure
+### Which layout
 
-- `CONTEXT-MAP.md` exists → read it; update the right context’s `CONTEXT.md`
-- Only root `CONTEXT.md` → single context
-- Neither → create root `CONTEXT.md` when the first term is resolved
-- Multi-context and unclear which file → ask
+| Situation | Action |
+|-----------|--------|
+| `CONTEXT-MAP.md` exists | Read it; edit the matching context’s `CONTEXT.md` |
+| Only root `CONTEXT.md` | Single context |
+| Neither | Create root `CONTEXT.md` when the first term lands |
+| Multi-context, unclear target | Ask |
 
-Create files lazily. Update the map when a new context appears.
+`AGENTS.md` in the target repo may override paths. Update the map when a new context appears.
+
+## Challenge the language
+
+- Conflict with an existing definition → surface it immediately; pick one meaning.
+- Overloaded everyday words ("account", "user") → force a precise term.
+- Same idea, two labels across contexts → either align or document the relationship on the map.

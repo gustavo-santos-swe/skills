@@ -4,9 +4,6 @@ description: Write or update durable docs — ADRs before build, and system/API/
 disable-model-invocation: true
 metadata:
   area: wip
-  inspired_by:
-    - addyosmani/agent-skills — documentation-and-adrs
-    - mattpocock/skills — domain-modeling (ADR format)
 ---
 
 # Documentation
