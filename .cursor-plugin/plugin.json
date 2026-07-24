@@ -1,7 +1,7 @@
 {
   "name": "gustavo-santos-skills",
   "version": "1.0.0",
-  "description": "Personal agent skills — workflow, engineering, product, design, mobile, communication, meta, operations",
+  "description": "Personal agent skills — workflow, engineering, product, design, mobile, communication, meta, operations, wip",
   "author": { "name": "Gustavo Santos" },
   "repository": "https://github.com/gustavo-santos-swe/skills",
   "skills": [
@@ -12,6 +12,7 @@
     "./skills/mobile",
     "./skills/operations",
     "./skills/product",
+    "./skills/wip",
     "./skills/workflow"
   ],
   "mcpServers": "./.mcp.json"

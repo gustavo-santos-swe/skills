@@ -15,7 +15,18 @@ from pathlib import Path
 
 SKILLS_ROOT = Path(__file__).resolve().parents[3]
 AREAS = frozenset(
-    {"meta", "workflow", "engineering", "product", "design", "mobile", "communication", "marketing", "operations"}
+    {
+        "meta",
+        "workflow",
+        "engineering",
+        "product",
+        "design",
+        "mobile",
+        "communication",
+        "marketing",
+        "operations",
+        "wip",
+    }
 )
 
 

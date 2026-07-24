@@ -26,7 +26,9 @@ skills/
 ├── mobile/         # React Native / Expo — native feel, performance
 ├── communication/  # prose and copy
 ├── marketing/      # pricing, launch, acquisition (reserved)
-└── operations/     # support, metrics, deploy ops
+├── operations/     # support, metrics, deploy ops
+└── wip/            # personal drafts — graduate to a stable area when ready
+                    # (stack packs: wip/implement/{database,dotnet,react-native,frontend}/)
 ```
 
 Each `SKILL.md` includes `metadata.area` with the corresponding area.
@@ -145,6 +147,27 @@ _Reserved for future imports (`pricing-strategy`, `launch-strategy`, etc.)._
 |-------|---------|
 | [`triage-bug`](skills/operations/triage-bug/) | Bug report → structured ticket |
 
+### wip
+
+Personal lifecycle stubs under [`skills/wip/`](skills/wip/). No upstream sync. Graduate to a stable area when ready. See the [wip map](skills/wip/README.md).
+
+| Skill | Role |
+|-------|------|
+| [`ask`](skills/wip/ask/) | Router |
+| [`research`](skills/wip/research/) | Explore options (cited) |
+| [`brainstorm`](skills/wip/brainstorm/) | Sharpen idea before plan |
+| [`documentation`](skills/wip/documentation/) | ADR + ship-docs (two branches) |
+| [`planning`](skills/wip/planning/) | Implementation plan |
+| [`create-tickets`](skills/wip/create-tickets/) | Plan → issues + blockers |
+| [`bug-triage`](skills/wip/bug-triage/) | Incoming bug → ready issue |
+| [`implement`](skills/wip/implement/) | Build the work (+ [`database/`](skills/wip/implement/database/), [`dotnet/`](skills/wip/implement/dotnet/), [`react-native/`](skills/wip/implement/react-native/), [`frontend/`](skills/wip/implement/frontend/)) |
+| [`security-check`](skills/wip/security-check/) | Optional security gate before ship |
+| [`git-practices`](skills/wip/git-practices/) | Branch / commits |
+| [`pr-raise`](skills/wip/pr-raise/) | Open PR (never merge) |
+| [`pr-review`](skills/wip/pr-review/) | Review existing PR |
+| [`pr-iterate`](skills/wip/pr-iterate/) | Handle PR feedback / re-request |
+| [`write-like-goose`](skills/wip/write-like-goose/) | House voice (prose + comments) |
+
 ## Typical workflow
 
 ```
@@ -163,7 +186,7 @@ Helpers: `finding-duplicate-functions`, `mcp-builder`, `handoff`, `stop-slop`, `
 
 ## Adding a new skill
 
-1. Choose an area (`meta`, `workflow`, `engineering`, …)
+1. Choose an area (`meta`, `workflow`, `engineering`, `wip`, …)
 2. Create `skills/<area>/<name>/SKILL.md`
 3. Minimum frontmatter:
 

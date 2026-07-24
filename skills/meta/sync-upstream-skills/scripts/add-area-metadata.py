@@ -17,6 +17,7 @@ AREAS = {
     "communication",
     "marketing",
     "operations",
+    "wip",
 }
 
 
