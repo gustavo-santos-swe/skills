@@ -34,7 +34,7 @@ Router (always start here when unsure):
 
 ```
 ask  →  picks the skill / flow above
-     →  or write-like-goose (anytime: house voice / comments)
+     →  write-like-goose is always-on for durable prose (rule + AGENTS.md)
 ```
 
 | # | Folder | Role |
@@ -52,6 +52,7 @@ ask  →  picks the skill / flow above
 | 6 | [`pr-raise`](./pr-raise/) | PR title/body + open (never merge) |
 | 7 | [`pr-review`](./pr-review/) | Review an existing PR |
 | 8 | [`pr-iterate`](./pr-iterate/) | Author loop — handle feedback, push, re-request |
-| — | [`write-like-goose`](./write-like-goose/) | Anytime — Goose voice for prose + code comments |
+| — | [`write-like-goose`](./write-like-goose/) | **Always-on voice** — prose + code comments (see root `AGENTS.md` + `.cursor/rules/write-like-goose.mdc`) |
 
 Later (not stubbed yet): verify/done.
+

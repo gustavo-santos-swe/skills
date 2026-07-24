@@ -87,9 +87,11 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 - Don’t comment every line.
 - Don’t force a shell command as the first line of a PR/ADR.
 
-## For other wip skills
+## For other wip skills / always-on
 
 > Voice: durable text and comments — use `write-like-goose`.
+
+Also wired at repo root: `AGENTS.md` + `.cursor/rules/write-like-goose.mdc` (`alwaysApply`).
 
 ## Next (Voice)
 

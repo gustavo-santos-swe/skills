@@ -69,10 +69,14 @@ Load from **`implement`** by concern. Prefer progressive disclosure — one skil
 - **Next.js web** → `frontend/<concern>`; visual craft may also use [`../../design/`](../../design/).
 - **Same feature, multiple tiers** → load one skill per tier (e.g. `database` + `dotnet/db-integration` + `frontend/server-actions-and-forms`).
 
-## Anytime (not a lifecycle step)
+## Always-on voice (not a lifecycle step)
 
-- **`write-like-goose`** — house voice for prose **and** code comments. Default when humanizing or drafting durable text in this workflow.
+**`write-like-goose`** is the default for **all** durable Goose prose (tickets, plans, ADRs, commits, PRs, review comments, code comments).
+
+- Enforced by repo **AGENTS.md** + `.cursor/rules/write-like-goose.mdc` (`alwaysApply`).
+- Emitters still remind: **`implement`**, **`git-practices`**, **`pr-raise`**, **`documentation`**, **`brainstorm`**.
 - Fallback only if asked: `write-like-a-human`, `stop-slop` — **don't stack** with goose on the same pass.
+
 
 ## Crossing sessions
 
