@@ -5,7 +5,7 @@ disable-model-invocation: true
 metadata:
   area: wip
   inspired_by:
-    - mattpocock/skills — grilling, grill-with-docs, domain-modeling
+    - mattpocock/skills — grilling, grill-with-docs
     - obra/superpowers — brainstorming
     - compound-engineering — ce-brainstorm
 ---
@@ -69,6 +69,8 @@ End with an **Established so far** block (Goose voice): purpose, non-goals, chos
 
 Domain terms that crystallize go in **`CONTEXT.md`**. That file **is** the project’s ubiquitous language (glossary of what words mean here) — not ADRs, not implementation notes.
 
+**Format + examples:** [`references/context-format.md`](references/context-format.md) (`CONTEXT.md` and `CONTEXT-MAP.md`).
+
 **Layout (target repo):**
 
 - **Single context (usual):** `CONTEXT.md` at the repo root. Create it when the first term lands if missing.
@@ -81,7 +83,7 @@ Challenge conflicts with the existing language immediately. Sharpen overloaded w
 
 ### 6. ADR handoff (sparingly)
 
-Offer **`documentation:adr`** only when all three hold:
+Offer **`documentation:adr`** only when all three hold (detail in that skill’s [`adr-format`](../documentation/references/adr-format.md)):
 
 1. Hard to reverse  
 2. Surprising without context later  
