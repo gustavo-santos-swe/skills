@@ -159,7 +159,7 @@ Personal lifecycle stubs under [`skills/wip/`](skills/wip/). No upstream sync. G
 | [`documentation`](skills/wip/documentation/) | ADR + ship-docs (two branches) |
 | [`planning`](skills/wip/planning/) | Implementation plan |
 | [`create-tickets`](skills/wip/create-tickets/) | Plan → issues + blockers |
-| [`bug-triage`](skills/wip/bug-triage/) | Incoming bug → ready issue |
+| [`diagnose`](skills/wip/diagnose/) | Failure → root cause → fix → lock |
 | [`implement`](skills/wip/implement/) | Build the work (+ [`database/`](skills/wip/implement/database/), [`dotnet/`](skills/wip/implement/dotnet/), [`react-native/`](skills/wip/implement/react-native/), [`frontend/`](skills/wip/implement/frontend/)) |
 | [`security-check`](skills/wip/security-check/) | Optional security gate before ship |
 | [`git-practices`](skills/wip/git-practices/) | Branch / commits |
