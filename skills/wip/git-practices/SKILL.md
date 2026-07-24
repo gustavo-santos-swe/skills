@@ -10,7 +10,8 @@ metadata:
 
 Source of truth for **branch names** and **commit messages** only.  
 PR title, body, templates, push/open → **`pr-raise`**.  
-Voice for durable commit prose when needed → **`write-like-goose`**.
+Voice for commit subjects/bodies → **`write-like-goose`** (always; not optional).
+
 
 Specs:
 

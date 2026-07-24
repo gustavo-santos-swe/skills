@@ -21,6 +21,15 @@ Drive the build.
 
 Pick by concern — don’t load a whole pack. Persistence often needs **both** `database` + `dotnet/db-integration`.
 
+## Voice (required)
+
+Before calling the slice done, run **`write-like-goose`** on durable text you added:
+
+- new/changed **code comments** and docstrings (why only; silence if obvious)
+- ticket notes, plan scraps, or handoff lines left in the repo
+
+Do not ship AI-shaped comments. Chat chatter in the session does not need the full catalog.
+
 ## Next
 
 Self-review the branch diff here (or as the first step of **pr-raise**), then **git-practices** → **pr-raise**.

@@ -1,0 +1,32 @@
+---
+description: Durable Goose prose always uses write-like-goose (commits, PRs, comments, tickets)
+alwaysApply: true
+---
+
+# Write Like Goose (always)
+
+House voice for **all durable prose** in this repo and Goose lifecycle work.
+
+## When it applies
+
+Before emitting any of:
+
+- tickets, plans, ADRs, ship docs
+- commit subjects/bodies
+- PR titles/bodies, review comments
+- code comments / docstrings that stay in the tree
+- handoff notes meant for a future session
+
+## What to do
+
+1. **Load** [`skills/wip/write-like-goose/SKILL.md`](skills/wip/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
+2. Heavy rewrite → also load `references/patterns.md` + `vocabulary.md` + `phrases-and-structures.md`.
+3. Chat-shaped answers → Defaults + `density.md` only; full catalog optional.
+
+## Do not
+
+- Skip because the change is “small” or “just a commit”
+- Stack `stop-slop` / `write-like-a-human` on the same pass
+- Paste the full pattern catalog into this rule or into AGENTS.md — **load the skill**
+
+Shape/format for branches and commits → `git-practices`. PR open → `pr-raise`. Voice → **this skill**.
