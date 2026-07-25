@@ -12,6 +12,14 @@ https://mcp.skillsovermcp.com/mcp/gustavo-santos-swe/skills
 
 **Cursor:** Settings → MCP → Add server → paste the URL above (transport: `streamable-http`).
 
+## Cursor plugin marketplace
+
+This repo is a Cursor marketplace (single plugin). Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
+
+**Team / Enterprise:** Dashboard → Plugins → Team Marketplaces → Add Marketplace → Import from Repo → `https://github.com/gustavo-santos-swe/skills`. Then install **gustavo-santos-skills** from Customize in any workspace.
+
+**Local (no Team plan):** symlink or copy the repo to `~/.cursor/plugins/local/gustavo-santos-skills`, then Reload Window.
+
 ## Area structure
 
 Skills organized under `skills/<area>/<name>/`. [Skills Over MCP](https://skillsovermcp.com/) supports nested folders.
