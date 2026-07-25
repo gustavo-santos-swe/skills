@@ -1,6 +1,6 @@
 ---
 name: endpoint-conventions
-description: Minimal APIs/controllers, routing, versioning, ProblemDetails, auth hooks. Use when writing or reviewing .NET/C# code in this area, or when the implement skill loads this pack.
+description: Use when designing or reviewing ASP.NET HTTP endpoints — Minimal APIs/controllers, routes, QUERY, pagination, statuses, OpenAPI — or when implement loads the dotnet pack for API surface work.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,39 +8,107 @@ metadata:
 
 # Endpoint Conventions
 
-Status: **stub** — topic list below is what to define later (Goose conventions + examples). Keep SKILL.md short; push deep samples to `references/`.
+Goose handbook for the HTTP edge of .NET backends. Greenfield defaults below. **Target repo wins** if the host already standardized on controllers, unversioned routes, etc.
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- Adding or changing HTTP endpoints.
-- **`implement`** loading this pack for a .NET change.
+- Adding or changing HTTP endpoints
+- Choosing verbs, pagination, or status codes
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Style
 
-### Style
-- Minimal APIs vs controllers — our default
-- Route templates, naming, pluralization
+**Greenfield:** Minimal APIs + `MapGroup`. Thin endpoints only — bind, authorize at the edge, call `I…RequestHandler`, map the Result.
 
-### HTTP semantics
-- Status codes we use; ProblemDetails shape
-- Idempotent verbs; PUT vs PATCH policy
+**Existing controller hosts:** keep controllers; don’t mix Minimal APIs and controllers in the same host without a migration plan.
 
-### Authz at the edge
-- `[Authorize]` / policies / filters — where it lives vs application layer
+Endpoint code does **not** own business rules (see **`application-layer`**). Coarse authn/authz on the endpoint; resource checks in the handler.
 
-### Versioning
-- URL vs header; how breaking changes ship (align with api-contracts)
+## Routes and verbs
 
-### Binding & validation
-- What binds from body/route/query; handoff to validation skill
+- Prefix: **`/api/v1/...`** from day one for client-facing APIs. Breaking changes → `/api/v2/...` (sunset/deprecation → **`api-contracts`**).
+- Resources: **plural kebab** (`/credit-cards`, `/checking-accounts`).
+- Item: `/{id}` with a typed constraint when useful (`{id:guid}`).
+- Verbs: `GET` read, `POST` create, `PUT` full replace, `PATCH` partial update, `DELETE` remove.
+- When REST is a lie, use an explicit subpath (`…/settle`) rather than overloading `POST` on the collection without a name.
 
-### OpenAPI
-- What we expose; what's internal
+### QUERY (RFC 10008)
+
+Safe, idempotent, **body allowed** — for list/search/filter payloads that don’t belong in a query string.
+
+- **Greenfield default** for body-bearing list/search: **`QUERY`** (not `POST …/search`).
+- Simple lists with a few filters: `GET` + query string is fine.
+- Document gateway/WAF/OpenAPI caveats; add a dual `POST` only when a required client cannot speak QUERY.
+- Map with `HttpMethods.Query` / `MapMethods` (or current ASP.NET helpers).
+
+## Pagination
+
+Never return unbounded collections. Cap `limit` / `pageSize` hard (pick a product max, e.g. 100).
+
+| Mode | When | Inputs | Output extras |
+|------|------|--------|----------------|
+| **Cursor (default)** | Feeds, mobile, large tables | `cursor`, `limit` | `nextCursor` (optional `prevCursor`) |
+| **Offset** | Admin grids / “page N of M” | `page` or `offset`, `pageSize` | `page`, `pageSize`, optional `totalCount` |
+
+**Same endpoint may support both** if modes are mutually exclusive:
+
+- Infer: `cursor` present → cursor; `page`/`offset` present → offset; neither → cursor default
+- Reject `cursor` + `page` together → `ValidationFailed` / 422
+- Same documented sort key for both modes
+- `totalCount` opt-in (expensive) — don’t compute on every cursor page
+
+Envelope sketch: `items` + mode-specific fields (see [references](references/examples.md)).
+
+Fat filters/sort for lists prefer **QUERY** body; simple cursor params may live on `GET`.
+
+## Success and errors
+
+Shared Result → HTTP mapper (**`error-handling`**):
+
+| Outcome | Status |
+|---------|--------|
+| Read / update with body | **200** |
+| Create | **201** + `Location` when there is a resource URL |
+| Success, no body | **204** |
+| Validation | **422** Problem Details |
+| Not found / forbidden / conflict | 404 / 403 / 409 Problem Details |
+
+No `{ success, data, error }` envelope that fights Problem Details.
+
+## Binding and validation
+
+- Bind route/query/body into the Application **Request** DTO (or map into it in one line).
+- FluentValidation runs in the **handler** (application-layer). Keep endpoint binding failures as 400; business/input rules as 422 via the handler.
+
+## OpenAPI
+
+Treat OpenAPI as a **first-class public contract** for `/api/v1`:
+
+- Generate with **`Microsoft.AspNetCore.OpenApi`** (`AddOpenApi` / `MapOpenApi`) — not Swashbuckle as the greenfield default
+- Interactive docs: **[Scalar](https://scalar.com/)** via `Scalar.AspNetCore` (`MapScalarApiReference`). **Do not** ship Swagger UI for new APIs
+- Configure Scalar with a clear title, theme, and default HTTP client (see [references](references/examples.md)); serve at `/scalar` in Development (and anywhere else you intentionally expose the reference)
+- Document auth, pagination envelopes, success types, Problem Details error responses
+- Prefer OpenAPI **3.2** when documenting QUERY cleanly
+- Versioning, deprecation, client impact → **`api-contracts`**
 
 ## Don't
-- Don't leak domain exceptions as 500 without mapping.
-- Don't put business rules only in endpoint filters.
+
+- Don’t put domain rules only in endpoint filters
+- Don’t leak unmapped exceptions as opaque 500s without the host pipeline
+- Don’t ship unbounded list endpoints
+- Don’t use `POST …/search` for new greenfield body searches when QUERY is available
+- Don’t invent a second success envelope beside Problem Details
+- Don’t add Swagger UI / Swashbuckle UI on greenfield hosts — use Scalar
 
 ## References
 
-Optional: `references/` for longer examples. Project-specific paths stay in the target repo `AGENTS.md`.
+- [`references/examples.md`](references/examples.md) — MapGroup, QUERY, pagination envelope
+
+## Related
+
+- Handlers / authz split → **`application-layer`**
+- Failure mapping → **`error-handling`**
+- Contract evolution → **`api-contracts`**
+- Cancellation on endpoints → **`async`**
