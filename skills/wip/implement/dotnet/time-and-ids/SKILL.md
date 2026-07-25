@@ -90,4 +90,4 @@ Serialization of typed ids (Guid string on the wire) → **`serialization`**. Co
 - Handlers getting “now” → **`application-layer`**
 - EF columns / Npgsql NodaTime → **`db-integration`**
 - JSON shape → **`serialization`**
-- Locale display → **`localization`**
+- Locale display formatting — product/UI concern; not in this pack yet

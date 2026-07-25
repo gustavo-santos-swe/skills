@@ -34,7 +34,6 @@ Each skill is still a **stub** until filled: `Topics to fill` (or a full body) h
 | [`resilience`](./resilience/) | Timeouts, retries, idempotency |
 | [`security`](./security/) | AuthN/Z, secrets (.NET) |
 | [`serialization`](./serialization/) | JSON / contracts wire format |
-| [`localization`](./localization/) | Cultures, resources, locale formatting |
 
 ### Boundaries
 | Skill | Focus |
