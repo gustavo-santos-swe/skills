@@ -50,7 +50,6 @@ Each skill is still a **stub** until filled: `Topics to fill` (or a full body) h
 | Skill | Focus |
 |-------|--------|
 | [`code-style`](./code-style/) | C# style & analyzers |
-| [`performance`](./performance/) | Hot-path perf |
 | [`migrations-and-compat`](./migrations-and-compat/) | Schema/API evolution |
 
 Out of scope here: multi-tenancy, Blazor/MAUI (add later if needed).
