@@ -1,6 +1,6 @@
 ---
 name: async
-description: async/await, cancellation, sync-over-async traps, ConfigureAwait, ValueTask. Use when writing or reviewing .NET/C# code in this area, or when the implement skill loads this pack.
+description: Use when writing or reviewing async/await, cancellation, parallelism, or sync-over-async traps in .NET — or when implement loads the dotnet pack for async code.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,38 +8,71 @@ metadata:
 
 # Async
 
-Status: **stub** — topic list below is what to define later (Goose conventions + examples). Keep SKILL.md short; push deep samples to `references/`.
+Goose handbook for async correctness in backends. **Target repo wins** if it already has a documented async policy.
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- Any async I/O, deadlocks, or cancellation bugs.
-- **`implement`** loading this pack for a .NET change.
+- New I/O, timeouts, fan-out, or “why is this deadlocking?”
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Defaults
 
-### Defaults
-- Async all the way for I/O; no `.Result` / `.Wait()` on ASP.NET
-- `CancellationToken` from the request — always flow it
+- **Async all the way** for I/O: handlers, ports, EF, HTTP clients
+- **Always flow `CancellationToken`** on those paths; endpoints pass the request token (minimal APIs: `CancellationToken` parameter / `RequestAborted`)
+- Prefer returning **`Task` / `Task<T>`**. Use **`ValueTask`** only on measured hot paths that often complete synchronously — not as a default API style
 
-### ConfigureAwait
-- Library vs app code — our rule (usually false in libs, default in apps)
+## No sync-over-async
 
-### ValueTask / channels
-- When ValueTask is worth it; when it isn't
+On the request path (Api / Application / Infrastructure serving requests):
 
-### Parallelism
-- `Task.WhenAll` bounds; don't fan-out unbounded
-- `Parallel.ForEachAsync` — when allowed
+- No `.Result`, `.Wait()`, `.GetAwaiter().GetResult()`
+- No async work in constructors or sync DI factory methods
+- No `async void` (we don’t use UI-style event handlers here)
 
-### Traps
-- Sync-over-async in constructors / DI
-- Async void (except event handlers we don't use)
-- Capturing DbContext across threads
+If something must run after the HTTP response, use **`background-work`** or **`messaging`** — don’t discard tasks in the handler (`_ = DoAsync()`).
+
+## ConfigureAwait
+
+In Api / Application / Infrastructure for ASP.NET: **omit** `ConfigureAwait` (default is fine).
+
+Use `ConfigureAwait(false)` only in reusable library code that must not capture a synchronization context. Don’t spray it on every await “for performance.”
+
+## Parallelism
+
+Concurrent I/O is OK when it helps:
+
+- Bound concurrency (`SemaphoreSlim`, chunked `Task.WhenAll`, `Parallel.ForEachAsync` with `MaxDegreeOfParallelism`)
+- **Never** use one `DbContext` (or other non-thread-safe scoped service) from multiple tasks at once — one context per task/scope, or stay sequential
+- Unbounded `WhenAll` over a large list is a smell (pool / upstream overload)
+
+## Traps checklist
+
+| Trap | Do instead |
+|------|------------|
+| Block on async in a request | `await` |
+| Fire-and-forget in a handler | Hosted service / queue / outbox |
+| Parallel + shared DbContext | Sequential, or new scope per task |
+| Missing cancellation | Pass the token through |
+| `async void` | `async Task` |
 
 ## Don't
-- Don't block on async in request threads.
-- Don't invent fire-and-forget without an explicit host pattern (see background-work).
+
+- Don’t block the request thread on async work
+- Don’t invent fire-and-forget without an explicit host pattern
+- Don’t share EF contexts across parallel awaits
+- Don’t default every method to `ValueTask`
+- Don’t add `ConfigureAwait(false)` on every line of app code
 
 ## References
 
-Optional: `references/` for longer examples. Project-specific paths stay in the target repo `AGENTS.md`.
+- [`references/examples.md`](references/examples.md) — token flow, bounded fan-out
+
+## Related
+
+- Handlers → **`application-layer`**
+- EF / DbContext lifetime → **`db-integration`**
+- Outbound HTTP → **`http-clients`**
+- Jobs after the request → **`background-work`**
+- Retries / timeouts → **`resilience`**
