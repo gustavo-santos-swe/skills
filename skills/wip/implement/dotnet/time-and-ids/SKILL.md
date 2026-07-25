@@ -1,6 +1,6 @@
 ---
 name: time-and-ids
-description: Clocks, UTC, and identifier generation in .NET (TimeProvider, Guid/Ulid, strong IDs). Use when writing or reviewing time-dependent logic, ID creation, or testability of DateTime/new Guid in C#.
+description: Use when writing or reviewing clocks, UTC/calendar time, NodaTime types, or ID generation in .NET — or when implement loads the dotnet pack for time/id code.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,42 +8,86 @@ metadata:
 
 # Time and IDs
 
-Status: **stub** — topic list below is what to define later. Keep SKILL.md short; deep samples → `references/`.
+Goose handbook for “now”, calendar vs instant, and identifiers. Greenfield defaults below; Monetis today is mostly BCL `DateTime`/`DateOnly` + Guid v7 — **target wins** until you migrate.
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- New entities needing IDs; scheduling; “now”; ordering/timestamps; freezing time in tests.
-- **`implement`** loading this pack for a .NET change that touches clocks or ID generation.
+- New timestamps, “today”, scheduling, or entity IDs
+- Freezing time in tests
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Clock
 
-### Clock
-- `TimeProvider` / `IClock` — our abstraction; ban `DateTime.Now` / `UtcNow` in domain/app?
-- Always UTC in process and storage; local only at the UI edge
-- `DateTime` vs `DateTimeOffset` vs `DateOnly` / `TimeOnly` — when each
+Use **`TimeProvider`** wherever production code needs “now” in Domain or Application.
 
-### IDs
-- Guid v4 vs v7 / Ulid / DB sequences — default per entity type
-- Who generates IDs (app vs database)
-- Strongly-typed IDs (wrappers) — yes/no; serialization rules (→ serialization / db-integration)
+- Ban `DateTime.Now` / `DateTime.UtcNow` / `DateTimeOffset.Now` on those paths
+- Register `TimeProvider.System` (or test fake) in DI
+- Prefer passing an **`Instant`** (or `LocalDate`) into domain mutators when you want entities free of `TimeProvider`
 
-### Ordering & uniqueness
-- Sortable IDs when we need time-ordering without a separate column
-- Collision / uniqueness assumptions we document
+Glue to NodaTime:
 
-### Testing
-- How we fake the clock; seed IDs in tests
-- Determinism requirements for snapshots/golden tests
+```csharp
+var instant = Instant.FromDateTimeOffset(timeProvider.GetUtcNow());
+var today = instant.InZone(userZone).Date; // when "today" is zone-dependent
+```
 
-### Align with
-- domain-modeling (ID as value object), db-integration (column types), serialization (wire format)
+Optional: wrap with NodaTime’s `IClock` in Infrastructure if a library API wants it — still backed by `TimeProvider` for tests.
+
+## Time types (NodaTime)
+
+| Meaning | Type |
+|---------|------|
+| Point on the timeline (created-at, event time) | **`Instant`** — treat as UTC |
+| Calendar day (due date, statement period, “billing day”) | **`LocalDate`** |
+| Time of day without a date | **`LocalTime`** when needed |
+| Civil date-time in a zone (rare in core) | Convert at the edge; don’t persist ambiguous local timestamps as if they were UTC |
+
+**Process and store instants in UTC.** Keep a user/tenant **`DateTimeZone`** (or zone id string) when the product needs “today for this user.” Convert for display / “local today” at API/UI (or a presentation mapper) — not deep in Domain as a default.
+
+Wire/JSON and EF mapping for NodaTime → **`serialization`** / **`db-integration`** (System.Text.Json NodaTime converters; provider plugins). Don’t invent ad-hoc ISO helpers per feature.
+
+Legacy repos on `DateTime`/`DateOnly`: follow them; new greenfield code uses NodaTime unless the user says otherwise.
+
+## IDs
+
+**Strongly typed IDs** on public domain APIs — see **`domain-modeling`**.
+
+| Kind | Default |
+|------|---------|
+| Aggregate / entity identity | App-generated **`Guid` version 7** (`Guid.CreateVersion7()`), wrapped (`CustomerId`) |
+| Human-facing numbers (invoice #, ticket #) | **DB sequence** (or equivalent) — not a random Guid shown to users |
+
+Who creates the Guid: typically the aggregate/entity (or a tiny factory) **before** insert so the app can use the id immediately. Don’t wait on the database for v7 ids.
+
+Sortability: v7 is enough for time-ordered ids without a separate column in most cases. Document collision assumptions: treat Guid as unique; don’t build “pretty” non-unique public ids without a uniqueness guarantee.
+
+Serialization of typed ids (Guid string on the wire) → **`serialization`**. Column types → **`db-integration`**.
+
+## Testing
+
+- Prefer **`FakeTimeProvider`** (or advanceable test double) when behavior depends on time
+- Convert faked UTC to `Instant` the same way production does
+- Real Guid v7 in tests is fine; seed fixed ids only when asserting on identity or golden output
+- Don’t require deterministic ids in every test
 
 ## Don't
 
-- Don't call `DateTime.Now` in domain/application if we standardize on a clock abstraction.
-- Don't mix local and UTC timestamps in the same column/API field.
-- Don't generate non-unique “pretty” IDs without a uniqueness guarantee.
+- Don’t call `DateTime.Now` / `UtcNow` in Domain or Application production code
+- Don’t store local wall time as if it were UTC
+- Don’t mix `DateTime` Kind-unspecified with NodaTime `Instant` without an explicit conversion
+- Don’t use Ulid/sequences as the default surrogate key unless the product asks
+- Don’t show raw DB sequences as security tokens
 
 ## References
 
-Optional: `references/` for ID/clock patterns. Project-specific generators stay in the target repo.
+- [`references/examples.md`](references/examples.md) — clock glue, typed id, test fake
+
+## Related
+
+- Typed ids / VOs → **`domain-modeling`**
+- Handlers getting “now” → **`application-layer`**
+- EF columns / Npgsql NodaTime → **`db-integration`**
+- JSON shape → **`serialization`**
+- Locale display → **`localization`**
