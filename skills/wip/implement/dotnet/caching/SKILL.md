@@ -64,4 +64,4 @@ Distributed store for rate-limit global quotas → often same Redis → **`rate-
 
 - Options / Redis connection → **`configuration`** / **`dependency-injection`**
 - Shared Redis for limits → **`rate-limiting`**
-- Perf measurement → **`performance`**
+- Latency/alloc evidence → **`observability`** (metrics/traces); query cost → **`db-integration`** / **`database`**
