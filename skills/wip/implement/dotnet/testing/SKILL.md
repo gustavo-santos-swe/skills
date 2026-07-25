@@ -96,6 +96,19 @@ Enforce **`solution-structure`** rules at minimum:
 - Domain has no outward infra/ASP.NET references
 - Add rules when a recurring footgun appears
 
+## Quality traps (flaky / hollow tests)
+
+| Trap | Fix |
+|------|-----|
+| `Thread.Sleep` / fixed delays for async | Await the real signal; condition-based wait |
+| `DateTime.Now` / `UtcNow` in SUT or assert | Inject `TimeProvider` / `FakeTimeProvider` (**`time-and-ids`**) |
+| Shared mutable statics across tests | Isolate; no order-dependent suites |
+| Assert-less or tautological asserts | Assert the observable outcome that would fail if broken |
+| Swallowing exceptions in act | Let failures surface; assert typed Result when that’s the contract |
+| Mocking `DbSet` / change tracker | Ports + Testcontainers (**`db-integration`**) |
+
+Deep audit catalogs stay in the Cursor **`dotnet-test`** plugins (`test-anti-patterns`, etc.) — this pack lists Goose’s recurring bans.
+
 ## Don't
 
 - Don’t mock EF `DbSet` / change tracker
@@ -105,6 +118,8 @@ Enforce **`solution-structure`** rules at minimum:
 - Don’t skip mutation on Unit just because Integration is green
 - Don’t force 100% mock coverage of trivial code
 - Don’t point Stryker at the full Integration suite on every PR
+- Don’t sleep to “wait for” async work
+- Don’t let wall-clock time make tests flake
 
 ## References
 
@@ -116,3 +131,4 @@ Enforce **`solution-structure`** rules at minimum:
 - Testcontainers / no InMemory → **`db-integration`**
 - Clock fakes → **`time-and-ids`**
 - TDD process → lifecycle **`test-driven-development`** / implement flow
+- Broader test audits (plugin) → Cursor **`dotnet-test`**
