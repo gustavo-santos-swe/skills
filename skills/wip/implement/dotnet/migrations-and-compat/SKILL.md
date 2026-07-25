@@ -1,6 +1,6 @@
 ---
 name: migrations-and-compat
-description: EF migrations hygiene, expand/contract, schema compatibility. Use when writing or reviewing .NET/C# code in this area, or when the implement skill loads this pack.
+description: Use when adding or reviewing EF Core migrations, expand/contract deploy order, or schema apply in CI — or when implement loads the dotnet pack for migration work.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,33 +8,69 @@ metadata:
 
 # Migrations and Compat
 
-Status: **stub** — topic list below is what to define later (Goose conventions + examples). Keep SKILL.md short; push deep samples to `references/`.
+Goose handbook for **EF Core migration mechanics** and deploy order. Schema design / expand-contract *principles* → **`database`**. API JSON breaks → **`api-contracts`**.
+
+**Target repo wins** if migrate-on-startup or bundle flow is already settled.
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- EF migrations, expand/contract in .NET, deploy order.
-- **`implement`** loading this pack for a .NET change.
+- New EF migration; renaming/dropping columns; rolling deploys
+- CI/CD apply steps; seed vs migrate
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Ownership
 
-### EF mechanics
-- Where migrations live; how we generate/apply in CI and local
-- Idempotent scripts? bundle?
+| Concern | Skill |
+|---------|--------|
+| Tables, FKs, indexes, expand/contract rules | **`database`** |
+| `Migration` classes, `dotnet ef`, apply order | **this skill** |
+| Dual-write / backfill jobs in app code | **`background-work`** |
 
-### Hygiene
-- Never edit applied migrations
-- Seed data policy
+## EF hygiene
 
-### Expand / contract
-- Principles in [`../../database/`](../../database/SKILL.md); here = EF steps for dual columns, backfill jobs
+- Migrations live in **Infrastructure** (or the agreed persistence project)
+- **Generate** with EF tools (`dotnet ef migrations add …`) — don’t hand-author opaque diffs as the default
+- **Never edit** a migration already applied to shared/staging/prod; add a new migration instead
+- Don’t squash/rewrite history that’s left the developer laptop
 
-### Multi-instance
-- Rolling deploy + migration order
+## Apply
+
+- **Production/CD:** explicit apply step — typically `dotnet ef database update` (or equivalent) in the pipeline / release Job. **Don’t** rely on the first app instance calling `Database.Migrate()` under scale-out
+- **Local/dev:** `dotnet ef` (or a repo script) is fine; startup migrate only if the target already does it for DX
+- **Bundles** (`dotnet ef migrations bundle`) are **optional** — use when deploy wants a standalone migrator without SDK/project; not required Goose-wide
+
+## Expand / contract (with EF)
+
+Follow **`database`** expand/contract:
+
+1. **Expand** migration (additive / dual-write columns) → apply
+2. Deploy app that reads/writes both shapes
+3. Backfill (migration SQL and/or **`background-work`**)
+4. **Contract** migration (drop old) only after backfill + app no longer needs the old shape
+
+Never run destructive contract steps before backfill completes. Rolling deploys must survive old and new app binaries during the expand window.
+
+## Seed data
+
+- Reference/seed data: dedicated migration or **idempotent** seed path — not one-off prod fixes buried in unrelated migrations
+- Don’t use migrations as an unstructured data-entry tool for production incidents
 
 ## Don't
-- Don't squash or rewrite history that's in prod.
-- Don't run destructive contract steps before backfill completes.
+
+- Don’t edit applied migrations
+- Don’t auto-migrate on startup as the prod strategy
+- Don’t drop/rename columns in one step when old binaries are still live
+- Don’t point migrate at the wrong database “to save time”
 
 ## References
 
-Optional: `references/` for longer examples. Project-specific paths stay in the target repo `AGENTS.md`.
+- [`references/examples.md`](references/examples.md) — expand/contract + apply sketch
+
+## Related
+
+- Schema rules → **`database`**
+- EF mapping / DbContext → **`db-integration`**
+- Backfill jobs → **`background-work`**
+- Public API compat → **`api-contracts`**
