@@ -51,7 +51,7 @@ Don’t put `MustAsync` DB calls in every validator by default. Async FluentVali
 - Field-keyed errors in `ValidationFailed` (`email` → messages[]) for client forms
 - Stable **error codes** on the failure case where useful (`Customers.EmailTaken` on Conflict)
 - User-facing wording in the message; no secrets/stack traces
-- Localization of messages → **`localization`** when the product needs it — English strings are fine until then
+- Localized validation messages — only when the product is multi-locale (no pack skill yet); English strings are fine until then
 
 ## Cross-field rules
 
