@@ -50,3 +50,14 @@ public async Task Application_Should_NotReference_Infrastructure()
     await Assert.That(result.IsSuccessful).IsTrue();
 }
 ```
+
+## Mutation (Stryker) — Unit projects
+
+Point Stryker at Domain / Application projects exercised by `*.Tests.Unit`. Set `break-at` (or equivalent) to the repo’s minimum score in CI so PRs fail when too many mutants survive.
+
+```bash
+# Illustrative — exact CLI/config lives in the target repo
+dotnet tool run dotnet-stryker --config-file stryker-config.json
+```
+
+Do not mutate Integration/Testcontainers projects on every PR.

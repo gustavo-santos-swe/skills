@@ -28,6 +28,7 @@ Voice: **`write-like-goose`**.
 | Substitutes | **NSubstitute** (ports / interfaces) |
 | Persistence integration | **Testcontainers** (real engine) |
 | Architecture | **NetArchTest** (or maintained successor) |
+| Mutation | **Stryker.NET** (or equivalent) on **Unit** projects |
 | Clock in tests | **`FakeTimeProvider`** when time matters (**`time-and-ids`**) |
 
 Ban EF **InMemory** for anything beyond throwaway smoke (**`db-integration`**). Ban mocking `DbSet` / EF internals.
@@ -39,10 +40,21 @@ Ban EF **InMemory** for anything beyond throwaway smoke (**`db-integration`**). 
 | **Unit** | `*.Tests.Unit` | Domain, pure Application logic with substituted ports |
 | **Integration** | `*.Tests.Integration` | Handlers + real DB; host wiring / critical HTTP via `WebApplicationFactory` when needed |
 | **Architecture** | `*.Architecture.Tests` | Dependency rule, no forbidden references — run on CI |
+| **Mutation** | Stryker vs Unit suite | Kills weak asserts — **CI gate** on PRs (see below) |
 
 Prefer **DAMP** over clever shared hierarchies. Shared builders/fixtures are fine when they reduce noise without hiding the scenario.
 
 Don’t ship I/O-heavy features with only happy-path unit tests.
+
+## Mutation testing
+
+**Scope:** mutate production code covered by **`*.Tests.Unit`** (Domain **and** Application unit tests) — not Domain-only.
+
+**CI:** run on PRs that touch that code; **fail** below a mutation-score threshold configured in the target repo (Stryker config / pipeline).
+
+**Out of PR gate by default:** Integration / Testcontainers suites (too slow and flaky for mutant fan-out). Optional slower lane (nightly) later if a critical path has almost no unit coverage.
+
+Mutation is a protection layer on top of the pyramid — it does not replace Integration or Architecture tests.
 
 ## Naming and layout (Monetis-shaped)
 
@@ -90,11 +102,13 @@ Enforce **`solution-structure`** rules at minimum:
 - Don’t use production databases for tests
 - Don’t invent a second naming style next to `Should_When`
 - Don’t skip Architecture tests on CI “to go faster”
+- Don’t skip mutation on Unit just because Integration is green
 - Don’t force 100% mock coverage of trivial code
+- Don’t point Stryker at the full Integration suite on every PR
 
 ## References
 
-- [`references/examples.md`](references/examples.md) — naming + substitute sketch
+- [`references/examples.md`](references/examples.md) — naming, substitute, mutation sketch
 
 ## Related
 
