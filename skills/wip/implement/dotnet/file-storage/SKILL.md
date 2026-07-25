@@ -1,6 +1,6 @@
 ---
 name: file-storage
-description: Uploads, blobs, streaming, and object storage from .NET. Use when adding or changing file upload/download, S3/Azure Blob/disk storage, or large payload streaming in ASP.NET.
+description: Use when adding or reviewing .NET file/blob upload download, object storage ports, size/type limits, or signed URLs — or when implement loads the dotnet pack for storage work.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,47 +8,70 @@ metadata:
 
 # File Storage
 
-Status: **stub** — topic list below is what to define later. Keep SKILL.md short; deep samples → `references/`.
+Goose handbook for binaries outside the database.
+
+**Target repo wins** if storage ports/providers are already settled (e.g. Monetis `IFileStorage` + R2/S3).
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- Upload/download endpoints; storing binaries outside the DB; streaming large files.
-- **`implement`** loading this pack for a .NET change that touches files/blobs.
+- Upload/download endpoints; attachments; avatars; reports
+- Choosing bucket vs disk vs DB; signed URLs
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Where bytes live
 
-### Where bytes live
-- Object storage (S3/Blob) vs disk vs DB (DB almost never for blobs)
-- Naming/key layout; multi-env buckets/containers
+| Store | Rule |
+|-------|------|
+| **Object storage** (S3 / R2 / Azure Blob / MinIO) | Default for user/app binaries |
+| **Disk on web node** | Avoid under scale-out |
+| **SQL BYTEA / varbinary** | Ban for large blobs; tiny exceptions only |
 
-### Upload path
-- Multipart / size limits; content-type allowlist
-- Virus/malware scan — required or not
-- Direct-to-storage (presigned URL) vs via API
+**Application** depends on a storage **port** (`IFileStorage` / similar). **Infrastructure** owns the SDK. **DB** holds metadata: key/path, size, content-type, hash, owner, timestamps — not the bytes.
 
-### Download path
-- Streaming vs buffering; range requests
-- Authz on the object (not just the URL being “hard to guess”)
-- Signed URLs — TTL and scope
+## Upload
 
-### Metadata & lifecycle
-- What we store in DB (key, hash, size, content-type) vs in the bucket
-- Retention, delete, soft-delete of objects
-- Orphan cleanup jobs (→ background-work)
+**Default:** upload through the API/handler.
 
-### Security
-- Path traversal; content sniffing; SSRF if fetching remote URLs
-- Align with security + endpoint-conventions
+- Enforce **max size** (Kestrel/form limits + app check)
+- **Allowlist** content types / extensions — don’t trust `Content-Type` or filename alone; sniff when risk warrants
+- **Stream** to the port; don’t load multi‑MB files into `byte[]` “for convenience”
+- **Presigned direct-to-bucket** when files are large or you need to offload the API — minting the URL still requires authz + the same allowlist/size policy
+- Malware scan: product decision; if required, do it before the object is treated as trusted (often async → **`background-work`**)
 
-### Testing
-- How we fake storage in tests; Testcontainers for MinIO/Azurite?
+## Download and authz
+
+- **Authorize first** (ownership / policy) — obscure object keys are not security
+- Then **stream** via API or issue a **short-TTL signed URL**
+- **Private buckets** by default for user data; no public containers for private attachments
+- Range requests when serving large downloads and clients need them
+
+## Lifecycle
+
+- Soft-delete or hard-delete per product rules; remove or GC the object when metadata goes away
+- **Orphan cleanup** jobs for abandoned uploads → **`background-work`**
+- Multi-env: separate buckets/prefixes; never point prod at a shared “dev” bucket
+
+## Testing
+
+- Fake/substitute the storage port in Unit tests
+- Integration: Azurite / MinIO / Testcontainers when the adapter matters — don’t hit real prod buckets
 
 ## Don't
 
-- Don't store large binaries in Postgres/SQL “just for now.”
-- Don't trust client-provided content-type/filename without allowlisting.
-- Don't expose public buckets for private user data.
+- Don’t store large binaries in Postgres “just for now”
+- Don’t expose public buckets for private user data
+- Don’t trust client content-type/filename without allowlisting
+- Don’t use forever-lived signed URLs for private objects
+- Don’t put AWS/Azure SDK types in Application/Domain
 
 ## References
 
-Optional: `references/` for provider adapters. Bucket names/secrets stay in the target repo / configuration.
+- [`references/examples.md`](references/examples.md) — port + upload gates sketch
+
+## Related
+
+- Endpoint size limits / forms → **`endpoint-conventions`** / **`security`**
+- Orphan jobs → **`background-work`**
+- Secrets for buckets → **`configuration`**
