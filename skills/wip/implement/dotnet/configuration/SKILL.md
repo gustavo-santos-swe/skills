@@ -1,6 +1,6 @@
 ---
 name: configuration
-description: Options pattern, secrets, environments, feature flags. Use when writing or reviewing .NET/C# code in this area, or when the implement skill loads this pack.
+description: Use when adding or reviewing .NET configuration — appsettings hierarchy, env/secrets, typed options, feature toggles — or when implement loads the dotnet pack for config work.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,35 +8,70 @@ metadata:
 
 # Configuration
 
-Status: **stub** — topic list below is what to define later (Goose conventions + examples). Keep SKILL.md short; push deep samples to `references/`.
+Goose handbook for how settings and secrets enter a .NET host.
+
+**Target repo wins** if sources or secret wiring are already settled.
+
+Voice: **`write-like-goose`**.
+
+Registration lifetimes and **`ValidateOnStart`** → **`dependency-injection`**. This skill owns **sources**, **secrets hygiene**, **environments**, and **flags**.
 
 ## When to use
 
-- New settings, secrets wiring, or feature flags.
-- **`implement`** loading this pack for a .NET change.
+- New settings sections, secret stores, env-specific config
+- Feature toggles / gradual rollout knobs
+- **`implement`** loading this pack
 
-## Topics to fill (checklist)
+## Sources (greenfield)
 
-### Sources
-- appsettings hierarchy; env vars; secret stores we use
-- Never commit secrets
+Load order (later wins):
 
-### Options pattern
-- Named options; validation at startup; reload semantics
+1. `appsettings.json`
+2. `appsettings.{Environment}.json`
+3. Environment variables
+4. User secrets (Development) / secret store (Production)
+5. Optional host-only **`.env`** for local runs (never commit; gitignore it)
 
-### Feature flags
-- Library/process; default-off for risky paths
+Bind into **typed options** at the composition root. Don’t sprinkle `IConfiguration["Some:Key"]` through Application/handlers.
 
-### Environments
-- Dev/Staging/Prod differences we allow
+## Secrets
 
-### Align with
-- security (secrets), dependency-injection (IOptions lifetimes)
+- Never commit secrets, connection strings with passwords, or API keys
+- Prefer a cloud secret store in prod when the platform supports it
+- Local: user secrets and/or `.env`
+- Never log option instances wholesale; never put secrets in health JSON or span attributes (**`observability`**, **`health-and-readiness`**)
+
+## Options
+
+- One options type per concern (`StripeOptions`, `OpeniOptions`, …)
+- Bind + validate at startup — see **`dependency-injection`** (`ValidateDataAnnotations` / `ValidateOnStart`)
+- `IOptions<T>` for mostly static config; `IOptionsMonitor<T>` only when live reload is required
+
+## Feature flags
+
+- Start with **bool / small enum** on typed options for most toggles
+- Risky paths **default off**
+- Introduce a flag platform (OpenFeature, App Config, LaunchDarkly, …) only when you need remote flip, % rollout, or per-tenant gates
+- Don’t invent a second config system beside options for every boolean
+
+## Environments
+
+- `Development` / `Staging` / `Production` (or the repo’s names) via `ASPNETCORE_ENVIRONMENT`
+- Don’t ship Development-only sinks, verbose logging, or relaxed auth into Production
+- Env-specific *values* live in env/secret store; keep committed appsettings free of real secrets
 
 ## Don't
-- Don't read raw `IConfiguration["Secret"]` scattered in code — bind options.
-- Don't ship with Development settings in Production.
+
+- Don’t commit `.env`, user-secrets XML, or KeyVault dumps
+- Don’t read raw configuration keys in Domain
+- Don’t default a dangerous feature flag to on
+- Don’t duplicate options validation rules outside the options type / DI registration
 
 ## References
 
-Optional: `references/` for longer examples. Project-specific paths stay in the target repo `AGENTS.md`.
+- [`references/examples.md`](references/examples.md) — bind sketch + `.env` note
+
+## Related
+
+- Options lifetimes / ValidateOnStart → **`dependency-injection`**
+- Secret exposure in telemetry → **`observability`** / **`security`**
