@@ -1,6 +1,6 @@
 ---
 name: db-integration
-description: EF Core / ADO.NET / Dapper adapter for .NET — DbContext, repositories, transactions in code. Schema truth lives in implement/database. Use when writing or reviewing .NET data-access code, or when the implement skill loads this pack.
+description: Use when writing or reviewing EF Core / .NET data access — DbContext, mappings, tracking, transactions, concurrency — or when implement loads the dotnet pack for persistence code.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,59 +8,93 @@ metadata:
 
 # DB Integration (.NET)
 
-Status: **stub** — topic list below is what to define later. **Schema / SQL / integrity / indexes** → [`../../database/`](../../database/SKILL.md). This skill = how .NET talks to that schema.
+How .NET talks to the database. **Schema / SQL / indexes / isolation** → [`../../database/`](../../database/SKILL.md). Migrations mechanics → **`migrations-and-compat`**.
+
+**Target repo wins** if persistence is already standardized.
+
+Voice: **`write-like-goose`**.
 
 ## When to use
 
-- DbContext, repositories, unit of work, raw SQL from C#, EF config that maps to an existing schema.
-- **`implement`** loading this pack for a .NET change that touches persistence.
+- DbContext, mappings, queries, `SaveChanges`, concurrency in C#
+- Choosing EF vs raw SQL
+- **`implement`** loading this pack
 
 ## Split of responsibility
 
 | Concern | Skill |
 |---------|--------|
-| Tables, FKs, indexes, isolation, expand/contract principles | [`database`](../../database/SKILL.md) |
-| EF migrations generate/apply mechanics | [`migrations-and-compat`](../migrations-and-compat/SKILL.md) |
-| DbContext, tracking, repos, SaveChanges, concurrency tokens in C# | **this skill** |
+| Tables, FKs, indexes, expand/contract | [`database`](../../database/SKILL.md) |
+| Generate/apply migrations | **`migrations-and-compat`** |
+| DbContext, tracking, Fluent config, SaveChanges | **this skill** |
 
-## Topics to fill (checklist)
+## Access style
 
-### Access style
-- EF Core only vs Dapper/ADO for hot paths — our rule
-- Repository vs DbContext-from-handler — our line
+**EF Core** for almost all reads and writes.
 
-### DbContext
-- One context vs bounded contexts; pooling
-- No-tracking defaults for reads; when tracking is required
-- Global query filters (soft delete, etc.) — yes/no and how
+Dapper / `FromSql` / ADO only for proven hot paths or SQL EF can’t express cleanly — always **parameterized**. Those queries still obey [`database`](../../database/SKILL.md).
 
-### Mapping
-- Fluent API vs attributes; where configurations live
-- Value converters / strong IDs
-- Owned types / JSON columns — when allowed
+Who the handler calls (ports vs `DbContext`) → **`application-layer`** + **`solution-structure`**.
 
-### Transactions & UoW
-- Who starts the transaction (handler vs infra)
-- `SaveChanges` once per use case — enforce?
-- Ambient `TransactionScope` — banned or not
+## Tracking
 
-### Concurrency (C# side)
-- RowVersion / xmin mapping; handling `DbUpdateConcurrencyException`
-- Align with database skill isolation/locking choices
+- Read/project paths: **`AsNoTracking()`** (or `AsNoTrackingWithIdentityResolution` when you need graph identity without write tracking)
+- Load-then-mutate: normal tracking, then `SaveChanges`
+- Never return tracked entities across process boundaries (API responses, messages)
 
-### Raw SQL
-- When `FromSql` / Dapper is allowed; parameterization always
-- Still must satisfy [`database`](../../database/SKILL.md) query/plan rules
+## Mapping
 
-### Testing
-- Testcontainers vs InMemory — align with testing skill
+Fluent **`IEntityTypeConfiguration<T>`** in Infrastructure / Persistence. Apply via `ApplyConfigurationsFromAssembly` (or explicit registration).
+
+- No EF data annotations on Domain types
+- Value converters for strongly typed ids, NodaTime (`Instant` / `LocalDate`), enums as needed — align with **`time-and-ids`** / **`serialization`**
+- Owned types / JSON columns when the schema skill allows them; don’t invent document blobs to avoid tables
+
+## Query filters
+
+- **Ownership / tenant** global filters are OK when the product is user-scoped (Monetis-style `UserId`)
+- **Soft-delete** filters only on aggregates that need them — not a tax on every table
+- Admin, jobs, and migrations need an explicit **ignore filter** path when they must see all rows
+
+## Transactions and SaveChanges
+
+- Handler owns the use-case write boundary (**`application-layer`**)
+- Prefer **one `SaveChangesAsync` per use case**
+- Ban ambient **`TransactionScope`** unless you truly need a distributed transaction
+- Explicit `BeginTransaction` when multiple saves or contexts must commit atomically
+- Don’t open nested transactions casually
+
+## Concurrency
+
+Optimistic concurrency on aggregates that can race: rowversion / provider token (`IsConcurrencyToken`).
+
+Map `DbUpdateConcurrencyException` (and known unique violations) to **`Conflict`** per **`error-handling`**. Don’t silently last-write-wins on contested money/state rows.
+
+## Testing
+
+Persistence / handler integration tests that hit EF: **real engine** via Testcontainers (or equivalent). 
+
+- Ban EF **InMemory** for anything beyond a throwaway smoke
+- Domain unit tests: no DB
+- Broader test layout → **`testing`**
 
 ## Don't
 
-- Don't invent schema in C# that contradicts [`database`](../../database/SKILL.md).
-- Don't return tracked entities across process boundaries.
-- Don't open nested transactions casually.
+- Don’t invent schema in C# that contradicts [`database`](../../database/SKILL.md)
+- Don’t return tracked entities from handlers
+- Don’t use unbounded raw SQL string concat
+- Don’t rely on EF InMemory for filter/concurrency truth
+- Don’t soft-delete every table by default
 
 ## References
 
-Optional: `references/` for EF patterns. Schema checklists stay in the database skill.
+- [`references/examples.md`](references/examples.md) — mapping sketch, no-track read, concurrency catch
+
+## Related
+
+- Schema → **`database`**
+- Handlers / UoW boundary → **`application-layer`**
+- Ports-only layout → **`solution-structure`**
+- NodaTime / ids → **`time-and-ids`**
+- Migrations → **`migrations-and-compat`**
+- Test project shape → **`testing`**
