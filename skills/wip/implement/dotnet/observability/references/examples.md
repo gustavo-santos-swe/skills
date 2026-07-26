@@ -24,7 +24,7 @@ builder.Services.AddOpenTelemetry()
                 && !ctx.Request.Path.StartsWithSegments("/health");
         })
         .AddHttpClientInstrumentation()
-        .AddSource("Goose.Billing")) // must match ActivitySource name
+        .AddSource("Goose.Billing")) // must match Tracer name below
     .WithMetrics(m => m
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
@@ -48,20 +48,25 @@ using (_logger.BeginScope(new Dictionary<string, object>
 }
 ```
 
-## Custom span (only when needed)
+## Custom span (only when needed) — OTel Tracer shim
 
 ```csharp
-private static readonly ActivitySource ActivitySource = new("Goose.Billing");
+using OpenTelemetry.Trace;
 
-using var activity = ActivitySource.StartActivity("ReconcileInstallments");
-activity?.SetTag("card.id", cardId.ToString());
+// Prefer resolving Tracer from the host TracerProvider (DI) when available.
+// Name must match .AddSource("Goose.Billing") on the host.
+private static readonly Tracer Tracer =
+    TracerProvider.Default.GetTracer("Goose.Billing");
+
+using var span = Tracer.StartActiveSpan("ReconcileInstallments");
+span.SetAttribute("card.id", cardId.ToString());
 
 // work…
 
-activity?.SetStatus(ActivityStatusCode.Ok);
+span.SetStatus(Status.Ok);
 ```
 
-`ActivitySource` name **must** match `.AddSource("Goose.Billing")` or `StartActivity` returns null.
+Don’t use `ActivitySource` / `Activity` for custom Application spans — the SDK may use activities under the hood; Goose code talks **Tracer / Span**.
 
 Custom metrics: create meters with `IMeterFactory`, register the name with `.AddMeter(...)`.
 
