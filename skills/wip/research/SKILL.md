@@ -1,6 +1,6 @@
 ---
 name: research
-description: Explore options, libraries, or approaches against primary sources and leave a cited Markdown note.
+description: Explore options against primary sources and leave a cited decision brief. Use when choosing libraries/approaches, checking docs/API facts, or gathering evidence before brainstorm or planning — not for building the feature yet.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,10 +8,100 @@ metadata:
 
 # Research
 
-Status: **stub**.
+Goose handbook for **bounded, cited investigation** before design locks in.
 
-Investigate a question (e.g. SMS vs email providers, best library for X) against high-trust sources; capture findings as a cited file the next skill can consume.
+Voice: **`write-like-goose`**.
+
+## When to use
+
+- “SMS vs email?”, “which library for X?”, “what does this API actually guarantee?”
+- Need facts from docs/specs/source before **brainstorm** or **planning**
+- Reading legwork that should outlive the chat
+
+## When not to
+
+- Design debate with options already known → **brainstorm**
+- Build / spike code is the only way to learn → **prototype** (or a short experiment under **implement**), not a research novel
+- Failure / flake / regression → **diagnose**
+- Formal long-form report (market/policy/science deep dive) — say so; this skill stays a **decision brief**, not a whitepaper
+
+## How it runs
+
+**Same session by default.** Do the research here.
+
+Opt into a background agent only when the user asks, or the source set is large enough that parallel reading clearly helps. Don’t background a 10-minute docs check by default.
+
+## Steps
+
+1. **Frame the question** — one sentence; success criteria (“enough to pick among A/B/C”).
+2. **List candidate options** (usually 2–3). Don’t boil the ocean.
+3. **Gather evidence** — primary-first (below). Timebox: prefer finishing a brief over exhaustive coverage.
+4. **Write the decision brief** to disk (path below).
+5. **Hand off** — point to the file; next skill is usually **brainstorm** (sharpen) or **planning** (if the what is already frozen).
+
+## Sources
+
+| Prefer | Use carefully |
+|--------|----------------|
+| Official docs, RFCs/specs, first-party API references | Blog posts, SO answers, secondary roundups — **leads only** |
+| Library/source in the repo or upstream | Vendor marketing pages — verify in docs/code |
+| Release notes / changelogs from the owner | LLM memory with no URL — not a cite |
+
+Every hard claim in the brief needs a **primary** cite (URL or path). If you only have secondary noise, say so under open questions / uncertainty.
+
+## Deliverable — decision brief
+
+One Markdown file. Structure:
+
+```markdown
+# Research: <question>
+
+**Date:** YYYY-MM-DD
+**Status:** findings | lean
+
+## Question
+…
+
+## Options
+- A — …
+- B — …
+
+## Findings
+- … ([source](url))
+
+## Trade-offs
+| Option | Pros | Cons |
+|--------|------|------|
+
+## Open questions
+- …
+
+## Lean (optional)
+One short paragraph — or “no lean; needs brainstorm.”
+```
+
+No copy-pasteable production code required. No full POC unless the user explicitly asked for one (then keep it throwaway and tiny).
+
+## Where to save
+
+1. Match the **target repo’s** existing notes/docs convention if there is one.
+2. Else: `docs/research/YYYY-MM-DD-<slug>.md` (create `docs/research/` if needed).
+3. Tell the user the path when done.
+
+## Don't
+
+- Don’t treat blog roundups as proof
+- Don’t write a whitepaper when a brief will do
+- Don’t skip the file and leave findings only in chat
+- Don’t jump to implementing the feature under the guise of research
+- Don’t invent citations
+
+## References
+
+- [`references/brief-template.md`](references/brief-template.md) — copy-paste stub
 
 ## Next
 
-Feeds **brainstorm** (or **planning** when the question is narrow).
+- Sharpen approach → **brainstorm**
+- What already frozen → **planning** (or **create-tickets** if multi-slice)
+- Small clear change already decided → **implement**
