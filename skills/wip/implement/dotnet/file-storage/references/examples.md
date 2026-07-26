@@ -12,6 +12,34 @@ public interface IFileStorage
 }
 ```
 
+## Dual host size limits
+
+```csharp
+const long MaxBytes = 5 * 1024 * 1024;
+
+builder.WebHost.ConfigureKestrel(o => o.Limits.MaxRequestBodySize = MaxBytes);
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.MultipartBodyLengthLimit = MaxBytes;
+});
+```
+
+## Minimal API form binding + antiforgery
+
+```csharp
+// File + fields → [FromForm] on form-bound params
+api.MapPost("/avatars", async (
+    [FromForm] IFormFile file,
+    [FromForm] string? caption,
+    IUploadAvatarHandler handler,
+    CancellationToken ct) => /* … */);
+
+// JWT API with UseAntiforgery() in the pipeline:
+api.MapPost("/avatars", …).DisableAntiforgery();
+
+// Cookie-auth upload: do NOT DisableAntiforgery — send the token
+```
+
 ## Upload gates (handler sketch)
 
 ```csharp
@@ -24,8 +52,9 @@ if (file.Length is <= 0 or > MaxBytes)
 if (!allowed.Contains(file.ContentType)) // also validate sniffed type when needed
     return new ValidationFailed(...);
 
+// Never: Path.Combine(root, file.FileName)
 await using var stream = file.OpenReadStream();
-var key = $"users/{userId}/avatar/{Guid.CreateVersion7()}";
+var key = $"users/{userId}/avatar/{Guid.CreateVersion7()}.jpg";
 await _storage.UploadAsync(stream, file.ContentType, key, ct);
 // persist metadata row with key, size, content-type, owner
 ```

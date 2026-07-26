@@ -20,11 +20,15 @@ Voice: **`write-like-goose`**.
 
 ## Style
 
+**Before writing:** detect the host’s existing style (`ControllerBase` / `[ApiController]` vs `MapGet`/`MapPost`). Match it.
+
 **Greenfield:** Minimal APIs + `MapGroup`. Thin endpoints only — bind, authorize at the edge, call `I…RequestHandler`, map the Result.
 
 **Existing controller hosts:** keep controllers; don’t mix Minimal APIs and controllers in the same host without a migration plan.
 
 Endpoint code does **not** own business rules (see **`application-layer`**). Coarse authn/authz on the endpoint; resource checks in the handler.
+
+**Never** bind or return EF entities / domain graphs on the wire — Application **Request/Response** DTOs only (**`serialization`**, **`application-layer`**). Timestamps on those DTOs follow **`time-and-ids`** / **`serialization`** (NodaTime Instant/LocalDate) — not a blanket `DateTimeOffset` mandate from generic Web API guides.
 
 ## Routes and verbs
 
@@ -91,7 +95,19 @@ Treat OpenAPI as a **first-class public contract** for `/api/v1`:
 - Configure Scalar with a clear title, theme, and default HTTP client (see [references](references/examples.md)); serve at `/scalar` in Development (and anywhere else you intentionally expose the reference)
 - Document auth, pagination envelopes, success types, Problem Details error responses
 - Prefer OpenAPI **3.2** when documenting QUERY cleanly
+- XML `<summary>` on public request/response DTOs is fine when the host already feeds comments into OpenAPI — optional, not a new tax on every type
 - Versioning, deprecation, client impact → **`api-contracts`**
+
+Optional: `.http` files next to the API for manual smoke — useful, not a substitute for Integration tests (**`testing`**).
+
+## Failure modes (agent traps)
+
+| Temptation | Why it hurts | Do instead |
+|------------|--------------|------------|
+| Mix controllers + Minimal APIs | Two styles in one host | Match existing; migrate deliberately |
+| Return EF entity from endpoint | Cycles, over-post, leaks | Map to Response DTO |
+| `DateTime` / wrong clock type on wire | Ambiguous TZ | Instant / LocalDate per **`serialization`** |
+| Swagger UI on greenfield | Wrong docs stack | Scalar + `Microsoft.AspNetCore.OpenApi` |
 
 ## Don't
 
@@ -101,6 +117,7 @@ Treat OpenAPI as a **first-class public contract** for `/api/v1`:
 - Don’t use `POST …/search` for new greenfield body searches when QUERY is available
 - Don’t invent a second success envelope beside Problem Details
 - Don’t add Swagger UI / Swashbuckle UI on greenfield hosts — use Scalar
+- Don’t expose domain/EF types as request or response bodies
 
 ## References
 
@@ -112,3 +129,5 @@ Treat OpenAPI as a **first-class public contract** for `/api/v1`:
 - Failure mapping → **`error-handling`**
 - Contract evolution → **`api-contracts`**
 - Cancellation on endpoints → **`async`**
+- Wire JSON shape → **`serialization`**
+- Generic Web API how-to (plugin) → Cursor **`dotnet-aspnetcore`** / `dotnet-webapi` — **override** their DateTimeOffset/sealed-record defaults with this pack

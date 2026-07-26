@@ -24,18 +24,36 @@ Voice: **`write-like-goose`**.
 
 | Piece | Choice |
 |-------|--------|
-| Traces / metrics | **OpenTelemetry** (Aspire `ServiceDefaults` when present) |
+| Traces / metrics | **OpenTelemetry** (Aspire `ServiceDefaults` when present — prefer that over hand-rolling) |
 | Logs | **MEL** (`ILogger<T>`) bridged into the OTel / host pipeline |
 | Export | **OTLP** — local collector / Aspire dashboard; prod backend via config |
 | Custom instrumentation | **OTel API / shim** (Tracer, span, attributes) — not a vendor SDK in app code |
 
 Sampling and exporter endpoints are **environment config**, not hard-coded in handlers.
 
+### Packages (when not using Aspire defaults)
+
+Install the hosting + instrumentations + OTLP exporter — **not** bare `OpenTelemetry` alone:
+
+- `OpenTelemetry.Extensions.Hosting`
+- `OpenTelemetry.Instrumentation.AspNetCore`
+- `OpenTelemetry.Instrumentation.Http`
+- `OpenTelemetry.Exporter.OpenTelemetryProtocol`
+
+Add only what you use: `EntityFrameworkCore` / `SqlClient` / `Runtime` / `GrpcNetClient` instrumentations. Console exporter is **dev-only**, not a prod dependency.
+
+Wire traces + metrics + logging through one `AddOpenTelemetry()` → `UseOtlpExporter()` (or Aspire equivalent). Endpoint / protocol: gRPC **4317** vs HTTP/protobuf **4318** — match the collector.
+
 ## Traces
 
 **Default instrumentation:** ASP.NET request + outbound HttpClient / EF (and other OTel instrumentations you enable). That’s enough for most paths.
 
-**Custom spans:** only when a flow is opaque. When you add them, use OTel terminology/API (shim), not New Relic / App Insights types in Application code.
+**Filter noise:** exclude probe paths from ASP.NET spans (`/alive`, `/health`, and whatever **`health-and-readiness`** uses) so dashboards aren’t flooded.
+
+**Custom spans:** only when a flow is opaque. Use the **OTel API / shim** (`OpenTelemetry.Trace.Tracer` → `StartActiveSpan` / attributes / status) — not `ActivitySource` / `Activity` in Application code, and not New Relic / App Insights types.
+
+- Tracer name must be registered with `.AddSource("…")` on the host (the SDK still keys sources that way) — unmatched names silently drop spans
+- Prefer `ILogger` for exceptions on the path (trace correlation via `.WithLogging`); don’t invent a second exception channel
 
 Don’t create a span per handler or per validation step by default.
 
@@ -61,23 +79,37 @@ Prefer opaque ids. Email/phone only when product requires and with redaction/has
 
 - Start with **RED** (and runtime) from ASP.NET / HttpClient / process instrumentations
 - Add custom meters only for product KPIs / SLOs you will actually alert on
-- Keep label cardinality low (no raw user ids as metric labels)
+- Create meters via **`IMeterFactory`** (DI); register meter names with `.AddMeter("…")` — same silent-drop footgun as unregistered tracer sources
+- Keep label cardinality low (no raw user ids / UUIDs as metric labels)
 
 ## Local vs prod
 
 Same shape everywhere: OTel + MEL → OTLP (and console/JSON logs as configured). Only the destination and sampling change per environment. Don’t run a different mental model locally than in prod.
 
+## Failure modes (agent traps)
+
+| Temptation | Why it hurts | Do instead |
+|------------|--------------|------------|
+| Install only `OpenTelemetry` | No DI hosting | `Extensions.Hosting` + instrumentations + OTLP |
+| Tracer name not in `AddSource` | Spans silently dropped | Register every tracer/source name |
+| Custom spans via `ActivitySource` | Bypasses Goose OTel shim default | `Tracer.StartActiveSpan` |
+| Trace every health poll | Noise / cost | Filter `/alive` + `/health` |
+| UserId as metric tag | Cardinality explosion | Counts/RED; ids in logs/spans sparingly |
+| Vendor SDK in Application | Lock-in | OTel API + MEL |
+
 ## Don't
 
 - Don’t put vendor APM APIs in Application/Domain for greenfield
+- Don’t use `ActivitySource` / `Activity` for custom spans in Application — use the OTel Tracer shim
 - Don’t log every NotFound at Error
 - Don’t log secrets or full payloads “just for Debug”
 - Don’t sprinkle custom spans on every use case
 - Don’t invent a second correlation id beside the trace
+- Don’t ship Console exporter as a production dependency
 
 ## References
 
-- [`references/examples.md`](references/examples.md) — log template + optional custom span sketch
+- [`references/examples.md`](references/examples.md) — packages, host wiring, log template, custom span
 
 ## Related
 
@@ -85,3 +117,4 @@ Same shape everywhere: OTel + MEL → OTLP (and console/JSON logs as configured)
 - Outbound clients → **`http-clients`** / **`dependency-injection`**
 - Retries / timeouts → **`resilience`**
 - Probes → **`health-and-readiness`**
+- Full install recipes (plugin) → Cursor **`dotnet-aspnetcore`** / `configuring-opentelemetry-dotnet`

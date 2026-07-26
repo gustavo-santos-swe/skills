@@ -42,6 +42,26 @@ Who the handler calls (ports vs `DbContext`) → **`application-layer`** + **`so
 - Load-then-mutate: normal tracking, then `SaveChanges`
 - Never return tracked entities across process boundaries (API responses, messages)
 
+## Queries (avoid N+1 and client eval)
+
+**N+1** is the usual EF footgun: load parents, then touch collections in a loop (especially with lazy-loading proxies).
+
+| Pattern | Prefer |
+|---------|--------|
+| Need related data for a write/graph | `Include` (single query) or **`AsSplitQuery()`** when multiple Includes / large children risk cartesian blow-up |
+| Read/list shapes | **Project** with `Select` into DTOs — often better than Include+map |
+| Existence | `.AnyAsync` — not `.CountAsync() > 0` |
+| Filter | Filter **before** `ToListAsync` — never materialize then filter in memory |
+| Include + Select | Projection wins; drop redundant `Include` when you `Select` |
+
+Ban lazy-loading proxies on Goose greenfield (`Microsoft.EntityFrameworkCore.Proxies`) unless the target repo already depends on them — they hide N+1.
+
+**Compiled queries** (`EF.CompileAsyncQuery`) only on measured hot paths — not a default style.
+
+When LINQ can’t express it cleanly: parameterized `FromSqlInterpolated` / `ExecuteSql` (never string-concat SQL). Bulk updates: prefer `ExecuteUpdateAsync` / `ExecuteDeleteAsync` when you don’t need a tracked graph.
+
+See query traps in [references](references/examples.md). Schema/index truth stays in [`database`](../../database/SKILL.md).
+
 ## Mapping
 
 Fluent **`IEntityTypeConfiguration<T>`** in Infrastructure / Persistence. Apply via `ApplyConfigurationsFromAssembly` (or explicit registration).
@@ -78,6 +98,16 @@ Persistence / handler integration tests that hit EF: **real engine** via Testcon
 - Domain unit tests: no DB
 - Broader test layout → **`testing`**
 
+## Failure modes (agent traps)
+
+| Temptation | Why it hurts | Do instead |
+|------------|--------------|------------|
+| Lazy load in a loop | N+1 | Include / split / project |
+| `ToList` then `Where` | Full table load | Filter in SQL first |
+| `Include` + `Select` | Include ignored | Projection only |
+| `FromSqlRaw` + concat | Injection | `FromSqlInterpolated` |
+| Sensitive SQL logging in prod | Leaks data | Dev-only detailed/sensitive logs |
+
 ## Don't
 
 - Don’t invent schema in C# that contradicts [`database`](../../database/SKILL.md)
@@ -85,10 +115,11 @@ Persistence / handler integration tests that hit EF: **real engine** via Testcon
 - Don’t use unbounded raw SQL string concat
 - Don’t rely on EF InMemory for filter/concurrency truth
 - Don’t soft-delete every table by default
+- Don’t enable lazy-loading proxies on greenfield
 
 ## References
 
-- [`references/examples.md`](references/examples.md) — mapping sketch, no-track read, concurrency catch
+- [`references/examples.md`](references/examples.md) — mapping, no-track, N+1 fixes, concurrency catch
 
 ## Related
 
@@ -98,3 +129,4 @@ Persistence / handler integration tests that hit EF: **real engine** via Testcon
 - NodaTime / ids → **`time-and-ids`**
 - Migrations → **`migrations-and-compat`**
 - Test project shape → **`testing`**
+- Deep EF how-to (plugin) → Cursor **`dotnet-data`** / `optimizing-ef-core-queries`

@@ -34,8 +34,27 @@ Voice: **`write-like-goose`**.
 
 **Default:** upload through the API/handler.
 
-- Enforce **max size** (Kestrel/form limits + app check)
-- **Allowlist** content types / extensions — don’t trust `Content-Type` or filename alone; sniff when risk warrants
+### Size limits (two knobs)
+
+Configure **both** — agents usually set only one:
+
+| Layer | What |
+|-------|------|
+| **Kestrel** `MaxRequestBodySize` | Whole request body |
+| **FormOptions** `MultipartBodyLengthLimit` | Multipart/form uploads |
+
+App-level max (handler) stays the product truth; host limits must be ≥ that max. Per-endpoint `[RequestSizeLimit]` / `.DisableRequestSizeLimit()` only when streaming large blobs on purpose.
+
+### Minimal API binding
+
+- `IFormFile` alone binds from multipart
+- Mixing file + other form fields → mark form-bound params with **`[FromForm]`** (or one `[FromForm]` DTO)
+- With `UseAntiforgery()`: form uploads require antiforgery unless you **`.DisableAntiforgery()`** — safe for **JWT** APIs; **keep antiforgery** for cookie-auth uploads (**`security`**)
+
+### Content and keys
+
+- **Allowlist** content types / extensions — don’t trust `Content-Type` or filename alone; sniff magic bytes when risk warrants
+- **Never** use the client filename as a path segment (path traversal) — generate a safe key; derive extension from validated type
 - **Stream** to the port; don’t load multi‑MB files into `byte[]` “for convenience”
 - **Presigned direct-to-bucket** when files are large or you need to offload the API — minting the URL still requires authz + the same allowlist/size policy
 - Malware scan: product decision; if required, do it before the object is treated as trusted (often async → **`background-work`**)
@@ -58,6 +77,16 @@ Voice: **`write-like-goose`**.
 - Fake/substitute the storage port in Unit tests
 - Integration: Azurite / MinIO / Testcontainers when the adapter matters — don’t hit real prod buckets
 
+## Failure modes (agent traps)
+
+| Temptation | Why it hurts | Do instead |
+|------------|--------------|------------|
+| Raise only Kestrel limit | Multipart still capped | Set FormOptions too |
+| Save as `file.FileName` | Path traversal | Generated key + validated extension |
+| Trust `Content-Type` | Spoofed uploads | Allowlist + sniff when needed |
+| Cookie upload + `DisableAntiforgery` | CSRF | Keep antiforgery on cookie hosts |
+| 400 on upload, blame “file code” | Often missing antiforgery token | Check antiforgery / JWT opt-out |
+
 ## Don't
 
 - Don’t store large binaries in Postgres “just for now”
@@ -68,10 +97,11 @@ Voice: **`write-like-goose`**.
 
 ## References
 
-- [`references/examples.md`](references/examples.md) — port + upload gates sketch
+- [`references/examples.md`](references/examples.md) — port, dual size limits, form binding, upload gates
 
 ## Related
 
 - Endpoint size limits / forms → **`endpoint-conventions`** / **`security`**
 - Orphan jobs → **`background-work`**
 - Secrets for buckets → **`configuration`**
+- Minimal API upload how-to (plugin) → Cursor **`dotnet-aspnetcore`** / `minimal-api-file-upload`

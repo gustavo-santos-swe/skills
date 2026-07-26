@@ -36,6 +36,21 @@ public class CreateCustomerRequestHandlerTests
 }
 ```
 
+## Flaky — don’t / do
+
+```csharp
+// Don't
+await Task.Delay(500); // hoping the side effect finished
+Assert.That(DateTime.UtcNow - started).IsLessThan(…); // wall clock
+
+// Do — fake clock when time matters
+var time = new FakeTimeProvider();
+time.SetUtcNow(DateTimeOffset.Parse("2026-01-15T12:00:00Z"));
+var handler = new ExpireOffersHandler(time, /* … */);
+time.Advance(TimeSpan.FromDays(8));
+var result = await handler.Handle(…, CancellationToken.None);
+```
+
 ## Architecture (sketch)
 
 ```csharp

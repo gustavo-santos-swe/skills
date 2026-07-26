@@ -27,6 +27,32 @@ var list = await db.Customers
     .ToListAsync(ct);
 ```
 
+## N+1 — don’t / do
+
+```csharp
+// Don't — N+1 (especially with lazy loading)
+var orders = await db.Orders.ToListAsync(ct);
+foreach (var order in orders)
+{
+    _ = order.Items.Count; // extra query per order
+}
+
+// Do — project for reads
+var summaries = await db.Orders
+    .AsNoTracking()
+    .Select(o => new OrderSummary(
+        o.Id,
+        o.Items.Sum(i => i.Amount),
+        o.Items.Count))
+    .ToListAsync(ct);
+
+// Do — graph for mutate: Include, or AsSplitQuery when many Includes
+var order = await db.Orders
+    .Include(o => o.Items)
+    .AsSplitQuery()
+    .SingleOrDefaultAsync(o => o.Id == id, ct);
+```
+
 ## Mutate + one SaveChanges
 
 ```csharp
