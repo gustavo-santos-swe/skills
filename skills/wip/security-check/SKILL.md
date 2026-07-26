@@ -1,6 +1,6 @@
 ---
 name: security-check
-description: Security pass on a change or PR — auth, secrets, input boundaries, dependency risk. Use when the ticket touches auth/PII/payments/public APIs, before shipping, or when the user says "security check", "secure this", "OWASP pass".
+description: Security pass on a change (gate) or optional full-repo audit - trace before flag, high-confidence findings only, report without auto-fixing. Use when the diff hits a trust boundary, before shipping, or when the user says security check / full audit / OWASP pass.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -8,30 +8,121 @@ metadata:
 
 # Security Check
 
-Status: **stub**.
+Goose handbook for a **security pass**: default **gate** on the change, optional **full audit** when asked.
 
-Optional gate (not every ticket). Run when the change hits a trust boundary; otherwise skip.
+Voice: **`write-like-goose`**.
 
-Inspired by Addy Osmani `security-and-hardening` — tailor later to our stack (.NET / APIs / mobile).
+Stack **how** (AuthN recipes, CORS defaults, …) lives in pack skills. This skill owns **process, confidence, and the report**.
 
 ## When to use
 
-- Ticket/PR involves auth, sessions, tokens, secrets, PII, payments, file upload, or public HTTP APIs.
-- User asks for a security pass before `pr-raise` / merge.
-- After a security-related review comment.
+**Gate (default)** - suggest or run when the diff/paths touch a trust boundary:
+
+- Auth, sessions, tokens, cookies, CSRF
+- Secrets, keys, connection strings
+- PII, payments, tenancy / multi-tenant ids
+- File upload/download, path construction
+- Public HTTP APIs, webhooks, SSRF-prone outbound calls
+- Crypto, deserialization of untrusted data
+
+Also when the user asks for a security pass, or after a security-related review comment.
+
+**Full audit** - only when the user asks for whole-repo / periodic / “full audit” / “OWASP everything”. Same confidence bar; wider surface.
 
 ## When not to
 
-- Pure refactors with no trust-boundary change.
-- Docs-only / copy-only changes.
+- Pure refactors, docs-only, copy-only (unless the user forces a run)
+- Replacing pack handbooks (`implement/dotnet/security`, frontend/RN security when filled)
+- Silent auto-fixes (this skill **reports**; fixes go through **implement** after the engineer asks)
 
-## Steps (outline)
+## Modes
 
-1. **Scope the boundary** — what crosses trust? (user input, authz, data at rest, outbound calls).
-2. **Checklist pass** — secrets in diff? authz on new endpoints? validation at boundary? unsafe deserialization? SSRF/path traversal if relevant?
-3. **Deps** — new packages: known issues / unexpected privilege?
-4. **Report** — findings by severity (block / should-fix / fyi); no finding → explicit “no security blockers for this scope”.
+| Mode | Scope | Deliverable |
+|------|--------|-------------|
+| **Gate** | Branch diff, uncommitted change, or named paths/PR | Short report **in chat** |
+| **Full audit** | Broader codebase (still timebox; prefer entrypoints + trust boundaries) | Markdown file (below) + chat summary |
 
-## Next
+Default = **gate**. Do not escalate to full audit unless asked.
 
-Blockers → back to **implement**. Clean → **git-practices** / **pr-raise** (or **pr-iterate** if already in review).
+## Hard rules
+
+1. **Trace before flag.** Follow data flow. Confirm attacker-controlled input (or real misconfig) before reporting.
+2. **High confidence only** for the main report. Medium → “needs verification.” Low / theory / pure defense-in-depth → omit (or one FYI line max).
+3. **Report only.** No code changes unless the engineer explicitly asks to fix afterward.
+4. **Never paste raw secrets** into chat or files - redact (`sk-…****`, env var **names** ok).
+5. **Load pack security how** when the stack is known (see [Stack packs](#stack-packs)).
+
+## Confidence
+
+| Level | Criteria | Action |
+|-------|----------|--------|
+| **High** | Vulnerable pattern + attacker-controlled (or confirmed broken authz/secret) after research | **Report** with severity |
+| **Medium** | Pattern present; input source or mitigation unclear | **Needs verification** |
+| **Low** | Theoretical, best-practice-only, framework already mitigates | **Do not report** |
+
+Research before flagging: other validation, middleware, framework defaults, whether the value is server-controlled config vs request data.
+
+Do **not** flag solely on pattern match. Do **not** treat env/settings/constants as attacker input.
+
+## Severity (report buckets)
+
+| Bucket | Meaning |
+|--------|---------|
+| **Block** | Exploitable trust failure; must fix before ship |
+| **Should-fix** | Real issue; ship judgment is the engineer’s |
+| **FYI** | Narrow note; optional |
+| **Needs verification** | Medium confidence only |
+
+If nothing high-confidence: say explicitly **“No security blockers for this scope.”**
+
+## Stack packs
+
+When reviewing .NET / web / RN code, load the matching pack security skill for stack-specific tells (not the whole pack unless already loaded by **implement**):
+
+| Stack | Skill |
+|-------|--------|
+| .NET | [`../implement/dotnet/security/SKILL.md`](../implement/dotnet/security/SKILL.md) |
+| Frontend / Next | [`../implement/frontend/security/SKILL.md`](../implement/frontend/security/SKILL.md) (when filled) |
+| React Native | pack security / auth skills when filled |
+
+Process and confidence stay here. Pack wins on stack defaults when they conflict with generic advice.
+
+## Steps
+
+### Gate
+
+1. **Scope** - diff vs base, uncommitted tree, or user-named paths. List trust boundaries in play.
+2. **Heuristic** - if no trust-boundary touch and user didn’t force: say skip reason; stop.
+3. **Load** - checklist ([`references/checklist.md`](references/checklist.md)) + relevant pack security skill(s).
+4. **Hunt** - focus on changed code; research call sites / middleware as needed for confidence.
+5. **Report** in chat using [`references/report-template.md`](references/report-template.md).
+6. **Next** - blockers → back to **implement** (only if engineer wants fixes). Clean → **git-practices** / **pr-raise** (or **pr-iterate** if already in review).
+
+### Full audit
+
+1. Confirm the user wants full audit (not gate).
+2. Map entrypoints and trust boundaries (timebox; don’t boil the ocean).
+3. Same hunt + confidence rules; cover more surface using the checklist categories that apply.
+4. Write `docs/security/YYYY-MM-DD-<slug>.md` (or the repo’s security-docs convention if one exists). Chat: short summary + path.
+5. Same next-step routing as gate.
+
+## Don't
+
+- Don’t auto-fix
+- Don’t dump OWASP theater rows for N/A categories in gate mode
+- Don’t report framework false positives without checking mitigations
+- Don’t write `security-report/` noise folders unless the engineer asks for that layout
+- Don’t paste secret values
+- Don’t run full audit by default
+
+## References
+
+- [`references/checklist.md`](references/checklist.md) - trust-boundary hunt list
+- [`references/report-template.md`](references/report-template.md) - report shape
+
+## Related
+
+- Build / fix → **implement**
+- Ship → **git-practices** → **pr-raise**
+- PR feedback loop → **pr-iterate**
+- .NET security how → **implement/dotnet/security**
