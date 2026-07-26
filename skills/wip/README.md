@@ -43,7 +43,7 @@ ask  →  picks the skill / flow above
 | 0 | [`research`](./research/) | Explore options, libraries, approaches (cited) |
 | 1 | [`brainstorm`](./brainstorm/) | Sharpen the idea before a plan exists |
 | — | [`documentation`](./documentation/) | ADR (pre-build) + ship-docs (post-build) — two branches |
-| 2 | [`planning`](./planning/) | Produce the implementation plan |
+| 2 | [`planning`](./planning/) | Frozen what → ordered how (tasks, files, risks) |
 | 3 | [`create-tickets`](./create-tickets/) | Plan/spec → tracer-bullet issues (e.g. Linear) + blockers |
 | — | [`diagnose`](./diagnose/) | Failure on-ramp — repro → root cause → fix → lock |
 | 4 | [`implement`](./implement/) | Build the work; packs: [`database/`](./implement/database/), [`dotnet/`](./implement/dotnet/), [`react-native/`](./implement/react-native/), [`frontend/`](./implement/frontend/) |
