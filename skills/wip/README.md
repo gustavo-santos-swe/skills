@@ -10,7 +10,7 @@ Scratch space for skills I'm authoring myself — drafts, experiments, and half-
 - When a skill is ready, **graduate** it: move to the right stable area (`workflow`, `engineering`, …), update `metadata.area`, and list it in the root `README.md` inventory.
 - PR-related skills use the **`pr-`** prefix for discoverability (`pr-raise`, `pr-review`, `pr-iterate`).
 
-## Lifecycle map (stubs)
+## Lifecycle map
 
 Main flow — idea → ship:
 
