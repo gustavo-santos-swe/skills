@@ -30,11 +30,11 @@ Every `pr-review` run covers these axes. Skip empty axes in the report (omit the
 
 ## Guidelines
 
-**Sources:** repo `CONTRIBUTING` / coding standards, Goose pack skills relevant to the stack, ADRs in the touched area.
+**Sources:** repo `CONTRIBUTING` / coding standards, Goose pack skills relevant to the stack, ADRs in the touched area, plus the [`smell-baseline.md`](smell-baseline.md) (judgement calls only).
 
-**Report:** violations that cause real pain (wrong layer, captive DI, API convention breaks, etc.).
+**Report:** violations that cause real pain (wrong layer, captive DI, API convention breaks, etc.); named smells from the baseline when they show up in the diff.
 
-**Skip:** anything CI/analyzers already enforce; pure naming bikesheds.
+**Skip:** anything CI/analyzers already enforce; pure naming bikesheds; smells the repo standard endorses.
 
 ## Ship risk + CI
 

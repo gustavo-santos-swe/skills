@@ -39,7 +39,11 @@ Use [`references/review-axes.md`](references/review-axes.md). Short list:
 | **Guidelines** | Repo + Goose pack rules that prevent real pain (not linter theater) |
 | **Ship risk + CI** | Migrations/breaking API/rollout; failing or missing checks |
 
+**Approval bar:** approve when the change clearly improves overall code health and matches the repo — not when it’s “how I would have written it.” Perfect code doesn’t exist; don’t block on taste.
+
 **Nitpick bar:** prefer fewer stronger findings. Severity: **Block** / **Should-fix** / **Nit** (≤2 Nits). Skip style tooling already enforces. Don’t invent requirements when no spec was provided - say “no spec provided” and still run the other axes.
+
+**Fat PRs:** you may split mental work into **Spec** vs **Standards/Guidelines** passes (same axes, separate notes) so one doesn’t mask the other — still one draft report.
 
 ## Hard rules
 
@@ -71,7 +75,7 @@ Ask: **chat**, **markdown doc**, or **canvas**?
 2. **Fetch** - title, body, base/head, commits, diff, checks/CI, existing review threads. Tooling: same discovery as **pr-raise** (MCP then `gh`).
 3. **Spec / SoT** - from PR body, linked tickets, paths the engineer gives, or plan/OpenAPI cited in the change. If none: note it; don’t invent AC.
 4. **Understand layout** - from the diff + repo tree, infer modules/layers for the walk guide (see human-walk template).
-5. **Review** against the axes. Trace before security flags. Check main-path integration coverage.
+5. **Review** against the axes (incl. smell baseline under Guidelines). Trace before security flags. Check main-path integration coverage.
 6. **Draft** using the report template + human walk guide (required sections).
 7. **Render** on the chosen/default surface (templates must match).
 8. **Ask** - post to GitHub? If yes: **request changes** if any Block; else **comment**; **approve** only if they explicitly ask.
@@ -92,6 +96,7 @@ Only after explicit go-ahead. One review submission with summary + inline commen
 ## References
 
 - [`references/review-axes.md`](references/review-axes.md) - what matters / what to skip
+- [`references/smell-baseline.md`](references/smell-baseline.md) - Fowler smells for Guidelines
 - [`references/report-template.md`](references/report-template.md) - fixed report shape
 - [`references/human-walk-guide.md`](references/human-walk-guide.md) - dynamic layer/file order
 - [`references/canvas-layout.md`](references/canvas-layout.md) - canvas section + aesthetic
@@ -102,4 +107,4 @@ Only after explicit go-ahead. One review submission with summary + inline commen
 - Open PR → **pr-raise**
 - Address feedback → **pr-iterate**
 - Trust-boundary deep pass → **security-check**
-- Local Standards+Spec without a PR → `engineering/code-review` (optional)
+- Module shape / seams → **codebase-design**

@@ -1,5 +1,8 @@
 # engineering
 
-Architecture and review helpers that still complement Goose `wip/`.
+Helpers that still sit beside Goose `wip/`:
 
-Lifecycle routing, research, tickets, implement, diagnose, and PR flow: use [`../wip/`](../wip/) (`ask` first when unsure). Domain glossary / ADRs: `wip/brainstorm` + `wip/documentation`.
+- `improve-codebase-architecture` — deepen survey (uses `wip/codebase-design` vocab)
+- `code-simplification`, `finding-duplicate-functions`, `resolving-merge-conflicts`
+
+Lifecycle, review, and deep-module language: [`../wip/`](../wip/).

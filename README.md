@@ -63,15 +63,12 @@ Lifecycle lives under [`wip/`](skills/wip/). Source: [anthropics/skills](https:/
 
 | Skill | Purpose |
 |-------|---------|
-| [`codebase-design`](skills/engineering/codebase-design/) | Deep modules, seams, small interfaces |
-| [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one |
-| [`code-review`](skills/engineering/code-review/) | Standards + spec review (parallel sub-agents) |
+| [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one (vocab → `wip/codebase-design`) |
 | [`resolving-merge-conflicts`](skills/engineering/resolving-merge-conflicts/) | Resolve merge/rebase by intent |
-| [`code-review-and-quality`](skills/engineering/code-review-and-quality/) | 5-axis review (correctness, architecture, security, perf) |
 | [`code-simplification`](skills/engineering/code-simplification/) | Simplify code without changing behavior |
 | [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
 
-Goose lifecycle is under [`wip/`](skills/wip/). Source for remaining engineering skills: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
+Goose lifecycle + `codebase-design` under [`wip/`](skills/wip/). Remaining engineering: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
 
 ### product
 
@@ -135,6 +132,7 @@ Goose lifecycle under [`skills/wip/`](skills/wip/). No upstream sync. Prefer the
 | [`pr-review`](skills/wip/pr-review/) | Review existing PR |
 | [`pr-iterate`](skills/wip/pr-iterate/) | Handle PR feedback / re-request |
 | [`write-like-goose`](skills/wip/write-like-goose/) | House voice (prose + comments) |
+| [`codebase-design`](skills/wip/codebase-design/) | Deep-module vocabulary (seams / depth) |
 
 ## Typical workflow
 
@@ -146,7 +144,7 @@ ask → research? → brainstorm → documentation:adr? → planning → create-
   → git-practices → pr-raise → pr-review ⇄ pr-iterate
 ```
 
-Optional complements: `code-review-and-quality` / `codebase-design` / `frontend-design`.
+Optional complements: `improve-codebase-architecture` / `frontend-design`.
 
 Writing pipeline: `writing-fragments` → `writing-beats` or `writing-shape`.
 

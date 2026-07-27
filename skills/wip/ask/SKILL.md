@@ -68,9 +68,10 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 - **Mobile UI / device** → `react-native` pack; deep technique may also use [`../../mobile/`](../../mobile/).
 - **Next.js web** → `frontend` pack; visual craft may also use [`../../design/`](../../design/).
 
-## Always-on voice (not a lifecycle step)
+## Always-on / anytime (not lifecycle steps)
 
-**`write-like-goose`** is the default for durable Goose prose. Details live there + repo **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`. Lifecycle skills only remind: Voice → **`write-like-goose`**.
+- **`write-like-goose`** — durable Goose prose (also root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
+- **`codebase-design`** — deep-module vocabulary when shaping seams/interfaces (also used by `engineering/improve-codebase-architecture`).
 
 ## Crossing sessions
 

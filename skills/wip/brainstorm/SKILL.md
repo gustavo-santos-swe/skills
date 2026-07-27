@@ -61,7 +61,7 @@ Always propose **2-3 approaches** with trade-offs before locking the shape - eve
 
 ### 4. Design freeze
 
-Present a compact design (scale to complexity - a few sentences or short sections). Cover what matters: shape, boundaries, data/flow if relevant, failure modes worth deciding now. Ask if it looks right; revise if not.
+Present a compact design (scale to complexity - a few sentences or short sections). Cover what matters: shape, boundaries, data/flow if relevant, failure modes worth deciding now. When the work is module shape / seams / testability, use **`codebase-design`** vocabulary (depth, seam, adapter — not “service/API/boundary”). Ask if it looks right; revise if not.
 
 End with an **Established so far** block (Goose voice): purpose, non-goals, chosen approach, key decisions, open questions (if any).
 

@@ -56,7 +56,7 @@ If a new concern appears mid-slice that belongs to another pack, load that pack 
 
 1. At batch start, list seams under test (public boundaries: HTTP contract, domain API, UI behaviour, etc.).
 2. Confirm with the engineer if unclear. No tests at unconfirmed seams.
-3. Loop: one failing test → minimal code to pass → next test. Prefer behaviour through public interfaces (not private guts).
+3. Loop: one failing test → minimal code to pass → next test. Prefer behaviour through public interfaces (not private guts) — interface = test surface (**codebase-design**).
 4. Skip TDD only for glue both sides call out (rename, pure wiring, generated stubs). Say so explicitly.
 
 Work vertical slices inside the batch (one test → code → next), not “all tests then all code.”
