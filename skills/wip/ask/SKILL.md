@@ -74,12 +74,12 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 
 ## Crossing sessions
 
-- Prefer engineering / productivity **`handoff`** when the window is full or you need a fresh session with continuity.
+- When the window is full: write a short durable brief in the target repo (or paste a compact summary for the next chat), then start fresh with that file.
 - Built-in **compact** only at intentional phase breaks - not mid-brainstorm or mid-implement slice.
 
 ## Related (outside wip)
 
-Matt / obra flows still exist under `engineering/` and `workflow/`. Prefer **wip** skills for Goose lifecycle; use upstream when you explicitly want that playbook.
+Optional complements under `engineering/` (architecture / review helpers) and `workflow/doc-coauthoring`. Prefer **wip** for Goose lifecycle.
 
 ## Later
 

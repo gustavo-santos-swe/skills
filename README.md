@@ -26,17 +26,17 @@ Skills organized under `skills/<area>/<name>/`. [Skills Over MCP](https://skills
 
 ```
 skills/
-├── meta/           # discover, maintain, and sync skills
-├── workflow/       # spec → plan → execution → PR
-├── engineering/    # code, tests, review, MCP, tech debt
+├── meta/           # skill authoring / discovery helpers
+├── workflow/       # remaining workflow helpers (doc co-authoring)
+├── engineering/    # architecture, review, simplification helpers
 ├── product/        # domain, discovery, positioning
 ├── design/         # UI/UX
 ├── mobile/         # React Native / Expo — native feel, performance
 ├── communication/  # prose and copy
 ├── marketing/      # pricing, launch, acquisition (reserved)
 ├── operations/     # support, metrics, deploy ops
-└── wip/            # personal drafts — graduate to a stable area when ready
-                    # (stack packs: wip/implement/{database,dotnet,react-native,frontend}/)
+└── wip/            # Goose lifecycle + stack packs
+                    # (implement/{database,dotnet,react-native,frontend}/)
 ```
 
 Each `SKILL.md` includes `metadata.area` with the corresponding area.
@@ -50,9 +50,7 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 | [`using-superpowers`](skills/meta/using-superpowers/) | Check available skills before acting |
 | [`writing-skills`](skills/meta/writing-skills/) | Create and maintain skills |
 | [`writing-great-skills`](skills/meta/writing-great-skills/) | Vocabulary/principles for predictable skills |
-| [`handoff`](skills/meta/handoff/) | Compact session for the next agent |
 | [`teach`](skills/meta/teach/) | Multi-session teaching workspace |
-| [`sync-upstream-skills`](skills/meta/sync-upstream-skills/) | Check and sync skills with upstream repos |
 | [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills |
 
 ### workflow
@@ -60,32 +58,22 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 | Skill | Purpose |
 |-------|---------|
 | [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-author specs, RFCs, PRDs |
-| [`quick-recap`](skills/workflow/quick-recap/) | Red/yellow/green status block convention at the end of every response |
 
-Lifecycle (brainstorm → plan → ship) lives under [`wip/`](skills/wip/). Source for remaining workflow skills: [anthropics/skills](https://github.com/anthropics/skills), [BuilderIO/skills](https://github.com/BuilderIO/skills).
+Lifecycle lives under [`wip/`](skills/wip/). Source: [anthropics/skills](https://github.com/anthropics/skills).
 
 ### engineering
 
 | Skill | Purpose |
 |-------|---------|
-| [`grill-with-docs`](skills/engineering/grill-with-docs/) | Grilling + domain model (`CONTEXT.md`, ADRs) — prefer `wip/brainstorm` + `wip/documentation` for Goose |
-| [`domain-modeling`](skills/engineering/domain-modeling/) | Sharpen domain language and ADRs |
 | [`codebase-design`](skills/engineering/codebase-design/) | Deep modules, seams, small interfaces |
 | [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one |
-| [`prototype`](skills/engineering/prototype/) | Throwaway prototype to answer a design question |
-| [`to-spec`](skills/engineering/to-spec/) | Conversation → spec on the issue tracker |
-| [`wayfinder`](skills/engineering/wayfinder/) | Multi-session map of decision tickets |
-| [`triage`](skills/engineering/triage/) | Issue triage state machine |
 | [`code-review`](skills/engineering/code-review/) | Standards + spec review (parallel sub-agents) |
 | [`resolving-merge-conflicts`](skills/engineering/resolving-merge-conflicts/) | Resolve merge/rebase by intent |
-| [`setup-matt-pocock-skills`](skills/engineering/setup-matt-pocock-skills/) | One-time repo setup for remaining Matt skills |
-| [`verification-before-completion`](skills/engineering/verification-before-completion/) | Evidence before claiming "done" |
 | [`code-review-and-quality`](skills/engineering/code-review-and-quality/) | 5-axis review (correctness, architecture, security, perf) |
 | [`code-simplification`](skills/engineering/code-simplification/) | Simplify code without changing behavior |
 | [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
-| [`mcp-builder`](skills/engineering/mcp-builder/) | Create MCP servers (Python/TypeScript) |
 
-Goose lifecycle (ask, research, planning, tickets, implement, diagnose, PR flow) is under [`wip/`](skills/wip/). Source for remaining engineering skills: [mattpocock/skills](https://github.com/mattpocock/skills), [obra/superpowers](https://github.com/obra/superpowers), [anthropics/skills](https://github.com/anthropics/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
+Goose lifecycle is under [`wip/`](skills/wip/). Source for remaining engineering skills: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
 
 ### product
 
@@ -166,11 +154,11 @@ ask → research? → brainstorm → documentation:adr? → planning → create-
   → git-practices → pr-raise → pr-review ⇄ pr-iterate
 ```
 
-Optional complements: `grill-with-docs` / `to-spec` / `verification-before-completion` / `code-review-and-quality` / `frontend-design`.
+Optional complements: `code-review-and-quality` / `codebase-design` / `frontend-design`.
 
 Writing pipeline: `writing-fragments` → `writing-beats` or `writing-shape`.
 
-Helpers: `finding-duplicate-functions`, `mcp-builder`, `handoff`, `sync-upstream-skills`, `to-questionnaire`.
+Helpers: `finding-duplicate-functions`, `to-questionnaire`.
 
 ## Adding a new skill
 
@@ -193,13 +181,7 @@ metadata:
 ---
 ```
 
-Schema: [`skills/meta/sync-upstream-skills/references/upstream-schema.md`](skills/meta/sync-upstream-skills/references/upstream-schema.md).
-
-Check upstream:
-
-```bash
-python skills/meta/sync-upstream-skills/scripts/check-upstream.py
-```
+For imported skills, keep `metadata.upstream` (repo, path, url, commit, synced_at). Goose `wip/` skills usually use `inspired_by` instead — no sync tooling in this repo anymore.
 
 4. Keep the body concise (< 500 lines). Details go in `references/`.
 5. Update the area `README.md` and this inventory.

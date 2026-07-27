@@ -17,7 +17,7 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-The issue tracker should have been provided to you — run `/setup-matt-pocock-skills` if `docs/agents/issue-tracker.md` is missing.
+If the repo has `docs/agents/issue-tracker.md` (or equivalent), use it to resolve issue/PR links. Otherwise ask how this repo tracks work.
 
 ## Process
 

@@ -81,6 +81,8 @@ Update **inline** when a term is resolved (don’t batch until the end). Keep de
 
 Challenge conflicts with the existing language immediately. Sharpen overloaded words (“account” → Customer vs User).
 
+When domain relationships are in play, stress-test them with **concrete scenarios** that force boundaries (partial cancel? two owners? clock skew?). When the user states how something works, **check the code** — if it contradicts, surface it and resolve which is right before freezing language.
+
 ### 6. ADR handoff (sparingly)
 
 Offer **`documentation:adr`** only when all three hold (detail in that skill’s [`adr-format`](../documentation/references/adr-format.md)):

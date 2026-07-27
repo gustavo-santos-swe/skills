@@ -60,14 +60,14 @@ These thoughts mean STOP — you're rationalizing:
 
 When multiple skills could apply:
 
-1. **Process skills first** (`wip/brainstorm`, `wip/diagnose`, grill-with-docs when domain docs matter) — HOW to approach
-2. **Implementation skills second** (`wip/planning`, `wip/create-tickets`, `wip/implement`, frontend-design, mcp-builder) — execution
-3. **Completion skills last** (verification-before-completion, `wip/pr-raise` / `wip/pr-iterate`)
+1. **Process skills first** (`wip/brainstorm`, `wip/diagnose`) — HOW to approach
+2. **Implementation skills second** (`wip/planning`, `wip/create-tickets`, `wip/implement`, frontend-design) — execution
+3. **Completion skills last** (`wip/pr-raise` / `wip/pr-review` / `wip/pr-iterate`)
 
 Examples:
 - "Let's build X" → `wip/brainstorm` → `wip/planning` / `wip/create-tickets` → `wip/implement`
 - "Fix this bug" → `wip/diagnose` → `wip/implement` (tests first when the pack says so)
-- "It's done" → verification-before-completion → `wip/pr-raise`
+- "It's done" → run the project's verify commands → `wip/pr-raise`
 
 ## Skill Types
 
