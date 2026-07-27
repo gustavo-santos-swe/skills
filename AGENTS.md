@@ -14,3 +14,7 @@ Unsure which skill → [`skills/goose/ask/SKILL.md`](skills/goose/ask/SKILL.md).
 How / when map: [`skills/goose/README.md`](skills/goose/README.md). Root README also has a short starter table.
 
 Branch / commit shape → `git-practices`. Open PR → `pr-raise` (never merge to main from the agent).
+
+## Evolving this skills repo
+
+Process for adding / pruning / absorbing skills → [`skills/meta/evolve-goose-skills/SKILL.md`](skills/meta/evolve-goose-skills/SKILL.md) (playbook in that skill’s `references/`). Do not re-teach the ritual in chat.

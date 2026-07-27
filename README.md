@@ -111,6 +111,7 @@ Each `SKILL.md` has `metadata.area` matching its folder.
 
 | Skill | Purpose |
 |-------|---------|
+| [`evolve-goose-skills`](skills/meta/evolve-goose-skills/) | Evolve this repo - iterate (inspire → grill → distill) or garden |
 | [`writing-great-skills`](skills/meta/writing-great-skills/) | Vocabulary for predictable skills |
 | [`teach`](skills/meta/teach/) | Multi-session teaching workspace |
 | [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills from repeated prompts |
