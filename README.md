@@ -150,7 +150,7 @@ Optional complements: `code-review-and-quality` / `codebase-design` / `frontend-
 
 Writing pipeline: `writing-fragments` → `writing-beats` or `writing-shape`.
 
-Helpers: `finding-duplicate-functions`, `to-questionnaire`.
+Helpers: `finding-duplicate-functions`.
 
 ## Adding a new skill
 
