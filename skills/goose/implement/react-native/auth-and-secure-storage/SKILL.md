@@ -1,7 +1,6 @@
 ---
 name: rn-auth-and-secure-storage
 description: Use when implementing login sessions, tokens, biometrics, or secure storage in React Native / Expo.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

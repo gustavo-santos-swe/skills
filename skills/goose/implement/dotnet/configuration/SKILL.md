@@ -1,7 +1,6 @@
 ---
 name: configuration
 description: Use when adding or reviewing .NET configuration — appsettings hierarchy, env/secrets, typed options, feature toggles — or when implement loads the dotnet pack for config work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

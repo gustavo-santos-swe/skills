@@ -1,7 +1,6 @@
 ---
 name: security
 description: Use when adding or reviewing .NET AuthN/Z, HTTPS, CORS, CSRF, trust-boundary input, or data protection — or when implement loads the dotnet pack for security work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

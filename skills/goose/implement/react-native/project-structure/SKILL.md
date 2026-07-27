@@ -1,7 +1,6 @@
 ---
 name: rn-project-structure
 description: Use when laying out or changing Expo/React Native folders, app entry, feature modules, or shared packages in a Goose mobile app.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

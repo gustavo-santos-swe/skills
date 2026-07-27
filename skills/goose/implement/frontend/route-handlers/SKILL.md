@@ -1,7 +1,6 @@
 ---
 name: web-route-handlers
 description: Use when adding Next.js Route Handlers (`app/api`) or webhook endpoints.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

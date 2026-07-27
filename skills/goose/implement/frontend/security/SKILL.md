@@ -1,7 +1,6 @@
 ---
 name: web-security
 description: Use when hardening a Next.js app — headers, XSS/CSRF, SSRF, uploads, or secret handling on the web tier.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

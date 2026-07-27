@@ -1,7 +1,6 @@
 ---
 name: brainstorm
 description: Relentless Q&A to freeze the what before a plan. Use when sharpening design; no implementation yet.
-disable-model-invocation: true
 metadata:
   area: goose
   inspired_by:

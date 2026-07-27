@@ -1,7 +1,6 @@
 ---
 name: web-accessibility
 description: Use when improving web a11y in Next.js — semantics, focus, keyboard, and ARIA.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

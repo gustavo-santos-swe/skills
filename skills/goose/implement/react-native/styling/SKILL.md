@@ -1,7 +1,6 @@
 ---
 name: rn-styling
 description: Use when styling React Native screens — StyleSheet, NativeWind/Uniwind, design tokens, or spacing/typography conventions.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: serialization
 description: Use when configuring or reviewing .NET JSON wire format — System.Text.Json, enums, dates, DTOs vs entities — or when implement loads the dotnet pack for serialization work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

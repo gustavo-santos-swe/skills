@@ -1,7 +1,6 @@
 ---
 name: http-clients
 description: Use when adding or reviewing outbound .NET HTTP calls — typed clients, DelegatingHandlers, fakes — or when implement loads the dotnet pack for HttpClient work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

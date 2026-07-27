@@ -35,7 +35,7 @@ Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
 
 ## How to use Goose skills
 
-Lifecycle skills live under [`skills/goose/`](skills/goose/). They are **user-invoked** (or via the router): say the skill name, or start with **`ask`** when unsure.
+Lifecycle skills live under [`skills/goose/`](skills/goose/). They are **model-invoked**: the agent fires them autonomously when a description matches, and skills can reach each other — so **`ask`** can route straight into the skill it picks. You can still invoke any of them by name, or start with **`ask`** when unsure.
 
 Full map + when-table: [`skills/goose/README.md`](skills/goose/README.md).
 
@@ -198,7 +198,7 @@ Imported third-party skills may use `metadata.upstream` instead of `inspired_by`
 
 - Repo is **public** — anyone with the MCP URL can read the skills.
 - Do not store secrets or credentials.
-- Frontmatter `description` is what model-invoked skills use for auto-routing; Goose lifecycle skills are mostly user-invoked via **ask** / name.
+- Frontmatter `description` is what model-invoked skills use for auto-routing. Every skill here is model-invoked, so keep descriptions rich in trigger phrasing — they are the whole routing surface, and they sit in the context window every turn.
 
 ## Installing as a plugin
 

@@ -1,7 +1,6 @@
 ---
 name: pr-review
 description: Review an open PR (correctness, SoT drift, security-in-diff, main-path tests, CI). Draft first; optional GitHub post. Not for local self-check or addressing comments (pr-iterate).
-disable-model-invocation: true
 metadata:
   area: goose
 ---

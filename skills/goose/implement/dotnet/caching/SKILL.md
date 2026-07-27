@@ -1,7 +1,6 @@
 ---
 name: caching
 description: Use when adding or reviewing .NET caching — HybridCache, keys, TTLs, invalidation, stampede — or when implement loads the dotnet pack for cache work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

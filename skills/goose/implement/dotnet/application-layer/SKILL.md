@@ -1,7 +1,6 @@
 ---
 name: application-layer
 description: Use when writing or reviewing .NET use cases/handlers, DTOs, validation placement, or orchestration — or when implement loads the dotnet pack for Application code.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

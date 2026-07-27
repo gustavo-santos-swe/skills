@@ -1,7 +1,6 @@
 ---
 name: endpoint-conventions
 description: Use when designing or reviewing ASP.NET HTTP endpoints — Minimal APIs/controllers, routes, QUERY, pagination, statuses, OpenAPI — or when implement loads the dotnet pack for API surface work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

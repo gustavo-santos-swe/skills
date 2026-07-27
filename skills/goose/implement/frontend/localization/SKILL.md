@@ -1,7 +1,6 @@
 ---
 name: web-localization
 description: Use when adding Next.js i18n routing, dictionaries, or locale-aware formatting.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

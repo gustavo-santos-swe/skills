@@ -1,7 +1,6 @@
 ---
 name: rn-navigation
 description: Use when adding or changing Expo Router / React Navigation stacks, tabs, modals, or auth gates in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

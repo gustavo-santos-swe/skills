@@ -1,7 +1,6 @@
 ---
 name: migrations-and-compat
 description: Use when adding or reviewing EF Core migrations, expand/contract deploy order, or schema apply in CI — or when implement loads the dotnet pack for migration work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

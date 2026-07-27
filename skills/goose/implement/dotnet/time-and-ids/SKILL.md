@@ -1,7 +1,6 @@
 ---
 name: time-and-ids
 description: Use when writing or reviewing clocks, UTC/calendar time, NodaTime types, or ID generation in .NET — or when implement loads the dotnet pack for time/id code.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

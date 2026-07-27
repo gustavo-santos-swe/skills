@@ -1,7 +1,6 @@
 ---
 name: write-like-goose
 description: Goose voice for durable prose and code comments. Use when humanizing tickets, plans, PRs, commits, or comments - or when asked for goose voice / menos IA.
-disable-model-invocation: true
 metadata:
   area: goose
   inspired_by:

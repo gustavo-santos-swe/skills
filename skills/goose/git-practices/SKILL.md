@@ -1,7 +1,6 @@
 ---
 name: git-practices
 description: Conventional branch names and commit messages. Use when branching or committing; PR open stays in pr-raise.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

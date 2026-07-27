@@ -1,7 +1,6 @@
 ---
 name: rn-gestures
 description: Use when implementing pan/pinch/swipe/long-press or Gesture Handler patterns in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

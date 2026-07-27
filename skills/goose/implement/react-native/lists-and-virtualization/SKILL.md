@@ -1,7 +1,6 @@
 ---
 name: rn-lists-and-virtualization
 description: Use when building FlashList/FlatList feeds, infinite scroll, or list performance work in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

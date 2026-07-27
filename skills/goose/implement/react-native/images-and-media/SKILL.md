@@ -1,7 +1,6 @@
 ---
 name: rn-images-and-media
 description: Use when loading images, picking photos/files, or playing media in React Native / Expo.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

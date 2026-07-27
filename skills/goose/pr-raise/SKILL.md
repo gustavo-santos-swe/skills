@@ -1,7 +1,6 @@
 ---
 name: pr-raise
 description: Open or update a PR (title, body, push) - never merge. Use when shipping a branch to review.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

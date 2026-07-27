@@ -1,7 +1,6 @@
 ---
 name: db-integration
 description: Use when writing or reviewing EF Core / .NET data access — DbContext, mappings, tracking, transactions, concurrency — or when implement loads the dotnet pack for persistence code.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

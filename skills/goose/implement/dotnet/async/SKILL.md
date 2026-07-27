@@ -1,7 +1,6 @@
 ---
 name: async
 description: Use when writing or reviewing async/await, cancellation, parallelism, or sync-over-async traps in .NET — or when implement loads the dotnet pack for async code.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

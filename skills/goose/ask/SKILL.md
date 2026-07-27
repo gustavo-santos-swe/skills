@@ -1,7 +1,6 @@
 ---
 name: ask
 description: Router for Goose lifecycle skills and implement stack packs. Use when unsure which skill or flow fits.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

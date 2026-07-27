@@ -1,7 +1,6 @@
 ---
 name: rn-state-management
 description: Use when choosing or changing client state (server cache, Zustand/context, form state) in a React Native app.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

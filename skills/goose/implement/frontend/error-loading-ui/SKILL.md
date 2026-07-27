@@ -1,7 +1,6 @@
 ---
 name: web-error-loading-ui
 description: Use when adding Next.js `loading.tsx`, `error.tsx`, `not-found`, or Suspense fallbacks.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

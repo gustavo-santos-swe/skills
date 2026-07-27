@@ -1,7 +1,6 @@
 ---
 name: pr-iterate
 description: Author loop on PR feedback: triage, fix, local review, then commit/push/reply/re-request. Use when addressing review comments or changes requested.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

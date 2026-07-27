@@ -1,7 +1,6 @@
 ---
 name: database
 description: Language-agnostic database rules — modeling, integrity, indexes, transactions, schema evolution, SQL-level performance. Use when designing or changing schema, writing migrations/SQL, or reviewing data model decisions (not ORM/C# wiring).
-disable-model-invocation: true
 metadata:
   area: goose
 ---

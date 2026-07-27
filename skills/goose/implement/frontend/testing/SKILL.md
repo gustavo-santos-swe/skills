@@ -1,7 +1,6 @@
 ---
 name: web-testing
 description: Use when writing Next.js/React tests — Vitest/Jest, Testing Library, Playwright.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

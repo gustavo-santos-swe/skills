@@ -1,7 +1,6 @@
 ---
 name: web-env-and-config
 description: Use when adding environment variables, `NEXT_PUBLIC_*`, or runtime config in Next.js.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

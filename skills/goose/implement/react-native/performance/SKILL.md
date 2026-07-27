@@ -1,7 +1,6 @@
 ---
 name: rn-performance
 description: Use when chasing JS/UI jank, TTI, re-renders, or bundle size in React Native / Expo.
-disable-model-invocation: true
 metadata:
   area: goose
 ---
