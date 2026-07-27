@@ -1,3 +1,3 @@
 # workflow
 
-Remaining workflow helper: `doc-coauthoring`. Goose idea → ship lifecycle lives under [`../wip/`](../wip/).
+Remaining helper: `doc-coauthoring`. Goose idea → ship lifecycle: [`../goose/`](../goose/).

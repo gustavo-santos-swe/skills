@@ -1,5 +1,5 @@
 # communication
 
-Matt's article explore/exploit writing pipeline (`writing-fragments` → `writing-beats` / `writing-shape`).
+Matt's article explore/exploit pipeline (`writing-fragments` → `writing-beats` / `writing-shape`).
 
-House voice for Goose durable prose: [`../wip/write-like-goose/`](../wip/write-like-goose/).
+House voice for Goose durable prose: [`../goose/write-like-goose/`](../goose/write-like-goose/).
