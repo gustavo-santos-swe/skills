@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Build a named batch (ticket or plan slices) with TDD at agreed seams, full stack-pack load, and a dirty tree until the engineer reviews locally - then git-practices / pr-raise. Use when implementing from a ticket, plan slice, or small clear change.
+description: Build a named ticket/plan batch (TDD at seams, full pack load, dirty tree until local review). Use for implement/build work - not planning, ticket split, or opening a PR.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -10,7 +10,7 @@ metadata:
 
 Goose handbook for **building** after planning/tickets (or a small clear change).
 
-Voice: **`write-like-goose`** on durable text and comments you add.
+Voice: **`write-like-goose`**.
 
 ## When to use
 
@@ -28,11 +28,12 @@ Voice: **`write-like-goose`** on durable text and comments you add.
 
 ## Hard rules
 
-1. **Name the batch at start.** Soft default: one unblocked ticket/slice. Larger batches only if the engineer lists them. Don’t silently eat the whole epic.
-2. **Feature branch before edits.** If on `main`/`master`, create/switch to a conventional branch (**git-practices** naming). Do **not** commit or push until the engineer reviews locally and says to.
-3. **Dirty tree until review.** No commits during the build. At the done bar, pause and ask for local review. Only then offer **git-practices** (commit) and later **pr-raise**.
-4. **Source of truth is a hard gate.** Re-read the cited contract/brief (or “open - frozen here”). If missing/unclear, stop and ask. On drift mid-build, stop and ask: update source of truth | separate drift log + follow-up | addendum on the existing doc. Don’t silently rewrite docs or AC.
+1. **Name the batch at start.** Soft default: one unblocked ticket/slice. Larger batches only if the engineer lists them.
+2. **Feature branch before edits.** If on `main`/`master`, create/switch to a conventional branch (**git-practices** naming).
+3. **Dirty tree until local review (canonical).** No commits during the build. At the done bar, pause and ask for local review. **Commit/push only after the engineer OKs.** Then offer **git-practices** (commit) and later **pr-raise**. Other skills that build mid-PR (**pr-iterate**) follow this same rule.
+4. **Source of truth is a hard gate.** Re-read the cited contract/brief (or “open - frozen here”). If missing/unclear, stop and ask. On drift mid-build, follow **create-tickets** grounding (ask: update SoT | drift log | addendum) - do not invent a fourth option.
 5. **Load the whole active stack pack** before coding (see [Stack packs](#stack-packs)).
+6. **Stay in this skill for the build.** Open a PR only via **pr-raise** after review OK.
 
 ## Stack packs
 
@@ -58,48 +59,39 @@ If a new concern appears mid-slice that belongs to another pack, load that pack 
 3. Loop: one failing test → minimal code to pass → next test. Prefer behaviour through public interfaces (not private guts).
 4. Skip TDD only for glue both sides call out (rename, pure wiring, generated stubs). Say so explicitly.
 
-Horizontal “all tests then all code” is out. Vertical slices inside the batch.
+Work vertical slices inside the batch (one test → code → next), not “all tests then all code.”
 
 ## Steps
 
 1. **Confirm batch** - ticket ids / plan headings / AC. Soft default one frontier slice.
-2. **Grounding** - source of truth path or frozen open contract; implement-check and review-check from the ticket/plan. Stop if missing.
+2. **Grounding** - source of truth path or frozen open contract; implement-check and review-check from the ticket/plan. Stop if missing. Drift policy → **create-tickets** grounding.
 3. **Branch** - feature branch if needed; still no commits.
 4. **Load pack(s)** - full load as above.
 5. **Agree seams** - TDD list (or explicit glue exception).
 6. **Build** - red/green; run focused verifies often; honor pack rules and source of truth.
-7. **Drift?** - pause and ask (three options). Don’t auto-pick.
+7. **Drift?** - pause; apply create-tickets drift ask.
 8. **Done bar** (before review ask):
    - Batch AC satisfied
    - Ticket/plan verify steps run (or note why N/A)
    - Self-check against loaded pack skills + source of truth
-   - `write-like-goose` on new/changed comments and any durable notes you added
-9. **Pause for local engineer review** - show what changed (diff summary / paths). **Do not** commit or push.
+   - Goose voice on new/changed comments (`write-like-goose`)
+9. **Pause for local engineer review** - show what changed (diff summary / paths). Wait for OK before any commit/push.
 10. **After they approve** - ask before **git-practices** (commit) then **pr-raise**. If they want changes, stay in implement (still dirty tree) until the next pause.
 
 Stop when blocked, tests won’t go green after honest attempts, or scope shifts. Ask; don’t guess.
+
+**Done when:** named batch meets the done bar and the engineer has been offered (or completed) local review - commits only after their OK.
 
 ## Self-check (diff)
 
 Before the review pause, skim the branch diff:
 
 - Matches batch AC and source of truth?
-- Pack rules respected (security, testing, structure, …)?
+- Pack rules respected?
 - No drive-by refactors outside the batch?
 - Comments are why-only, Goose voice?
 
 Deeper PR review stays in **pr-review** after open.
-
-## Don't
-
-- Don’t commit or push before local engineer review
-- Don’t dirty `main`/`master` - branch first
-- Don’t silently expand the batch past what was named
-- Don’t skip loading pack `SKILL.md` files for the active stack
-- Don’t invent API/project shape when grounding is missing
-- Don’t auto-resolve drift
-- Don’t open a PR from this skill
-- Don’t leave AI-shaped comments
 
 ## References
 
@@ -107,7 +99,7 @@ Deeper PR review stays in **pr-review** after open.
 
 ## Related
 
-- Split work → **create-tickets**
+- Split work → **create-tickets** (owns grounding / drift)
 - Plan only → **planning**
 - After approve → **git-practices** → **pr-raise**
 - Trust boundary gate → **security-check** (optional)

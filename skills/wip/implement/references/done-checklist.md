@@ -12,7 +12,7 @@ Use before asking the engineer to read the diff. Still **no commit / push**.
 
 - [ ] Source of truth re-read (or open contract frozen in ticket/plan)
 - [ ] Behaviour matches that source of truth
-- [ ] If drift happened: engineer chose update / drift log / addendum; noted on ticket or plan
+- [ ] If drift happened: followed create-tickets grounding (update / log / addendum); noted on ticket or plan
 
 ## Build quality
 

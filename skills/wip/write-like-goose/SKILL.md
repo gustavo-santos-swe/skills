@@ -1,6 +1,6 @@
 ---
 name: write-like-goose
-description: Use when writing or rewriting in Goose's voice — durable prose and code comments without AI tells. Triggers include "write like goose", "goose voice", "humanize", "menos IA", or drafting tickets, plans, PRs, commits, or comments for his repos.
+description: Goose voice for durable prose and code comments. Use when humanizing tickets, plans, PRs, commits, or comments - or when asked for goose voice / menos IA.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -29,7 +29,7 @@ Voice samples: **TODO**. Until then use [Defaults](#defaults).
 
 | File | Contents |
 |------|----------|
-| [`references/patterns.md`](references/patterns.md) | AI-tell catalog (§1–43), detection guidance, rewrite process |
+| [`references/patterns.md`](references/patterns.md) | AI-tell catalog (§1-43), detection guidance, rewrite process |
 | [`references/vocabulary.md`](references/vocabulary.md) | Tier 1 word replacements |
 | [`references/phrases-and-structures.md`](references/phrases-and-structures.md) | Filler phrases, binary contrasts, false agency, rhythm |
 | [`references/density.md`](references/density.md) | Short/actable shape (ADHD-inspired rules by surface) |
@@ -42,7 +42,7 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 - Short sentences. Concrete nouns. Cut before clever.
 - Opinion ok; hype and fake confidence not.
 - Match the file/thread language (PT or EN). Don’t mix without reason.
-- **No em dashes (—) or en dashes (–)** as clause breaks. Period, comma, colon, or parentheses.
+- **No em dashes ( - ) or en dashes (-)** as clause breaks. Period, comma, colon, or parentheses.
 - Comments: *why* or non-obvious constraint only. Silence if obvious.
 - Never invent facts to sound specific.
 - Don’t replace AI mush with synonym mush.
@@ -59,11 +59,11 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 
 ## Steps
 
-1. **Surface** — pick row above + density rules.
-2. **Strip AI tells** — [`patterns.md`](references/patterns.md) + [`vocabulary.md`](references/vocabulary.md) + [`phrases-and-structures.md`](references/phrases-and-structures.md).
-3. **Fit Goose** — Defaults (later: Voice samples). Prefer cutting.
-4. **Density** — preamble/recap/closer gone; lists ≤ 5; first+last line test.
-5. **Audit once** — “What still sounds like a model or a blog?” Fix; stop.
+1. **Surface** - pick row above + density rules.
+2. **Strip AI tells** - [`patterns.md`](references/patterns.md) + [`vocabulary.md`](references/vocabulary.md) + [`phrases-and-structures.md`](references/phrases-and-structures.md).
+3. **Fit Goose** - Defaults (later: Voice samples). Prefer cutting.
+4. **Density** - preamble/recap/closer gone; lists ≤ 5; first+last line test.
+5. **Audit once** - “What still sounds like a model or a blog?” Fix; stop.
 
 ### Modes
 
@@ -72,7 +72,7 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 
 ## Quick pre-send
 
-- [ ] No `—` / `–`
+- [ ] No ` - ` / `-`
 - [ ] No chatbot opener/closer
 - [ ] No “it’s not X, it’s Y” runway
 - [ ] No significance fluff / Tier 1 vocabulary cluster
@@ -80,19 +80,18 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 - [ ] First line fits the surface
 - [ ] No invented facts
 
-## Don't
+## Guardrails
 
-- Don’t stack `write-like-a-human` / `stop-slop` on the same pass (this skill already includes that material).
-- Don’t “professionalize” away bluntness.
-- Don’t comment every line.
-- Don’t force a shell command as the first line of a PR/ADR.
+1. Run this skill alone for voice - do not stack `write-like-a-human` / `stop-slop` on the same pass.
+2. Keep bluntness; comments only when they carry a *why*.
+3. PR/ADR first line = substance (not a shell command theater opener).
 
 ## For other wip skills / always-on
 
-> Voice: durable text and comments — use `write-like-goose`.
+> Voice: durable text and comments - use `write-like-goose`.
 
 Also wired at repo root: `AGENTS.md` + `.cursor/rules/write-like-goose.mdc` (`alwaysApply`).
 
 ## Next (Voice)
 
-Paste 2–3 real Goose samples (PR, Slack/commit, code comment) into a **Voice** section. Samples outrank Defaults where they conflict, except keep the em-dash ban unless you explicitly reverse it.
+Paste 2-3 real Goose samples (PR, Slack/commit, code comment) into a **Voice** section. Samples outrank Defaults where they conflict, except keep the em-dash ban unless you explicitly reverse it.

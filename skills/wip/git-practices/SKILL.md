@@ -1,6 +1,6 @@
 ---
 name: git-practices
-description: Use when creating a branch or writing commit messages — Conventional Branch and Conventional Commits. PR title/body and opening a PR → pr-raise.
+description: Conventional branch names and commit messages. Use when branching or committing; PR open stays in pr-raise.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -22,7 +22,7 @@ Specs:
 
 - Naming a branch or writing/amending a commit (including before **`pr-raise`**).
 
-## Branches — Conventional Branch
+## Branches - Conventional Branch
 
 ```
 <type>/<description>
@@ -32,8 +32,8 @@ Specs:
 
 | Prefix | Use |
 |--------|-----|
-| `feat/` | New capability (`feature/` ok — prefer `feat/`) |
-| `fix/` | Bug fix (`bugfix/` ok — prefer `fix/`) |
+| `feat/` | New capability (`feature/` ok - prefer `feat/`) |
+| `fix/` | Bug fix (`bugfix/` ok - prefer `fix/`) |
 | `hotfix/` | Urgent production fix |
 | `release/` | Release prep (`release/v1.2.0`) |
 | `chore/` | Deps, CI, config, non-product chores |
@@ -45,7 +45,7 @@ Team extensions (document in target repo if CI enforces): `docs/`, `refactor/`, 
 - Lowercase, digits, hyphens; dots only in release versions
 - No underscores, spaces, consecutive/leading/trailing hyphens
 - Short kebab description; ticket when we have one: `feat/abc-123-short-name`
-- Never commit on trunk (`main` / `master` / `develop`) unless the user explicitly asks — create a prefixed branch first
+- Never commit on trunk (`main` / `master` / `develop`) unless the user explicitly asks - create a prefixed branch first
 
 ### AI agent prefixes (v1.1.0)
 
@@ -62,7 +62,7 @@ chore/bump-vitest
 release/v1.4.0
 ```
 
-## Commits — Conventional Commits
+## Commits - Conventional Commits
 
 ```
 <type>[optional scope][optional !]: <description>
@@ -92,7 +92,7 @@ Breaking: `!` after type/scope and/or footer `BREAKING CHANGE: …`.
 
 ### Rules
 
-- Imperative present tense: `add`, `fix`, `remove` — not “added” / “fixes”
+- Imperative present tense: `add`, `fix`, `remove` - not “added” / “fixes”
 - Description: lowercase start preferred, no trailing period, ~72 chars
 - **Default: one-liner.** Body only when why isn't obvious from the diff
 - Scope = recognizable area (`auth`, `checkout`, `web`, …)
@@ -127,11 +127,11 @@ feat(auth): add reset, update readme, fix typo   # split
 | Why over what | Body carries *why* when needed; diff shows *what* |
 | Align with branch | `feat/…` branch → mostly `feat:` commits |
 
-## Don't
+## Guardrails
 
-- Don't put PR title/body rules here — **`pr-raise`**
-- Don't invent types outside the table without documenting them in the target repo
-- Don't use AI vendor branch prefixes for ceremony when purpose prefixes fit
+1. This skill owns **branch names + commit messages** only - PR open → **pr-raise**.
+2. Stick to the Conventional Branch / Commits tables (document any extra types in the target repo first).
+3. Prefer purpose prefixes (`feat/…`, `fix/…`) over vendor ceremony prefixes.
 
 ## Next
 

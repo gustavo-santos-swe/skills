@@ -1,6 +1,6 @@
 ---
 name: security-check
-description: Security pass on a change (gate) or optional full-repo audit - trace before flag, high-confidence findings only, report without auto-fixing. Use when the diff hits a trust boundary, before shipping, or when the user says security check / full audit / OWASP pass.
+description: Trust-boundary gate (or full audit): high-confidence findings, report only. Use when the change hits auth/secrets/PII/payments/uploads/public APIs, or when asked for a security pass.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -106,14 +106,13 @@ Process and confidence stay here. Pack wins on stack defaults when they conflict
 4. Write `docs/security/YYYY-MM-DD-<slug>.md` (or the repo’s security-docs convention if one exists). Chat: short summary + path.
 5. Same next-step routing as gate.
 
-## Don't
+## Guardrails
 
-- Don’t auto-fix
-- Don’t dump OWASP theater rows for N/A categories in gate mode
-- Don’t report framework false positives without checking mitigations
-- Don’t write `security-report/` noise folders unless the engineer asks for that layout
-- Don’t paste secret values
-- Don’t run full audit by default
+1. **Report only** - code changes only if the engineer explicitly asks afterward.
+2. **High confidence after tracing** - redact secrets; skip low/theater findings.
+3. **Gate by default** - full audit only when asked; chat for gate, file for full audit (or on request).
+
+**Done when:** scoped report delivered with an explicit verdict (blockers or “no blockers for this scope”).
 
 ## References
 

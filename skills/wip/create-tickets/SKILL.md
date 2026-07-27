@@ -1,6 +1,6 @@
 ---
 name: create-tickets
-description: Break a plan or spec into tracer-bullet issues with blocking edges, grounded in a source of truth. Prefer a real tracker (e.g. Linear epic/feature/issues); if none is chosen, track slices in the plan markdown - do not invent a parallel ticket file tree.
+description: Tracer-bullet issues with blockers, grounded in a source of truth. Use to split a plan/spec for implement; tracker or plan markdown - not a local ticket tree.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -11,6 +11,8 @@ metadata:
 Goose handbook for turning a plan (or frozen spec) into **agent-ready vertical slices** with blockers and a clear **source of truth**.
 
 Voice: **`write-like-goose`**.
+
+This skill owns **grounding / drift** for the lifecycle. **implement** and **pr-iterate** point here when reality diverges from the cited source of truth.
 
 ## When to use
 
@@ -101,20 +103,18 @@ Do not close or rewrite a parent plan/issue unless asked.
 2. Prefer MCP for that tracker when configured; else CLI (`gh`, Linear CLI, …).
 3. If tools fail auth, stop and say what to run - don’t invent a local ticket tree.
 
-## Don't
+## Guardrails
 
-- Don’t publish before approval
-- Don’t create `docs/tickets/` or `.scratch/.../issues/` as a fallback backlog
-- Don’t invent API contracts or project shape when no source of truth was chosen
-- Don’t auto-resolve drift - ask update / log / addendum
-- Don’t write horizontal layer tickets when a vertical slice would demo sooner
-- Don’t implement the feature here
-- Don’t put stale file paths in acceptance criteria
+1. Publish only after the engineer approves the breakdown.
+2. Backlog = chosen tracker **or** the plan markdown (never a parallel `docs/tickets/` / `.scratch/.../issues/` tree).
+3. Prefer vertical tracer bullets; file maps stay in **planning**; feature code stays in **implement**.
+
+**Done when:** approved slices are published (tracker or plan), grounding filled, frontier listed for **implement**.
 
 ## References
 
 - [`references/issue-template.md`](references/issue-template.md) - issue / plan-slice skeleton
-- [`references/grounding.md`](references/grounding.md) - source-of-truth + drift cheat sheet
+- [`references/grounding.md`](references/grounding.md) - source-of-truth + drift (canonical)
 
 ## Related
 

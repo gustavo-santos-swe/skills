@@ -1,6 +1,6 @@
 ---
 name: pr-raise
-description: Use when drafting or opening a pull request — conventional title, Goose body (or repo template), discover GitHub MCP vs gh CLI, never merge to main.
+description: Open or update a PR (title, body, push) - never merge. Use when shipping a branch to review.
 disable-model-invocation: true
 metadata:
   area: wip
@@ -21,7 +21,7 @@ Branch names + commit messages → **`git-practices`**. Voice → **`write-like-
 
 ## Title
 
-Same shape as a [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) subject — primary outcome of the branch:
+Same shape as a [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) subject - primary outcome of the branch:
 
 ```
 feat(checkout): add pix payment option
@@ -32,18 +32,18 @@ Not a laundry list. Align with the branch type when practical (`feat/…` → `f
 
 ## Body
 
-Keep short — **code speaks; prose orients**. Details: [`references/pr-body.md`](references/pr-body.md).
+Keep short - **code speaks; prose orients**. Details: [`references/pr-body.md`](references/pr-body.md).
 
 ### Goose sections (default)
 
 | Section | Job |
 |---------|-----|
-| **Briefing** | 1–3 sentences: what + why |
+| **Briefing** | 1-3 sentences: what + why |
 | **References** | Ticket / issue / ADR links |
 | **Changes** | Short human bullets; screenshots for UI if needed |
-| **Notes** | Env, flags, migrations, rollout — omit if empty |
+| **Notes** | Env, flags, migrations, rollout - omit if empty |
 
-Optional **Test plan** only when the repo or change needs it — no theater checklists.
+Optional **Test plan** only when the repo or change needs it - no theater checklists.
 
 ### Repo PR template
 
@@ -63,7 +63,7 @@ Substance (conventional title, short Changes, real Notes) follows Goose. Shape f
 ### 1. Preflight
 
 1. Self-review the branch diff if that wasn't done at the end of **implement**.
-2. Load **`git-practices`** — branch + commits must comply (ask before rewriting published history).
+2. Load **`git-practices`** - branch + commits must comply (ask before rewriting published history).
 3. Discover PR template (above); draft **title** + **body**.
 4. Voice pass: **`write-like-goose`**.
 
@@ -73,7 +73,7 @@ Substance (conventional title, short Changes, real Notes) follows Goose. Shape f
 git push -u origin HEAD
 ```
 
-If the remote diverged, stop and ask — don't force-push unless the user asks.
+If the remote diverged, stop and ask - don't force-push unless the user asks.
 
 ### 3. Discover GitHub tooling
 
@@ -90,7 +90,7 @@ Check for an **existing PR** on this head branch before creating a duplicate.
 - **Create:** never merge. Draft if the user wants WIP.
 - **Exists:** report URL; update title/body only if asked or clearly stale.
 
-#### Example — MCP (shape only; use real schema)
+#### Example - MCP (shape only; use real schema)
 
 ```text
 create_pull_request
@@ -99,7 +99,7 @@ create_pull_request
   body: "<template-merged or Goose default markdown>"
 ```
 
-#### Example — `gh` CLI
+#### Example - `gh` CLI
 
 ```bash
 gh pr create --title "feat(checkout): add pix payment option" --body "$(cat <<'EOF'
@@ -128,13 +128,11 @@ If the repo template uses different headings, `body` follows **that** shape with
 
 Branch, PR URL, MCP vs `gh`, leftover ops notes for the human.
 
-## Don't
+## Guardrails
 
-- Don't assume CLI or MCP without checking
-- Don't ignore a repo PR template
-- Don't paste the full diff into Changes
-- Don't merge to `main` / `master`
-- Don't open a second PR for the same head branch
+1. Discover GitHub tooling (MCP then `gh`) before acting; draft for the human if neither works.
+2. Prefer the repo PR template when present; short Changes (no full diff paste).
+3. **Never merge** to `main`/`master`. One PR per head branch (update if it already exists).
 
 ## Next
 
