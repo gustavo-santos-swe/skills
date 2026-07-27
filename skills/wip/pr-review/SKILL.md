@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Review an open pull request for correctness, spec/SoT drift, security-in-diff, main-path integration coverage, guidelines that matter, ship risk, and CI - draft first, optional GitHub post, human walk order. Use when reviewing a PR URL or the current branch's PR; not for local self-check (implement / pr-raise).
+description: Review an open PR (correctness, SoT drift, security-in-diff, main-path tests, CI). Draft first; optional GitHub post. Not for local self-check or addressing comments (pr-iterate).
 disable-model-invocation: true
 metadata:
   area: wip
@@ -81,14 +81,13 @@ Ask: **chat**, **markdown doc**, or **canvas**?
 
 Only after explicit go-ahead. One review submission with summary + inline comments where useful. Don’t duplicate existing threads - reply in-thread. Don’t approve with open Blocks.
 
-## Don't
+## Guardrails
 
-- Don’t nitpick formatting the linter owns
-- Don’t post without approval
-- Don’t skip the human walk guide
-- Don’t freestyle section titles (templates exist for consistency)
-- Don’t merge
-- Don’t pretend a full security audit happened (gate-in-diff only unless they run **security-check**)
+1. **Draft first** - post to GitHub only after the engineer approves.
+2. Always include the **human review guide** using the fixed templates (same section titles every time).
+3. Human merges; deep AppSec → offer **security-check**. Stay matters-only (skip linter theater).
+
+**Done when:** review rendered on the chosen surface; posting asked (or skipped); next step clear.
 
 ## References
 
