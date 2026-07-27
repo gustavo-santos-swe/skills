@@ -20,7 +20,7 @@ metadata:
 |-----------|--------|--------|----------|
 | **Syncable** | present | absent | `sync-skill.py` can overwrite files |
 | **Adapted** | present | present | Check reports outdated; sync only with `--force` + diff review |
-| **Custom** | absent | `inspired_by` or `note` | Not syncable — e.g.: `ship-feature` |
+| **Custom** | absent | `inspired_by` or `note` | Not syncable — e.g. Goose `wip/` skills |
 | **Local** | absent | absent | Template or native skill — e.g.: `suggesting-skills` |
 
 ## Fields

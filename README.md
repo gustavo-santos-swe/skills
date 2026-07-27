@@ -59,51 +59,33 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 
 | Skill | Purpose |
 |-------|---------|
-| [`brainstorming`](skills/workflow/brainstorming/) | Design and spec before implementing |
-| [`grilling`](skills/workflow/grilling/) | Relentless interview until the decision tree is resolved |
-| [`grill-me`](skills/workflow/grill-me/) | User-invoked grilling entrypoint |
-| [`batch-grill-me`](skills/workflow/batch-grill-me/) | Grilling in rounds (whole frontier at once) |
-| [`writing-plans`](skills/workflow/writing-plans/) | Detailed implementation plan |
-| [`executing-plans`](skills/workflow/executing-plans/) | Execute plan task by task |
 | [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-author specs, RFCs, PRDs |
-| [`ship-feature`](skills/workflow/ship-feature/) | Commit, push, and open PR — never merge to main |
-| [`git-conventions`](skills/workflow/git-conventions/) | Branch naming (feat/, fix/, chore/…) and conventional commit messages on every git action |
 | [`quick-recap`](skills/workflow/quick-recap/) | Red/yellow/green status block convention at the end of every response |
 
-Source: [obra/superpowers](https://github.com/obra/superpowers), [mattpocock/skills](https://github.com/mattpocock/skills), [anthropics/skills](https://github.com/anthropics/skills), [BuilderIO/skills](https://github.com/BuilderIO/skills) — custom `ship-feature`. `batch-grill-me` from upstream `in-progress`.
+Lifecycle (brainstorm → plan → ship) lives under [`wip/`](skills/wip/). Source for remaining workflow skills: [anthropics/skills](https://github.com/anthropics/skills), [BuilderIO/skills](https://github.com/BuilderIO/skills).
 
 ### engineering
 
 | Skill | Purpose |
 |-------|---------|
-| [`ask-matt`](skills/engineering/ask-matt/) | Router — which Matt skill/flow fits |
-| [`grill-with-docs`](skills/engineering/grill-with-docs/) | Grilling + domain model (`CONTEXT.md`, ADRs) |
+| [`grill-with-docs`](skills/engineering/grill-with-docs/) | Grilling + domain model (`CONTEXT.md`, ADRs) — prefer `wip/brainstorm` + `wip/documentation` for Goose |
 | [`domain-modeling`](skills/engineering/domain-modeling/) | Sharpen domain language and ADRs |
 | [`codebase-design`](skills/engineering/codebase-design/) | Deep modules, seams, small interfaces |
 | [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one |
 | [`prototype`](skills/engineering/prototype/) | Throwaway prototype to answer a design question |
 | [`to-spec`](skills/engineering/to-spec/) | Conversation → spec on the issue tracker |
-| [`to-tickets`](skills/engineering/to-tickets/) | Plan/spec → tracer-bullet tickets with blockers |
-| [`implement`](skills/engineering/implement/) | Build from spec/tickets with TDD + review |
 | [`wayfinder`](skills/engineering/wayfinder/) | Multi-session map of decision tickets |
 | [`triage`](skills/engineering/triage/) | Issue triage state machine |
-| [`tdd`](skills/engineering/tdd/) | Red-green-refactor vertical slices |
-| [`diagnosing-bugs`](skills/engineering/diagnosing-bugs/) | Reproduce → minimise → instrument → fix |
 | [`code-review`](skills/engineering/code-review/) | Standards + spec review (parallel sub-agents) |
-| [`research`](skills/engineering/research/) | Cited research from primary sources |
 | [`resolving-merge-conflicts`](skills/engineering/resolving-merge-conflicts/) | Resolve merge/rebase by intent |
-| [`setup-matt-pocock-skills`](skills/engineering/setup-matt-pocock-skills/) | One-time repo setup for the Matt flow |
-| [`test-driven-development`](skills/engineering/test-driven-development/) | TDD — tests first (obra) |
-| [`systematic-debugging`](skills/engineering/systematic-debugging/) | Systematic debugging before fixing (obra) |
+| [`setup-matt-pocock-skills`](skills/engineering/setup-matt-pocock-skills/) | One-time repo setup for remaining Matt skills |
 | [`verification-before-completion`](skills/engineering/verification-before-completion/) | Evidence before claiming "done" |
-| [`requesting-code-review`](skills/engineering/requesting-code-review/) | Quick self-review of the diff before a PR |
 | [`code-review-and-quality`](skills/engineering/code-review-and-quality/) | 5-axis review (correctness, architecture, security, perf) |
-| [`receiving-code-review`](skills/engineering/receiving-code-review/) | Process review feedback |
 | [`code-simplification`](skills/engineering/code-simplification/) | Simplify code without changing behavior |
 | [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
 | [`mcp-builder`](skills/engineering/mcp-builder/) | Create MCP servers (Python/TypeScript) |
 
-Source: [mattpocock/skills](https://github.com/mattpocock/skills), [obra/superpowers](https://github.com/obra/superpowers), [anthropics/skills](https://github.com/anthropics/skills), [obra/superpowers-lab](https://github.com/obra/superpowers-lab), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
+Goose lifecycle (ask, research, planning, tickets, implement, diagnose, PR flow) is under [`wip/`](skills/wip/). Source for remaining engineering skills: [mattpocock/skills](https://github.com/mattpocock/skills), [obra/superpowers](https://github.com/obra/superpowers), [anthropics/skills](https://github.com/anthropics/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
 
 ### product
 
@@ -137,13 +119,11 @@ Source: custom (`react-native-design`), [software-mansion-labs/skills](https://g
 
 | Skill | Purpose |
 |-------|---------|
-| [`stop-slop`](skills/communication/stop-slop/) | Remove AI writing patterns |
-| [`write-like-a-human`](skills/communication/write-like-a-human/) | Humanize text (template) |
-| [`writing-fragments`](skills/communication/writing-fragments/) | Explore — mine raw fragments for an article |
-| [`writing-beats`](skills/communication/writing-beats/) | Exploit — assemble fragments into a beat journey |
-| [`writing-shape`](skills/communication/writing-shape/) | Exploit — shape pile into article paragraph by paragraph |
+| [`writing-fragments`](skills/communication/writing-fragments/) | Explore - mine raw fragments for an article |
+| [`writing-beats`](skills/communication/writing-beats/) | Exploit - assemble fragments into a beat journey |
+| [`writing-shape`](skills/communication/writing-shape/) | Exploit - shape pile into article paragraph by paragraph |
 
-Source: [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop), [mattpocock/skills](https://github.com/mattpocock/skills) `in-progress` (writing-*).
+House voice for Goose prose: [`wip/write-like-goose`](skills/wip/write-like-goose/). Source for writing-*: [mattpocock/skills](https://github.com/mattpocock/skills) `in-progress`.
 
 ### marketing
 
@@ -157,7 +137,7 @@ _Reserved for future imports (`pricing-strategy`, `launch-strategy`, etc.)._
 
 ### wip
 
-Personal lifecycle stubs under [`skills/wip/`](skills/wip/). No upstream sync. Graduate to a stable area when ready. See the [wip map](skills/wip/README.md).
+Goose lifecycle under [`skills/wip/`](skills/wip/). No upstream sync. Prefer these over deleted Matt/obra duplicates. See the [wip map](skills/wip/README.md).
 
 | Skill | Role |
 |-------|------|
@@ -178,19 +158,19 @@ Personal lifecycle stubs under [`skills/wip/`](skills/wip/). No upstream sync. G
 
 ## Typical workflow
 
+Goose lifecycle (`wip/`):
+
 ```
-ask-matt / grilling / grill-with-docs  (or brainstorming / doc-coauthoring)
-  → to-spec / to-tickets / writing-plans
-  → implement / executing-plans
-  → tdd or test-driven-development / frontend-design / diagnosing-bugs
-  → verification-before-completion
-  → code-review or code-review-and-quality
-  → ship-feature
+ask → research? → brainstorm → documentation:adr? → planning → create-tickets
+  → implement (+ stack packs) → documentation:ship-docs? → security-check?
+  → git-practices → pr-raise → pr-review ⇄ pr-iterate
 ```
+
+Optional complements: `grill-with-docs` / `to-spec` / `verification-before-completion` / `code-review-and-quality` / `frontend-design`.
 
 Writing pipeline: `writing-fragments` → `writing-beats` or `writing-shape`.
 
-Helpers: `finding-duplicate-functions`, `mcp-builder`, `handoff`, `stop-slop`, `sync-upstream-skills`, `to-questionnaire`, `batch-grill-me`.
+Helpers: `finding-duplicate-functions`, `mcp-builder`, `handoff`, `sync-upstream-skills`, `to-questionnaire`.
 
 ## Adding a new skill
 
@@ -301,7 +281,6 @@ Full list of plugins installed alongside these skills — a reference for reprod
 - [mattpocock/skills](https://github.com/mattpocock/skills)
 - [anthropics/skills](https://github.com/anthropics/skills)
 - [obra/superpowers-lab](https://github.com/obra/superpowers-lab)
-- [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 - [BuilderIO/skills](https://github.com/BuilderIO/skills)
 - [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills)

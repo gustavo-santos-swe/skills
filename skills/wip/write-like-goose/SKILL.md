@@ -82,7 +82,7 @@ For a heavy rewrite, read **patterns** + **vocabulary** + **phrases-and-structur
 
 ## Guardrails
 
-1. Run this skill alone for voice - do not stack `write-like-a-human` / `stop-slop` on the same pass.
+1. Run this skill alone for voice - do not stack other humanizer skills on the same pass.
 2. Keep bluntness; comments only when they carry a *why*.
 3. PR/ADR first line = substance (not a shell command theater opener).
 

@@ -26,7 +26,7 @@ Before emitting any of:
 ## Do not
 
 - Skip because the change is “small” or “just a commit”
-- Stack `stop-slop` / `write-like-a-human` on the same pass
+- Stack other humanizer skills on the same pass — `write-like-goose` alone
 - Paste the full pattern catalog into this rule or into AGENTS.md — **load the skill**
 
 Shape/format for branches and commits → `git-practices`. PR open → `pr-raise`. Voice → **this skill**.

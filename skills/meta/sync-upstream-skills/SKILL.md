@@ -18,7 +18,7 @@ Keep imported skills aligned with their source repos, using `metadata.upstream` 
 - Validate `metadata.upstream` after importing a new skill
 - Before adapting an upstream skill — know what changed since the last sync
 
-**When NOT to use:** custom skills (`ship-feature`) or templates without a `repo` — those are `custom`/`local`.
+**When NOT to use:** custom skills (`inspired_by` / no `repo`) or templates without a `repo` — those are `custom`/`local`.
 
 ## Step 1: Check all skills
 
@@ -103,7 +103,7 @@ python skills/meta/sync-upstream-skills/scripts/check-upstream.py
 
 For skills with scripts (`mcp-builder`), confirm that `scripts/` and `reference/` were included.
 
-If the user asks to ship: use `ship-feature` with a commit like:
+If the user asks to ship: use `git-practices` + `pr-raise` with a commit like:
 
 ```
 chore(skills): sync NAME from upstream @ abc1234
@@ -123,7 +123,7 @@ chore(skills): sync NAME from upstream @ abc1234
 |---------|-----|
 | Wrong `path` in frontmatter | Point to the actual folder in upstream, not the local name |
 | Sync overwrote an adaptation | Restore from git; use manual merge or `--force` only with re-application |
-| `stop-slop` with `path: .` | Correct — skill is at the root of the upstream repo |
+| Upstream skill at repo root | Use `path: .` in `metadata.upstream` |
 | GitHub API rate limit | Wait or use `GITHUB_TOKEN` |
 | Branch is not `main` | Script tries `main` then `master`; other branches = manual sync |
 
@@ -131,4 +131,4 @@ chore(skills): sync NAME from upstream @ abc1234
 
 - Full schema: [references/upstream-schema.md](references/upstream-schema.md)
 - Skill authoring: `writing-skills`
-- Ship after changes: `ship-feature`
+- Ship after changes: `git-practices` + `pr-raise`
