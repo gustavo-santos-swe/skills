@@ -1,8 +1,8 @@
 # skills
 
-Central repository for my [Agent Skills](https://agentskills.io/) — playbooks that teach the agent how to execute specific tasks in my workflow.
+Central repository for [Agent Skills](https://agentskills.io/) — playbooks that teach the agent how to run specific tasks.
 
-Served via [Skills Over MCP](https://skillsovermcp.com/). Push to `main` and any connected MCP client picks up the change immediately.
+Served via [Skills Over MCP](https://skillsovermcp.com/). Push to `main` and connected MCP clients pick up changes immediately.
 
 ## MCP URL
 
@@ -14,42 +14,106 @@ https://mcp.skillsovermcp.com/mcp/gustavo-santos-swe/skills
 
 ## Cursor plugin marketplace
 
-This repo is a Cursor marketplace (single plugin). Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
+Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
 
-**Team / Enterprise:** Dashboard → Plugins → Team Marketplaces → Add Marketplace → Import from Repo → `https://github.com/gustavo-santos-swe/skills`. Then install **gustavo-santos-skills** from Customize in any workspace.
+**Team / Enterprise:** Dashboard → Plugins → Team Marketplaces → Add Marketplace → Import from Repo → `https://github.com/gustavo-santos-swe/skills`. Then install **gustavo-santos-skills**.
 
-**Local (no Team plan):** symlink or copy the repo to `~/.cursor/plugins/local/gustavo-santos-skills`, then Reload Window.
+**Local (no Team plan):** symlink/copy to `~/.cursor/plugins/local/gustavo-santos-skills`, then Reload Window.
+
+---
+
+## How to use Goose skills
+
+Lifecycle skills live under [`skills/goose/`](skills/goose/). They are **user-invoked** (or via the router): say the skill name, or start with **`ask`** when unsure.
+
+Full map + when-table: [`skills/goose/README.md`](skills/goose/README.md).
+
+### Start here
+
+| You… | Run |
+|------|-----|
+| Don’t know which skill | **ask** |
+| Have a fuzzy idea | **brainstorm** (research first if you need facts) |
+| Have an agreed design | **planning** → **create-tickets** → **implement** |
+| Have a clear small change / ticket | **implement** |
+| Something is broken | **diagnose** |
+| Ready to open a PR | **git-practices** → **pr-raise** |
+| Reviewing a PR | **pr-review** |
+| Addressing review comments | **pr-iterate** |
+
+### Main flow (idea → ship)
+
+```
+ask
+  → research? → brainstorm → [documentation:adr?] → planning → create-tickets
+  → implement (+ stack packs) → [documentation:ship-docs?] → [security-check?]
+  → git-practices → pr-raise → pr-review ⇄ pr-iterate
+```
+
+- **Always-on voice:** **write-like-goose** for tickets, plans, commits, PRs, review comments, and code comments (see [`AGENTS.md`](AGENTS.md)).
+- **Stack packs** (under `implement/`): load the whole pack for the stack you’re touching — `database`, `dotnet`, `react-native` (stubs), `frontend` (stubs).
+- **Never merge to main** from the agent; humans merge.
+
+### Anytime (beside the flow)
+
+| Skill | When |
+|-------|------|
+| **write-like-goose** | Any durable prose / comments |
+| **codebase-design** | Shaping module seams, depth, adapters |
+| **documentation** | ADR before build, or ship-docs after |
+| **security-check** | Diff hits auth, secrets, tenancy, uploads, public APIs |
+
+---
 
 ## Area structure
 
-Skills organized under `skills/<area>/<name>/`. [Skills Over MCP](https://skillsovermcp.com/) supports nested folders.
-
 ```
 skills/
-├── meta/           # skill authoring / discovery helpers
-├── workflow/       # remaining workflow helpers (doc co-authoring)
-├── engineering/    # architecture, review, simplification helpers
-├── product/        # domain, discovery, positioning
-├── design/         # UI/UX
-├── mobile/         # React Native / Expo — native feel, performance
-├── communication/  # prose and copy
-├── marketing/      # pricing, launch, acquisition (reserved)
-├── operations/     # support, metrics, deploy ops
-└── wip/            # Goose lifecycle + stack packs
-                    # (implement/{database,dotnet,react-native,frontend}/)
+├── goose/          # House lifecycle (idea → ship) + implement stack packs
+├── meta/           # Skill authoring helpers
+├── workflow/       # Doc co-authoring (Anthropic)
+├── engineering/    # Optional architecture / conflict / duplicate helpers
+├── design/         # UI craft
+├── mobile/         # RN/Expo deep technique (complements goose RN pack)
+├── communication/  # Long-form article writing pipeline
+├── product/        # Reserved
+├── marketing/      # Reserved
+└── operations/     # Reserved
 ```
 
-Each `SKILL.md` includes `metadata.area` with the corresponding area.
+Each `SKILL.md` has `metadata.area` matching its folder.
+
+---
 
 ## Inventory
+
+### goose (primary)
+
+| Skill | When |
+|-------|------|
+| [`ask`](skills/goose/ask/) | Unsure which skill/flow |
+| [`research`](skills/goose/research/) | Cited options before locking design |
+| [`brainstorm`](skills/goose/brainstorm/) | Freeze the *what* |
+| [`documentation`](skills/goose/documentation/) | ADR or ship-docs |
+| [`planning`](skills/goose/planning/) | Implementation plan |
+| [`create-tickets`](skills/goose/create-tickets/) | Tracer-bullet issues + blockers |
+| [`diagnose`](skills/goose/diagnose/) | Failure → root cause → fix → lock |
+| [`implement`](skills/goose/implement/) | Build (+ [`database`](skills/goose/implement/database/), [`dotnet`](skills/goose/implement/dotnet/), [`react-native`](skills/goose/implement/react-native/), [`frontend`](skills/goose/implement/frontend/)) |
+| [`security-check`](skills/goose/security-check/) | Optional trust-boundary gate |
+| [`git-practices`](skills/goose/git-practices/) | Branch names + commits |
+| [`pr-raise`](skills/goose/pr-raise/) | Open PR (never merge) |
+| [`pr-review`](skills/goose/pr-review/) | Review open PR |
+| [`pr-iterate`](skills/goose/pr-iterate/) | Author feedback loop |
+| [`write-like-goose`](skills/goose/write-like-goose/) | House voice |
+| [`codebase-design`](skills/goose/codebase-design/) | Deep-module vocabulary |
 
 ### meta
 
 | Skill | Purpose |
 |-------|---------|
-| [`writing-great-skills`](skills/meta/writing-great-skills/) | Vocabulary/principles for predictable skills |
+| [`writing-great-skills`](skills/meta/writing-great-skills/) | Vocabulary for predictable skills |
 | [`teach`](skills/meta/teach/) | Multi-session teaching workspace |
-| [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills |
+| [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills from repeated prompts |
 
 ### workflow
 
@@ -57,192 +121,117 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 |-------|---------|
 | [`doc-coauthoring`](skills/workflow/doc-coauthoring/) | Co-author specs, RFCs, PRDs |
 
-Lifecycle lives under [`wip/`](skills/wip/). Source: [anthropics/skills](https://github.com/anthropics/skills).
-
 ### engineering
 
 | Skill | Purpose |
 |-------|---------|
-| [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one (vocab → `wip/codebase-design`) |
+| [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Survey deepening opportunities (uses `goose/codebase-design`) |
 | [`resolving-merge-conflicts`](skills/engineering/resolving-merge-conflicts/) | Resolve merge/rebase by intent |
 | [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
-
-Goose lifecycle + `codebase-design` under [`wip/`](skills/wip/). Remaining engineering: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).
-
-### product
-
-_Reserved — no skills yet._
 
 ### design
 
 | Skill | Purpose |
 |-------|---------|
-| [`frontend-design`](skills/design/frontend-design/) | Distinctive, production-grade UI, anti-"AI slop" |
-
-Source: [anthropics/skills](https://github.com/anthropics/skills).
+| [`frontend-design`](skills/design/frontend-design/) | Distinctive UI, anti-“AI slop” |
 
 ### mobile
 
 | Skill | Purpose |
 |-------|---------|
-| [`react-native-design`](skills/mobile/react-native-design/) | Native look-and-feel for React Native/Expo — anti-"web port", grounded in the Monetis mobile stack |
-| [`react-native-best-practices`](skills/mobile/react-native-best-practices/) | Animations (Reanimated 4/Skia/GPU), gestures, audio, on-device AI, JSI, multithreading |
-| [`react-native-performance`](skills/mobile/react-native-performance/) | FPS, TTI, bundle size, memory leaks, re-renders |
-| [`ui-ux-pro-max`](skills/mobile/ui-ux-pro-max/) | Searchable style/color/typography/UX-guideline database (incl. React Native stack) |
-| [`react-native-styling-and-navigation`](skills/mobile/react-native-styling-and-navigation/) | Basic StyleSheet/Navigation/Reanimated quick reference |
-
-Source: custom (`react-native-design`), [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills), [callstackincubator/agent-skills](https://github.com/callstackincubator/agent-skills), [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [wshobson/agents](https://github.com/wshobson/agents).
+| [`react-native-design`](skills/mobile/react-native-design/) | Native look-and-feel (Monetis-grounded) |
+| [`react-native-best-practices`](skills/mobile/react-native-best-practices/) | Animations, gestures, audio, JSI, … |
+| [`react-native-performance`](skills/mobile/react-native-performance/) | FPS, TTI, leaks, re-renders |
+| [`ui-ux-pro-max`](skills/mobile/ui-ux-pro-max/) | Style/UX guideline database |
+| [`react-native-styling-and-navigation`](skills/mobile/react-native-styling-and-navigation/) | StyleSheet / Navigation quick ref |
 
 ### communication
 
 | Skill | Purpose |
 |-------|---------|
-| [`writing-fragments`](skills/communication/writing-fragments/) | Explore - mine raw fragments for an article |
-| [`writing-beats`](skills/communication/writing-beats/) | Exploit - assemble fragments into a beat journey |
-| [`writing-shape`](skills/communication/writing-shape/) | Exploit - shape pile into article paragraph by paragraph |
+| [`writing-fragments`](skills/communication/writing-fragments/) | Explore — mine article fragments |
+| [`writing-beats`](skills/communication/writing-beats/) | Exploit — beat journey |
+| [`writing-shape`](skills/communication/writing-shape/) | Exploit — shape into article |
 
-House voice for Goose prose: [`wip/write-like-goose`](skills/wip/write-like-goose/). Source for writing-*: [mattpocock/skills](https://github.com/mattpocock/skills) `in-progress`.
+### product / marketing / operations
 
-### marketing
+_Reserved._
 
-_Reserved for future imports (`pricing-strategy`, `launch-strategy`, etc.)._
-
-### operations
-
-_Reserved — no skills yet._
-
-### wip
-
-Goose lifecycle under [`skills/wip/`](skills/wip/). No upstream sync. Prefer these over deleted Matt/obra duplicates. See the [wip map](skills/wip/README.md).
-
-| Skill | Role |
-|-------|------|
-| [`ask`](skills/wip/ask/) | Router |
-| [`research`](skills/wip/research/) | Explore options (cited) |
-| [`brainstorm`](skills/wip/brainstorm/) | Sharpen idea before plan |
-| [`documentation`](skills/wip/documentation/) | ADR + ship-docs (two branches) |
-| [`planning`](skills/wip/planning/) | Implementation plan |
-| [`create-tickets`](skills/wip/create-tickets/) | Plan → issues + blockers |
-| [`diagnose`](skills/wip/diagnose/) | Failure → root cause → fix → lock |
-| [`implement`](skills/wip/implement/) | Build the work (+ [`database/`](skills/wip/implement/database/), [`dotnet/`](skills/wip/implement/dotnet/), [`react-native/`](skills/wip/implement/react-native/), [`frontend/`](skills/wip/implement/frontend/)) |
-| [`security-check`](skills/wip/security-check/) | Optional security gate before ship |
-| [`git-practices`](skills/wip/git-practices/) | Branch / commits |
-| [`pr-raise`](skills/wip/pr-raise/) | Open PR (never merge) |
-| [`pr-review`](skills/wip/pr-review/) | Review existing PR |
-| [`pr-iterate`](skills/wip/pr-iterate/) | Handle PR feedback / re-request |
-| [`write-like-goose`](skills/wip/write-like-goose/) | House voice (prose + comments) |
-| [`codebase-design`](skills/wip/codebase-design/) | Deep-module vocabulary (seams / depth) |
-
-## Typical workflow
-
-Goose lifecycle (`wip/`):
-
-```
-ask → research? → brainstorm → documentation:adr? → planning → create-tickets
-  → implement (+ stack packs) → documentation:ship-docs? → security-check?
-  → git-practices → pr-raise → pr-review ⇄ pr-iterate
-```
-
-Optional complements: `improve-codebase-architecture` / `frontend-design`.
-
-Writing pipeline: `writing-fragments` → `writing-beats` or `writing-shape`.
-
-Helpers: `finding-duplicate-functions`.
+---
 
 ## Adding a new skill
 
-1. Choose an area (`meta`, `workflow`, `engineering`, `wip`, …)
+1. Choose an area (`goose`, `meta`, `engineering`, …)
 2. Create `skills/<area>/<name>/SKILL.md`
-3. Minimum frontmatter:
+3. Frontmatter minimum:
 
 ```markdown
 ---
 name: <name>
-description: What it does and when to use it — keywords I typically say.
+description: What it does and when to use it.
+disable-model-invocation: true
 metadata:
-  area: engineering
-  upstream:
-    repo: owner/repo
-    path: skills/<name>
-    url: https://github.com/owner/repo/tree/main/skills/<name>
-    synced_at: "YYYY-MM-DD"
-    commit: "<sha>"
+  area: goose
+  inspired_by:
+    - owner/repo - upstream name
 ---
 ```
 
-For imported skills, keep `metadata.upstream` (repo, path, url, commit, synced_at). Goose `wip/` skills usually use `inspired_by` instead — no sync tooling in this repo anymore.
+Imported third-party skills may use `metadata.upstream` instead of `inspired_by`.
 
-4. Keep the body concise (< 500 lines). Details go in `references/`.
-5. Update the area `README.md` and this inventory.
+4. Keep the body concise; details in `references/`.
+5. Update the area README and this inventory.
 
 ## Notes
 
 - Repo is **public** — anyone with the MCP URL can read the skills.
-- Do not store secrets, credentials, or sensitive data.
-- The `description` field in frontmatter is what the agent uses to decide *when* to activate the skill.
+- Do not store secrets or credentials.
+- Frontmatter `description` is what model-invoked skills use for auto-routing; Goose lifecycle skills are mostly user-invoked via **ask** / name.
 
 ## Installing as a plugin
-
-This repo works as an installable plugin in Claude Code and Cursor — no SKILL.md files are moved or duplicated. The manifest points to the [Skills Over MCP](https://skillsovermcp.com/) endpoint as the remote server.
 
 ### Claude Code
 
 ```bash
-# Single session (does not persist):
 claude --plugin-dir .
-
-# Permanent installation (user-scoped):
 claude plugins install --local "$(pwd)"
 ```
 
 ### Cursor (Windows / bash)
 
-Cursor has no CLI installer for local plugins — it loads anything placed (or symlinked) under `~/.cursor/plugins/local/<name>`, matching the `name` in `plugin.json`.
-
 ```bash
 mkdir -p ~/.cursor/plugins/local
-
-# Option 1 — symlink (requires Developer Mode enabled on Windows, or run as Administrator):
 cmd /c mklink /D "%USERPROFILE%\.cursor\plugins\local\gustavo-santos-skills" "%cd%"
-
-# Option 2 — copy (no permission restrictions, but won't auto-update on pull):
-cp -r . ~/.cursor/plugins/local/gustavo-santos-skills
 ```
 
-Then run **Developer: Reload Window** from the Command Palette and confirm it loaded under **Customize** in the sidebar.
+## Installed plugins (outside this repo)
 
-## Plugin stack
-
-Full list of plugins installed alongside these skills — a reference for reproducing the environment on a new machine.
-
-### cursor-public (Cursor Marketplace + Claude Code)
+Handy plugins used alongside these skills (not vendored here):
 
 | Plugin | What it does |
 |--------|--------------|
-| [`compound-engineering`](https://github.com/EveryInc/compound-engineering-plugin) | AI-powered dev tools: code review, research, design, workflow automation |
-| [`superpowers`](https://github.com/obra/superpowers) | Core skills library: TDD, debugging, collaboration patterns |
-| [`cursor-team-kit`](https://github.com/cursor/plugins) | CI, code review, shipping, control-cli/ui, verify-this |
-| [`continual-learning`](https://github.com/cursor/plugins) | Learns preferences and keeps `AGENTS.md` updated from transcripts |
-| [`thermos`](https://github.com/cursor/plugins) | Thermo-nuclear code review and security audit |
-| [`docs-canvas`](https://github.com/cursor/plugins) | Renders architecture docs as a navigable Cursor Canvas |
-| [`pr-review-canvas`](https://github.com/cursor/plugins) | Renders PR diffs as a reviewer-organized Cursor Canvas |
-| [`notion-workspace`](https://www.notion.so/) | Notion skills + MCP server |
-| [`stripe`](https://github.com/stripe/ai) | Stripe best practices + MCP server |
-| [`context7-plugin`](https://context7.com/) | Context7 MCP — version-specific docs from source repos |
+| [`cursor-team-kit`](https://github.com/cursor/plugins) | CI, code review, shipping helpers |
+| [`continual-learning`](https://github.com/cursor/plugins) | Learns preferences into `AGENTS.md` |
+| [`thermos`](https://github.com/cursor/plugins) | Thermo-nuclear review / security |
+| [`docs-canvas`](https://github.com/cursor/plugins) | Architecture docs as Canvas |
+| [`pr-review-canvas`](https://github.com/cursor/plugins) | PR diffs as Canvas |
+| [`notion-workspace`](https://www.notion.so/) | Notion skills + MCP |
+| [`stripe`](https://github.com/stripe/ai) | Stripe practices + MCP |
+| [`context7-plugin`](https://context7.com/) | Version-specific library docs |
 
-### claude-plugins-official (Claude Code only)
+### claude-plugins-official (Claude Code)
 
 | Plugin | What it does |
 |--------|--------------|
-| `compound-engineering` | Same plugin, registered in the Claude Code marketplace |
-| `code-review` | Automated code review with specialized agents and confidence scoring |
-| `code-simplifier` | Code simplification without changing behavior |
+| `compound-engineering` | Compound Engineering workflows |
+| `code-review` | Automated review agents |
+| `code-simplifier` | Clarity polish without behavior change |
 | `feature-dev` | Feature development workflow |
-| `frontend-design` | Production-grade UI generation |
+| `frontend-design` | UI generation |
 | `pr-review-toolkit` | PR review toolkit |
-| `linear` | Linear issue tracking MCP |
-| `github` | Official GitHub MCP server |
-| `context7` | Context7 MCP (Claude Code variant) |
+| `linear` | Linear MCP |
+| `github` | GitHub MCP |
+| `context7` | Context7 MCP |
 
 ## References
 
@@ -251,7 +240,6 @@ Full list of plugins installed alongside these skills — a reference for reprod
 - [obra/superpowers](https://github.com/obra/superpowers)
 - [mattpocock/skills](https://github.com/mattpocock/skills)
 - [anthropics/skills](https://github.com/anthropics/skills)
-- [obra/superpowers-lab](https://github.com/obra/superpowers-lab)
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 - [BuilderIO/skills](https://github.com/BuilderIO/skills)
 - [software-mansion-labs/skills](https://github.com/software-mansion-labs/skills)
