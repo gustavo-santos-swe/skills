@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personal agent skills — workflow, engineering, product, design, mobile, communication, meta, operations, goose",
   "author": { "name": "Gustavo Santos", "url": "https://github.com/gustavo-santos-swe" },
-  "repository": { "type": "git", "url": "https://github.com/gustavo-santos-swe/skills.git" },
+  "repository": "https://github.com/gustavo-santos-swe/skills",
   "skills": [
     "./skills/communication",
     "./skills/design",
@@ -15,8 +15,5 @@
     "./skills/goose",
     "./skills/workflow"
   ],
-  "mcpServers": "./.mcp.json",
-  "dependencies": [
-    { "name": "compound-engineering", "marketplace": "cursor-public" }
-  ]
+  "mcpServers": "./.mcp.json"
 }

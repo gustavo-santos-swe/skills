@@ -12,6 +12,17 @@ https://mcp.skillsovermcp.com/mcp/gustavo-santos-swe/skills
 
 **Cursor:** Settings → MCP → Add server → paste the URL above (transport: `streamable-http`).
 
+## Claude Code plugin marketplace
+
+Manifest: [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json).
+
+```bash
+claude plugin marketplace add gustavo-santos-swe/skills
+claude plugin install gustavo-santos-skills@gustavo-santos-skills
+```
+
+Or in-session: `/plugin marketplace add gustavo-santos-swe/skills`, then `/plugin install gustavo-santos-skills@gustavo-santos-skills`.
+
 ## Cursor plugin marketplace
 
 Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
@@ -193,10 +204,21 @@ Imported third-party skills may use `metadata.upstream` instead of `inspired_by`
 
 ### Claude Code
 
+From GitHub:
+
 ```bash
-claude --plugin-dir .
-claude plugins install --local "$(pwd)"
+claude plugin marketplace add gustavo-santos-swe/skills
+claude plugin install gustavo-santos-skills@gustavo-santos-skills
 ```
+
+From a local clone (point at the absolute path — a bare `.` is rejected):
+
+```bash
+claude plugin marketplace add "$(pwd)"
+claude plugin install gustavo-santos-skills@gustavo-santos-skills
+```
+
+Verify with `claude plugin list` (expect `✔ enabled`) and `claude plugin details gustavo-santos-skills` for the skill inventory and token cost.
 
 ### Cursor (Windows / bash)
 
