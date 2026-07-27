@@ -59,6 +59,7 @@ ask  →  picks the skill / flow above
 | 7 | [`pr-review`](./pr-review/) | Review an existing PR |
 | 8 | [`pr-iterate`](./pr-iterate/) | Author loop - handle feedback, push, re-request |
 | - | [`write-like-goose`](./write-like-goose/) | **Always-on voice** - prose + code comments (see root `AGENTS.md` + `.cursor/rules/write-like-goose.mdc`) |
+| - | [`codebase-design`](./codebase-design/) | Deep-module vocabulary (seam / depth / adapter) - anytime + architecture pass |
 
 Later (not stubbed yet): verify/done.
 

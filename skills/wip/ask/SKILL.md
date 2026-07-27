@@ -68,18 +68,19 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 - **Mobile UI / device** → `react-native` pack; deep technique may also use [`../../mobile/`](../../mobile/).
 - **Next.js web** → `frontend` pack; visual craft may also use [`../../design/`](../../design/).
 
-## Always-on voice (not a lifecycle step)
+## Always-on / anytime (not lifecycle steps)
 
-**`write-like-goose`** is the default for durable Goose prose. Details live there + repo **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`. Lifecycle skills only remind: Voice → **`write-like-goose`**.
+- **`write-like-goose`** — durable Goose prose (also root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
+- **`codebase-design`** — deep-module vocabulary when shaping seams/interfaces (also used by `engineering/improve-codebase-architecture`).
 
 ## Crossing sessions
 
-- Prefer engineering / productivity **`handoff`** when the window is full or you need a fresh session with continuity.
+- When the window is full: write a short durable brief in the target repo (or paste a compact summary for the next chat), then start fresh with that file.
 - Built-in **compact** only at intentional phase breaks - not mid-brainstorm or mid-implement slice.
 
 ## Related (outside wip)
 
-Matt / obra flows still exist under `engineering/` and `workflow/`. Prefer **wip** skills for Goose lifecycle; use upstream when you explicitly want that playbook.
+Optional complements under `engineering/` (architecture / review helpers) and `workflow/doc-coauthoring`. Prefer **wip** for Goose lifecycle.
 
 ## Later
 

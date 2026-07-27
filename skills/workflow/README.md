@@ -1,3 +1,3 @@
 # workflow
 
-From problem to PR: grilling, brainstorming, plans, execution, collaborative docs, ship. Includes Matt grilling variants (`grilling`, `grill-me`, `batch-grill-me`).
+Remaining workflow helper: `doc-coauthoring`. Goose idea → ship lifecycle lives under [`../wip/`](../wip/).

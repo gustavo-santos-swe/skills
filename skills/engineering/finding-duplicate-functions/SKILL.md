@@ -96,7 +96,7 @@ Present the report to the user. For HIGH confidence duplicates:
 1. Verify the recommended survivor has tests
 2. Propose updating callers to use the survivor
 3. Delete duplicates only after user approval
-4. Run tests (`verification-before-completion`)
+4. Run the project's tests / verify commands before claiming done
 
 Do not auto-delete code without explicit user consent.
 

@@ -21,7 +21,7 @@ Voice: **`write-like-goose`**.
 ## When not to
 
 - Design debate with options already known → **brainstorm**
-- Build / spike code is the only way to learn → **prototype** (or a short experiment under **implement**), not a research novel
+- Build / spike code is the only way to learn → a short throwaway experiment under **implement** (not a research novel)
 - Failure / flake / regression → **diagnose**
 - Formal long-form report (market/policy/science deep dive) - say so; this skill stays a **decision brief**, not a whitepaper
 
@@ -92,7 +92,7 @@ No copy-pasteable production code required. No full POC unless the user explicit
 
 1. Hard claims need a **primary** cite (URL or path); secondary sources are leads only.
 2. Deliver a **decision brief** on disk (not chat-only, not a whitepaper).
-3. Stay in research - feature build belongs in **implement** / **prototype**.
+3. Stay in research - feature build / spikes belong in **implement**.
 
 **Done when:** brief saved, path reported, next skill proposed.
 

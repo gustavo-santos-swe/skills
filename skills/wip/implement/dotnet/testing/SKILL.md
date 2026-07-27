@@ -130,5 +130,5 @@ Deep audit catalogs stay in the Cursor **`dotnet-test`** plugins (`test-anti-pat
 - Layer projects → **`solution-structure`**
 - Testcontainers / no InMemory → **`db-integration`**
 - Clock fakes → **`time-and-ids`**
-- TDD process → lifecycle **`test-driven-development`** / implement flow
+- TDD process → parent **`implement`** (red-green-refactor at agreed seams)
 - Broader test audits (plugin) → Cursor **`dotnet-test`**

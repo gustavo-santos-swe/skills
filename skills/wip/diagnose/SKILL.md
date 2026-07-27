@@ -110,7 +110,7 @@ Then ship the fix via **`git-practices`** → **`pr-raise`** when the change lea
 
 1. Repro (simple) or red loop (hard) **before** proposing a fix; one hypothesis at a time.
 2. Done = original repro green **and** lock in place (or missing seam documented).
-3. Fix (or prove you can’t yet) here - tracker triage is a different skill.
+3. Fix (or prove you can’t yet) here - filing/prioritizing tracker tickets is out of scope for this skill.
 
 ## For other wip skills
 

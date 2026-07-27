@@ -1,3 +1,5 @@
 # communication
 
-User-facing prose: PRs, changelogs, landing copy, emails, docs — plus Matt's article explore/exploit writing pipeline.
+Matt's article explore/exploit writing pipeline (`writing-fragments` → `writing-beats` / `writing-shape`).
+
+House voice for Goose durable prose: [`../wip/write-like-goose/`](../wip/write-like-goose/).

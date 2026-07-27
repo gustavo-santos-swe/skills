@@ -1,3 +1,3 @@
 # operations
 
-Support, SaaS metrics, production deploys, churn.
+Reserved for future ops/support skills.
