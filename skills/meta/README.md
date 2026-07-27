@@ -1,3 +1,3 @@
 # meta
 
-Skill authoring and discovery helpers (`writing-skills`, `writing-great-skills`, `using-superpowers`, `suggesting-skills`, `teach`).
+Skill authoring helpers: `writing-great-skills`, `suggesting-skills`, `teach`.

@@ -47,8 +47,6 @@ Each `SKILL.md` includes `metadata.area` with the corresponding area.
 
 | Skill | Purpose |
 |-------|---------|
-| [`using-superpowers`](skills/meta/using-superpowers/) | Check available skills before acting |
-| [`writing-skills`](skills/meta/writing-skills/) | Create and maintain skills |
 | [`writing-great-skills`](skills/meta/writing-great-skills/) | Vocabulary/principles for predictable skills |
 | [`teach`](skills/meta/teach/) | Multi-session teaching workspace |
 | [`suggesting-skills`](skills/meta/suggesting-skills/) | Suggest new skills |
@@ -77,11 +75,7 @@ Goose lifecycle is under [`wip/`](skills/wip/). Source for remaining engineering
 
 ### product
 
-| Skill | Purpose |
-|-------|---------|
-| [`to-questionnaire`](skills/product/to-questionnaire/) | Turn a knowledge gap into an async questionnaire |
-
-Source: [mattpocock/skills](https://github.com/mattpocock/skills) `in-progress`.
+_Reserved — no skills yet._
 
 ### design
 
@@ -119,9 +113,7 @@ _Reserved for future imports (`pricing-strategy`, `launch-strategy`, etc.)._
 
 ### operations
 
-| Skill | Purpose |
-|-------|---------|
-| [`triage-bug`](skills/operations/triage-bug/) | Bug report → structured ticket |
+_Reserved — no skills yet._
 
 ### wip
 
