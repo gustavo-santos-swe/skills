@@ -19,7 +19,7 @@ Before emitting any of:
 
 ## What to do
 
-1. **Load** [`skills/wip/write-like-goose/SKILL.md`](skills/wip/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
+1. **Load** [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
 2. Heavy rewrite → also load `references/patterns.md` + `vocabulary.md` + `phrases-and-structures.md`.
 3. Chat-shaped answers → Defaults + `density.md` only; full catalog optional.
 
