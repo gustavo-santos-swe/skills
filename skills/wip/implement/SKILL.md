@@ -61,6 +61,12 @@ If a new concern appears mid-slice that belongs to another pack, load that pack 
 
 Work vertical slices inside the batch (one test → code → next), not “all tests then all code.”
 
+## Optional polish (simplify)
+
+After the batch is green, if the change feels heavier than it should, do a **clarity pass on this batch only** before the review pause. Full rules: [`references/simplify.md`](references/simplify.md).
+
+Short form: preserve behaviour and tests; match repo conventions; clarity over cleverness; no drive-by refactors; don’t strip seams that earn their keep (**codebase-design**). Skip when already clear or you don’t understand why the code is shaped that way yet.
+
 ## Steps
 
 1. **Confirm batch** - ticket ids / plan headings / AC. Soft default one frontier slice.
@@ -70,13 +76,14 @@ Work vertical slices inside the batch (one test → code → next), not “all t
 5. **Agree seams** - TDD list (or explicit glue exception).
 6. **Build** - red/green; run focused verifies often; honor pack rules and source of truth.
 7. **Drift?** - pause; apply create-tickets drift ask.
-8. **Done bar** (before review ask):
+8. **Optional polish** - if the batch is green but muddy, simplify per above (still dirty tree).
+9. **Done bar** (before review ask):
    - Batch AC satisfied
    - Ticket/plan verify steps run (or note why N/A)
    - Self-check against loaded pack skills + source of truth
    - Goose voice on new/changed comments (`write-like-goose`)
-9. **Pause for local engineer review** - show what changed (diff summary / paths). Wait for OK before any commit/push.
-10. **After they approve** - ask before **git-practices** (commit) then **pr-raise**. If they want changes, stay in implement (still dirty tree) until the next pause.
+10. **Pause for local engineer review** - show what changed (diff summary / paths). Wait for OK before any commit/push.
+11. **After they approve** - ask before **git-practices** (commit) then **pr-raise**. If they want changes, stay in implement (still dirty tree) until the next pause.
 
 Stop when blocked, tests won’t go green after honest attempts, or scope shifts. Ask; don’t guess.
 
@@ -96,6 +103,7 @@ Deeper PR review stays in **pr-review** after open.
 ## References
 
 - [`references/done-checklist.md`](references/done-checklist.md) - pause-for-review checklist
+- [`references/simplify.md`](references/simplify.md) - optional clarity polish after green
 
 ## Related
 
@@ -103,4 +111,5 @@ Deeper PR review stays in **pr-review** after open.
 - Plan only → **planning**
 - After approve → **git-practices** → **pr-raise**
 - Trust boundary gate → **security-check** (optional)
+- Module shape → **codebase-design**
 - Voice → **write-like-goose**

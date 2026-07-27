@@ -65,7 +65,6 @@ Lifecycle lives under [`wip/`](skills/wip/). Source: [anthropics/skills](https:/
 |-------|---------|
 | [`improve-codebase-architecture`](skills/engineering/improve-codebase-architecture/) | Find deepening opportunities, grill one (vocab → `wip/codebase-design`) |
 | [`resolving-merge-conflicts`](skills/engineering/resolving-merge-conflicts/) | Resolve merge/rebase by intent |
-| [`code-simplification`](skills/engineering/code-simplification/) | Simplify code without changing behavior |
 | [`finding-duplicate-functions`](skills/engineering/finding-duplicate-functions/) | Audit semantic duplication |
 
 Goose lifecycle + `codebase-design` under [`wip/`](skills/wip/). Remaining engineering: [mattpocock/skills](https://github.com/mattpocock/skills), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills).

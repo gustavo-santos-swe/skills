@@ -3,6 +3,6 @@
 Helpers that still sit beside Goose `wip/`:
 
 - `improve-codebase-architecture` — deepen survey (uses `wip/codebase-design` vocab)
-- `code-simplification`, `finding-duplicate-functions`, `resolving-merge-conflicts`
+- `finding-duplicate-functions`, `resolving-merge-conflicts`
 
-Lifecycle, review, and deep-module language: [`../wip/`](../wip/).
+Clarity polish after green lives in **`wip/implement`** (`references/simplify.md`). Lifecycle + deep-module language: [`../wip/`](../wip/).
