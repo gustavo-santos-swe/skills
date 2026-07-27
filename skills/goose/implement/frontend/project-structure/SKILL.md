@@ -1,7 +1,6 @@
 ---
 name: web-project-structure
 description: Use when laying out or changing a Next.js App Router repo — folders, feature modules, shared UI, or monorepo boundaries.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: rn-offline-and-sync
 description: Use when designing offline-first behavior, mutation queues, or sync conflict handling in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

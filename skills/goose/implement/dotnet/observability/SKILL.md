@@ -1,7 +1,6 @@
 ---
 name: observability
 description: Use when adding or reviewing .NET telemetry — OpenTelemetry traces/metrics, MEL structured logging, correlation, PII rules — or when implement loads the dotnet pack for observability work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

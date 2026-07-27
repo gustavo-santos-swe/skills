@@ -1,7 +1,6 @@
 ---
 name: research
 description: Cited decision brief from primary sources before design locks. Use for library/API/options research - not for building the feature.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

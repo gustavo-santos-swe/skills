@@ -1,7 +1,6 @@
 ---
 name: rn-data-fetching
 description: Use when wiring API clients, TanStack Query/React Query, mutations, or offline-aware fetches in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

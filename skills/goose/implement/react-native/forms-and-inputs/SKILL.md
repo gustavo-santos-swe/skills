@@ -1,7 +1,6 @@
 ---
 name: rn-forms-and-inputs
 description: Use when building React Native forms, text inputs, keyboard handling, or client-side validation UX.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

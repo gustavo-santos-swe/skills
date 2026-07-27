@@ -1,7 +1,6 @@
 ---
 name: security-check
 description: Trust-boundary gate (or full audit): high-confidence findings, report only. Use when the change hits auth/secrets/PII/payments/uploads/public APIs, or when asked for a security pass.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: rn-theming
 description: Use when adding dark mode, brand themes, or dynamic color schemes in a React Native / Expo app.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

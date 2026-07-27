@@ -1,7 +1,6 @@
 ---
 name: api-contracts
 description: Use when reviewing public API compatibility, OpenAPI drift, deprecation, or whether a change needs a new /api/vN — or when implement loads the dotnet pack for contract work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: web-images-fonts-assets
 description: Use when configuring next/image, next/font, static assets, or remote image patterns in Next.js.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

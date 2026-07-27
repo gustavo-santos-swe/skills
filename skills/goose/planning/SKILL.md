@@ -1,7 +1,6 @@
 ---
 name: planning
 description: Actionable implementation plan (tasks, files, verify) - no feature code. Use when the what is frozen and you need the how.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: web-typescript-conventions
 description: Use when setting TS patterns for a Next.js/React codebase — types for props, zod boundaries, and strictness.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: documentation
 description: ADRs before build; ship-docs after. Use when a decision or public/ops surface needs a durable written trail.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

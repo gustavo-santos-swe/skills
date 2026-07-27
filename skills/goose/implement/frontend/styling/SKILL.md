@@ -1,7 +1,6 @@
 ---
 name: web-styling
 description: Use when styling Next.js UI — Tailwind, CSS modules, tokens, or global styles. Aesthetic taste may also use design/frontend-design skills.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: health-and-readiness
 description: Use when adding or reviewing ASP.NET health/readiness probes — /alive vs /health, dependency checks, timeouts, exposure — or when implement loads the dotnet pack for probe work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

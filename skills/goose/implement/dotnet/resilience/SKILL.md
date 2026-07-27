@@ -1,7 +1,6 @@
 ---
 name: resilience
 description: Use when designing or reviewing .NET retries, timeouts, circuit breakers, or idempotent outbound calls — Polly/standard Http resilience — or when implement loads the dotnet pack for resilience work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

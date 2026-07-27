@@ -1,7 +1,6 @@
 ---
 name: messaging
 description: Use when designing or reviewing .NET integration events, buses, outbox, or queue consumers — or when choosing events vs Hangfire jobs — or when implement loads the dotnet pack for messaging work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

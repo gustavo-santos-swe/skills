@@ -1,7 +1,6 @@
 ---
 name: diagnose
 description: Evidence-first debug to root cause, then fix and lock. Use when something is broken, flaky, or failing tests - before guessing a fix.
-disable-model-invocation: true
 metadata:
   area: goose
   inspired_by:

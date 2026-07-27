@@ -1,7 +1,6 @@
 ---
 name: web-auth
 description: Use when implementing Next.js authentication — sessions, Auth.js/Clerk/etc., protected routes, or server auth helpers.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

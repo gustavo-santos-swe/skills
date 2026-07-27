@@ -1,7 +1,6 @@
 ---
 name: testing
 description: Use when writing or reviewing .NET tests — TUnit, NSubstitute, Testcontainers, architecture tests, naming — or when implement loads the dotnet pack for test work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

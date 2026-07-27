@@ -1,7 +1,6 @@
 ---
 name: rate-limiting
 description: Use when adding or reviewing ASP.NET request throttles, per-user/IP quotas, 429 behavior, or probe exemptions — or when implement loads the dotnet pack for rate-limit work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

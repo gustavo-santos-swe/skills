@@ -1,7 +1,6 @@
 ---
 name: solution-structure
 description: Use when changing .NET solution layout, project boundaries, references, or Directory.Build/CPM — or when implement loads the dotnet pack for where code should live.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

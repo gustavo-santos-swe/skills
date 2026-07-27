@@ -1,7 +1,6 @@
 ---
 name: file-storage
 description: Use when adding or reviewing .NET file/blob upload download, object storage ports, size/type limits, or signed URLs — or when implement loads the dotnet pack for storage work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

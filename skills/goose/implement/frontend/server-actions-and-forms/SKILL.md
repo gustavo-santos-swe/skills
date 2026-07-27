@@ -1,7 +1,6 @@
 ---
 name: web-server-actions-and-forms
 description: Use when implementing Next.js Server Actions, progressive forms, or progressive enhancement for mutations.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

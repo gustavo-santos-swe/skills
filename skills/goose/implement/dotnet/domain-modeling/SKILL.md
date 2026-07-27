@@ -1,7 +1,6 @@
 ---
 name: domain-modeling
 description: Use when shaping C# domain types — entities, value objects, aggregates, invariants, domain events — or when implement loads the dotnet pack for domain code.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: create-tickets
 description: Tracer-bullet issues with blockers, grounded in a source of truth. Use to split a plan/spec for implement; tracker or plan markdown - not a local ticket tree.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

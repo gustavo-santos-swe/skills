@@ -1,7 +1,6 @@
 ---
 name: code-style
 description: Use when writing or reviewing C# style — nullable, records, var, naming, EditorConfig/analyzers — or when implement loads the dotnet pack for style work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

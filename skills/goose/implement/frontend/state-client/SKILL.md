@@ -1,7 +1,6 @@
 ---
 name: web-state-client
 description: Use when adding client-only state (Zustand, context, URL state) in Next.js client islands.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: web-data-fetching
 description: Use when fetching data in Next.js — RSC fetch, cache options, Suspense, or client queries.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

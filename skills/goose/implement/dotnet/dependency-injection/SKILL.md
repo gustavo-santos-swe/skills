@@ -1,7 +1,6 @@
 ---
 name: dependency-injection
 description: Use when registering or reviewing .NET DI lifetimes, composition-root extensions, options, typed HttpClients, or captive-dependency risks — or when implement loads the dotnet pack for DI work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

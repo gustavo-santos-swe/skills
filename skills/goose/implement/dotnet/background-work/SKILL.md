@@ -1,7 +1,6 @@
 ---
 name: background-work
 description: Use when adding or reviewing .NET Hangfire jobs, hosted services, in-process channels, or deferred work off the request thread — or when implement loads the dotnet pack for background work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

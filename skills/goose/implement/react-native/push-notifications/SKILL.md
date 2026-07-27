@@ -1,7 +1,6 @@
 ---
 name: rn-push-notifications
 description: Use when adding Expo notifications, FCM/APNs, channels, or notification tap routing in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

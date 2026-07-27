@@ -1,7 +1,6 @@
 ---
 name: evolve-goose-skills
 description: Evolve this skills repo - iterate (inspire → decide → grill → distill → ship) or garden (prune / absorb / fill). Use when adding skill areas, sharing inspirations, or cleaning inventory.
-disable-model-invocation: true
 metadata:
   area: meta
 ---

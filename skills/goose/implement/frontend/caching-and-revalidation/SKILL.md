@@ -1,7 +1,6 @@
 ---
 name: web-caching-and-revalidation
 description: Use when setting Next.js cache tags, revalidatePath/Tag, ISR, or diagnosing stale UI after mutations.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

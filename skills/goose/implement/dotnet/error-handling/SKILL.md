@@ -1,7 +1,6 @@
 ---
 name: error-handling
 description: Use when defining or changing how .NET APIs express failures — unions/Result, error cases, HTTP mapping, exceptions vs expected outcomes.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

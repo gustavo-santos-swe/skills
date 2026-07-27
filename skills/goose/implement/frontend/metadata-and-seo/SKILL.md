@@ -1,7 +1,6 @@
 ---
 name: web-metadata-and-seo
 description: Use when setting Next.js Metadata API, Open Graph, sitemaps, robots, or JSON-LD.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

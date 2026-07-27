@@ -1,7 +1,6 @@
 ---
 name: rn-testing
 description: Use when writing or structuring React Native / Expo tests (Jest, RNTL, Maestro/Detox).
-disable-model-invocation: true
 metadata:
   area: goose
 ---

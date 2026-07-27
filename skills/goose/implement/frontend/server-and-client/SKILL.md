@@ -1,7 +1,6 @@
 ---
 name: web-server-and-client
 description: Use when deciding RSC vs client components, `'use client'` boundaries, or shipping JS to the browser in Next.js.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

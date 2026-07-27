@@ -1,7 +1,6 @@
 ---
 name: rn-error-and-boundaries
 description: Use when defining error UI, ErrorBoundaries, crash reporting, or user-visible failure patterns in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

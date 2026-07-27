@@ -1,7 +1,6 @@
 ---
 name: rn-native-modules
 description: Use when adding Expo modules, config plugins, or custom native iOS/Android code to a React Native app.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

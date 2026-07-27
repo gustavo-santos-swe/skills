@@ -1,7 +1,6 @@
 ---
 name: codebase-design
 description: Deep-module vocabulary (seam, depth, adapter). Use when shaping interfaces, deciding seams, or when brainstorm/implement/architecture-pass need that language.
-disable-model-invocation: true
 metadata:
   area: goose
   inspired_by:

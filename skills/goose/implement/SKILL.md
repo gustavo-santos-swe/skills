@@ -1,7 +1,6 @@
 ---
 name: implement
 description: Build a named ticket/plan batch (TDD at seams, full pack load, dirty tree until local review). Use for implement/build work - not planning, ticket split, or opening a PR.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

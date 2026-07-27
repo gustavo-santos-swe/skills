@@ -1,7 +1,6 @@
 ---
 name: rn-accessibility
 description: Use when improving VoiceOver/TalkBack labels, roles, focus order, or a11y checks in React Native.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

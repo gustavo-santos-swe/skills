@@ -1,7 +1,6 @@
 ---
 name: web-middleware
 description: Use when adding or changing Next.js middleware (auth redirects, headers, geo, A/B gates).
-disable-model-invocation: true
 metadata:
   area: goose
 ---

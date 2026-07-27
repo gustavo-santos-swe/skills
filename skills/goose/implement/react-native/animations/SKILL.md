@@ -1,7 +1,6 @@
 ---
 name: rn-animations
 description: Use when adding Reanimated/Skia motion in React Native — Goose defaults; deep patterns may defer to mobile area skills.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

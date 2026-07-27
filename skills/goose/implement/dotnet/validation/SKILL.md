@@ -1,7 +1,6 @@
 ---
 name: validation
 description: Use when defining or reviewing request/domain validation in .NET — FluentValidation placement, boundary vs invariants, uniqueness — or when implement loads the dotnet pack for validation work.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

@@ -1,7 +1,6 @@
 ---
 name: web-routing-and-layouts
 description: Use when adding Next.js routes, layouts, parallel/intercepting routes, or navigational UX.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

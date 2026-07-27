@@ -1,7 +1,6 @@
 ---
 name: web-performance
 description: Use when improving Next.js Core Web Vitals, bundle size, streaming, or client JS weight.
-disable-model-invocation: true
 metadata:
   area: goose
 ---

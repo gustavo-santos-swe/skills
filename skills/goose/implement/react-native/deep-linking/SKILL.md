@@ -1,7 +1,6 @@
 ---
 name: rn-deep-linking
 description: Use when configuring Universal Links / App Links, Expo linking, or in-app deep link routing.
-disable-model-invocation: true
 metadata:
   area: goose
 ---
