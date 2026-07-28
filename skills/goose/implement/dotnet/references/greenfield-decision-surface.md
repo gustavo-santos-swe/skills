@@ -1,12 +1,12 @@
 # Greenfield decision surface (dotnet)
 
-Load from **`brainstorm`** branch **`greenfield`** when **API / .NET** is an active pack. How-to stays in each skill; this file only forces **presence + short decisions**.
+Load from **`brainstorm`** branch **`greenfield`** when **API / .NET** is an active pack. How-to stays in each skill; this file only forces **presence + short decisions** for concerns that vary by cut.
 
 ## How to grill
 
 One concern per message (or one tightly coupled pair). Recommend + why; wait.
 
-For each row below, status must be one of:
+For each row in **Decide presence** / **Often later**, status must be one of:
 
 | Status | Meaning |
 |--------|---------|
@@ -14,7 +14,7 @@ For each row below, status must be one of:
 | **out** | Not in this product (reason). |
 | **later** | Skipped for this cut (POC/MVP). Reason + what unblocks it (ticket or milestone). |
 
-**Never grill** what the pack already decides (code-style, async traps, serialization fine print, DI lifetimes as ritual). Skills apply those at **`implement`**.
+**Never grill** pack-owned defaults (see below). Skills apply those at **`implement`**. Only reopen if the user overrides.
 
 **POC tip:** production concerns (rate limiting, rich health, full observability, messaging…) often start as **later**, not silent omit.
 
@@ -24,22 +24,12 @@ Deepen only when status is **in**. Point at the skill; do not paste the handbook
 
 Walk in order. Skip a row only after status is set.
 
-### Always decide presence
+### Decide presence
 
-| Concern | Skill | Default if **in** | Deepen when **in** (pick one path) |
-|---------|-------|-------------------|--------------------------------------|
-| Solution layout | [`solution-structure`](../solution-structure/) | Ports-only layers (Domain / Application / adapters) | Accept Goose layout, or name the override |
-| Domain modeling | [`domain-modeling`](../domain-modeling/) | Rich domain where invariants live | Anemic vs rich for the first slice? |
-| Application layer | [`application-layer`](../application-layer/) | Handlers + ports | Accept handlers/ports, or override |
-| Time & IDs | [`time-and-ids`](../time-and-ids/) | NodaTime + Guid v7 (Goose greenfield) | Accept defaults, or name clock/ID choice |
+| Concern | Skill | Default if **in** | Deepen when **in** |
+|---------|-------|-------------------|--------------------|
 | Data / schema | [`../../database/`](../../database/) + [`db-integration`](../db-integration/) | EF Core + explicit schema rules | DB engine; who owns migrations |
-| HTTP edge | [`endpoint-conventions`](../endpoint-conventions/) | Minimal APIs + MapGroup | Accept Minimal APIs, or controllers |
-| Errors | [`error-handling`](../error-handling/) | Union / Result → HTTP map | Accept Goose Result shape, or existing house type |
-| Validation | [`validation`](../validation/) | FluentValidation at boundary | Accept, or other |
 | AuthN/Z | [`security`](../security/) | Bearer JWT for API clients | Who authenticates; cookie session vs JWT; main policies |
-| Config / secrets | [`configuration`](../configuration/) | appsettings + env; secrets not in git | Secret store for non-dev |
-| API contracts | [`api-contracts`](../api-contracts/) | `/api/v1` + OpenAPI | Public vs private; versioning now? |
-| Testing bar | [`testing`](../testing/) | TUnit + seam tests | What must be red/green on first slice |
 
 ### Often **later** on a POC
 
@@ -58,17 +48,36 @@ Walk in order. Skip a row only after status is set.
 
 ### Do not ask (pack applies at implement)
 
-`code-style`, `async`, `serialization` details, `dependency-injection` ritual — unless the user overrides a known Goose default.
+Assumed **in** with Goose defaults unless the user overrides:
+
+| Concern | Skill | Locked default |
+|---------|-------|----------------|
+| Solution layout | [`solution-structure`](../solution-structure/) | Ports-only layers |
+| Domain modeling | [`domain-modeling`](../domain-modeling/) | Rich domain (invariants in the domain) |
+| Application layer | [`application-layer`](../application-layer/) | Handlers + ports |
+| Time & IDs | [`time-and-ids`](../time-and-ids/) | NodaTime + Guid v7 |
+| HTTP edge | [`endpoint-conventions`](../endpoint-conventions/) | Minimal APIs + MapGroup |
+| Errors | [`error-handling`](../error-handling/) | Union / Result → HTTP map |
+| Validation | [`validation`](../validation/) | FluentValidation at boundary |
+| Config / secrets | [`configuration`](../configuration/) | appsettings + env; secrets not in git |
+| API contracts | [`api-contracts`](../api-contracts/) | `/api/v1` + OpenAPI |
+| Testing | [`testing`](../testing/) | TUnit + seam tests |
+| Code style | [`code-style`](../code-style/) | Pack conventions |
+| Async | [`async`](../async/) | Pack traps / rules |
+| Serialization details | [`serialization`](../serialization/) | Pack wire defaults |
+| DI ritual | [`dependency-injection`](../dependency-injection/) | Pack lifetimes |
+
+Do not put these in the freeze table unless overridden.
 
 ## Freeze table (required)
 
-Copy into **Established so far** (one row per concern walked):
+Copy into **Established so far** (one row per concern **walked**):
 
 | Concern | Status | Decision (if in) | Notes |
 |---------|--------|------------------|-------|
 | … | in / out / later | … | … |
 
-No empty status. **later** needs a reason.
+No empty status on walked rows. **later** needs a reason.
 
 ## Pack order
 
