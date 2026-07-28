@@ -6,7 +6,9 @@ Path: `skills/goose/implement/dotnet/`. Load from **`implement`** (or by name) w
 
 **Target repo wins:** if the project already has a clear pattern (Result type, folders, errors, tests), **follow it**. Skills define Goose defaults for **greenfield** or when the user asks to migrate — don’t reinvent a working local convention.
 
-Each skill is still a **stub** until filled: `Topics to fill` (or a full body) holds Goose conventions. Schema/SQL stays in [`../database/`](../database/).
+**Greenfield presence grill** (in/out/later before coding) lives in [`references/greenfield-decision-surface.md`](./references/greenfield-decision-surface.md). Loaded by **`brainstorm`** branch **`greenfield`**, not as a substitute for reading skills at **`implement`**.
+
+Schema/SQL stays in [`../database/`](../database/).
 
 ## Map
 

@@ -18,6 +18,7 @@ House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` onl
 | Don’t know where to start | **ask** |
 | Need cited options / library facts before deciding | **research** |
 | Idea fuzzy; freeze the *what* | **brainstorm** |
+| New product / empty repo / greenfield | **brainstorm** → branch **`greenfield`** (Shape → Product → Platform) |
 | Hard-to-reverse decision | **documentation** → `adr` |
 | *What* is frozen; need ordered *how* | **planning** |
 | Multi-slice work with blockers | **create-tickets** |
@@ -54,7 +55,7 @@ On-ramp: **diagnose** → fix + lock → git-practices → pr-raise.
 |-------|------|
 | [ask](./ask/) | Router |
 | [research](./research/) | Cited decision brief |
-| [brainstorm](./brainstorm/) | Freeze the what |
+| [brainstorm](./brainstorm/) | Freeze the what (`product` / `greenfield`) |
 | [documentation](./documentation/) | ADR + ship-docs |
 | [planning](./planning/) | Implementation plan |
 | [create-tickets](./create-tickets/) | Tracer bullets + blockers |
