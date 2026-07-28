@@ -48,11 +48,12 @@ No placeholders: no TBD/TODO, no “add validation later,” no “similar to Ta
 ## Steps
 
 1. Confirm the **what** is frozen. If not, stop and route back.
-2. Scope check - independent subsystems → separate plans (or note split for **create-tickets**).
-3. Map files and dependencies (foundations before dependents; prefer **vertical** slices over “all DB then all API then all UI”).
-4. Write tasks (above depth bar).
-5. Self-check: every requirement has a task; no placeholders; names/types consistent across tasks.
-6. Save the plan; state the path; propose next skill (below).
+2. If the freeze came from **`brainstorm`** branch **`greenfield`**: copy **in / out / later** into Assumptions / Out of scope. Do not plan work for **out**/**later** unless the user reopens them. Do not re-grill Shape.
+3. Scope check - independent subsystems → separate plans (or note split for **create-tickets**).
+4. Map files and dependencies (foundations before dependents; prefer **vertical** slices over “all DB then all API then all UI”).
+5. Write tasks (above depth bar).
+6. Self-check: every requirement has a task; no placeholders; names/types consistent across tasks; greenfield **in** concerns have tasks.
+7. Save the plan; state the path; propose next skill (below).
 
 ## Where to save
 

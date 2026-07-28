@@ -24,7 +24,7 @@ research → brainstorm → [documentation:adr?] → planning → create-tickets
 | Step | Skill | When |
 |------|--------|------|
 | Explore options (cited) | **`research`** | Need primary sources / library choice before locking design |
-| Sharpen the idea | **`brainstorm`** | Relentless Q&A + 2-3 approaches; freeze *what* before **planning** |
+| Sharpen the idea | **`brainstorm`** | Relentless Q&A + 2-3 approaches; freeze *what* before **planning**. Branch **`greenfield`** when empty repo / new product / user asks (Shape → Product → Platform) |
 | Record a hard decision | **`documentation`** → branch **`adr`** | Pre-build ADR / glossary decision |
 | Plan the build | **`planning`** | Ready for an implementation plan |
 | Split into tickets | **`create-tickets`** | Multi-slice work; tracer bullets + blockers |
@@ -48,6 +48,7 @@ Self-check of the branch diff lives inside **`implement`** or **`pr-raise`** - n
 
 - **Something broken / flake / regression / test red** → **`diagnose`** (evidence → fix → lock), then **`git-practices`** / **`pr-raise`** when shipping the fix.
 - **Fuzzy request that isn't a failure** → **`brainstorm`** or **`create-tickets`**, not diagnose.
+- **New product / empty repo / “greenfield”** → **`brainstorm`** branch **`greenfield`** (Shape → Product → Platform), not a straight jump to **`planning`** / **`implement`**.
 
 ## Stack packs (under `implement`)
 

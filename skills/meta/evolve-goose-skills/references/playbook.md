@@ -47,6 +47,7 @@ inventory → triage (remove / absorb / keep / fill later) → fix ownership →
 | Build + dirty tree + optional polish | `implement` |
 | Ticket grounding / SoT drift | `create-tickets` |
 | Domain glossary / CONTEXT | `brainstorm` (+ `documentation:adr`) |
+| Greenfield shape + platform presence (in/out/later) | `brainstorm` branch `greenfield` (surfaces in pack `references/greenfield-decision-surface.md`) |
 | Deep-module vocabulary | `codebase-design` |
 | Skill craft (predictability) | `writing-great-skills` |
 | Skill-repo evolution ritual | **this skill** (`evolve-goose-skills`) |

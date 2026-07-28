@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Relentless Q&A to freeze the what before a plan. Use when sharpening design; no implementation yet.
+description: Relentless Q&A to freeze the what before a plan. Use when sharpening design; no implementation yet. Greenfield branch when empty repo, new product, or user asks greenfield.
 metadata:
   area: goose
   inspired_by:
@@ -32,7 +32,20 @@ A tiny design is fine. Skipping the freeze is not - “too simple” is where si
 - *How* / task breakdown already agreed → **`planning`**.
 - Hard-to-reverse decision already isolated → **`documentation:adr`** (can run mid-brainstorm; see below).
 
-## Flow
+## Branches
+
+| Branch | When |
+|--------|------|
+| **`product`** (default) | Feature or change in a repo that already has local patterns |
+| **`greenfield`** | Empty / near-empty repo, “new product”, “design from scratch”, **or** user asks for greenfield / this branch by name |
+
+Do **not** force **`greenfield`** on a mature repo that already has stack and platform conventions, unless the user asks explicitly.
+
+---
+
+## Branch: product
+
+### Flow
 
 ```
 orient → grill (1Q at a time) → always 2-3 approaches → design freeze
@@ -110,12 +123,76 @@ User confirms shared understanding → **`planning`**.
 Fact gap blocks a decision → **`research`**, then return.  
 Do **not** jump to **`implement`**.
 
+---
+
+## Branch: greenfield
+
+Stops silent platform defaults at **`implement`**. Same grill rules (1Q, recommend, wait). No feature code or scaffold.
+
+### Flow
+
+```
+orient → Shape → Product → Platform (per active pack)
+  → 2-3 approaches → design freeze (+ tables) → [CONTEXT.md?] → [adr?]
+  → user OK → planning
+```
+
+### 1. Orient
+
+- Confirm trigger: empty/near-empty repo, new product language, or explicit greenfield ask.
+- If the repo already has a clear stack and platform conventions → switch to **`product`** (unless user insisted on greenfield).
+
+### 2. Shape
+
+Load [`references/greenfield-shape.md`](references/greenfield-shape.md).
+
+Lock surfaces (API / Web / Mobile / Desktop), stack per surface, and **active packs** (order for Platform). Desktop has no Goose pack: user stack or **later**.
+
+### 3. Product
+
+Same focus as product-branch grill: purpose, who it serves, constraints, success criteria, non-goals. One question at a time.
+
+### 4. Platform
+
+For each **active pack**, in Shape order:
+
+1. Load that pack’s `references/greenfield-decision-surface.md` if it exists.
+2. Follow that file’s order (dotnet: **core → reminders → triggers**). Status **in / out / later**; deepen only **in**. Triggers only when Shape/Product signaled.
+3. Never grill pack-owned defaults (see the surface file).
+4. Stub pack (no surface yet): note “pack incomplete” and continue; do not invent SOTA.
+
+Today filled: [`../implement/dotnet/references/greenfield-decision-surface.md`](../implement/dotnet/references/greenfield-decision-surface.md).  
+`frontend` / `react-native`: add surfaces when those packs fill.
+
+### 5. Approaches + freeze
+
+2-3 approaches for the overall system shape (YAGNI). Then freeze including:
+
+- Surfaces + stacks + active packs  
+- Product: purpose, non-goals, success  
+- Per pack: concern table (status + decision if **in**)  
+- Chosen approach; rejected approaches in one line each  
+
+No empty status cells. User OK required.
+
+CONTEXT / ADR / durable brief: same rules as **`product`**.
+
+### 6. Exit gate
+
+User confirms → **`planning`** (plan must honor **in / out / later**; do not re-open Shape unless the user does).  
+Fact gap → **`research`**, then return.  
+Do **not** jump to **`implement`**.
+
+---
+
 ## Working in existing codebases
 
 - Prefer existing patterns; propose targeted seam fixes only when they serve this goal.
 - No unrelated refactors in the design.
 
 ## Checklist
+
+### product
 
 - [ ] Oriented on repo + scope OK (or decomposed)
 - [ ] Grilled one question at a time with recommendations
@@ -126,11 +203,21 @@ Do **not** jump to **`implement`**.
 - [ ] Durable brief only when the optional triggers fired
 - [ ] Next = **planning** (or research detour)
 
+### greenfield
+
+- [ ] Trigger OK (or switched to **product**)
+- [ ] Shape: surfaces + stacks + pack order locked
+- [ ] Product grilled
+- [ ] Platform: core + reminders asked; triggers only if signaled; statuses set
+- [ ] 2-3 approaches; freeze tables complete; user OK
+- [ ] Next = **planning** (or research detour)
+
 ## Guardrails
 
 1. Freeze the **what** only - no feature code or scaffolding this run.
 2. One question at a time (with a recommendation); prefer repo answers over asking the human for facts already in tree.
 3. `CONTEXT.md` = terms/glossary, not implementation detail. Skip the long interview when a one-breath confirm is enough and the user OK’d that shortcut.
+4. **greenfield:** do not skip Shape; do not exit with empty platform statuses; do not grill pack-owned style; do not invent a desktop pack or web/mobile SOTA beyond stubs; do not force greenfield on a mature local convention unless asked.
 
 ## Next
 
