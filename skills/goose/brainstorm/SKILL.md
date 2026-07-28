@@ -157,8 +157,8 @@ Same focus as product-branch grill: purpose, who it serves, constraints, success
 For each **active pack**, in Shape order:
 
 1. Load that pack’s `references/greenfield-decision-surface.md` if it exists.
-2. Walk concerns: **in / out / later** (reason on out/later). Deepen only **in**.
-3. Never grill code-style or other pack-owned rituals (see the surface file).
+2. Follow that file’s order (dotnet: **core → reminders → triggers**). Status **in / out / later**; deepen only **in**. Triggers only when Shape/Product signaled.
+3. Never grill pack-owned defaults (see the surface file).
 4. Stub pack (no surface yet): note “pack incomplete” and continue; do not invent SOTA.
 
 Today filled: [`../implement/dotnet/references/greenfield-decision-surface.md`](../implement/dotnet/references/greenfield-decision-surface.md).  
@@ -208,7 +208,7 @@ Do **not** jump to **`implement`**.
 - [ ] Trigger OK (or switched to **product**)
 - [ ] Shape: surfaces + stacks + pack order locked
 - [ ] Product grilled
-- [ ] Platform: every walked concern has in/out/later (+ deepen on in)
+- [ ] Platform: core + reminders asked; triggers only if signaled; statuses set
 - [ ] 2-3 approaches; freeze tables complete; user OK
 - [ ] Next = **planning** (or research detour)
 
