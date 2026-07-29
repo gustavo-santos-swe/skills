@@ -9,7 +9,7 @@ metadata:
 
 House process for **this repo** (`gustavo-santos-swe/skills`). Stops re-teaching how we invent, grill, absorb, and ship Goose skills.
 
-Voice: **`write-like-goose`**.  
+Voice: **`write-like-goose`** (**ASD-STE100**).  
 Craft of one `SKILL.md`: **`writing-great-skills`** (load when drafting bodies).  
 Gap pitches only: **`suggesting-skills`** (optional helper inside garden).
 

@@ -1,6 +1,6 @@
 # Vocabulary — Tier 1 replacements
 
-Always replace these when used as AI filler (not when the literal/technical sense is required). Adapted from avoid-ai-writing (MIT).
+STE-aligned swaps for AI filler. Always replace these when used as AI filler (not when the literal/technical sense is required). Adapted from avoid-ai-writing (MIT). Full STE dictionary: [asd-ste100.org](https://www.asd-ste100.org/).
 
 | Replace | With |
 |---------|------|

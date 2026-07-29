@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Write Like Goose (always)
 
-House voice for **all durable prose** in this repo and Goose lifecycle work.
+House voice for **all durable prose** in this repo and Goose lifecycle work. Prose standard: **ASD-STE100** (Simplified Technical English) via `write-like-goose`.
 
 ## When it applies
 
@@ -15,13 +15,15 @@ Before emitting any of:
 - commit subjects/bodies
 - PR titles/bodies, review comments
 - code comments / docstrings that stay in the tree
+- skill bodies (during distill passes)
 - handoff notes meant for a future session
 
 ## What to do
 
 1. **Load** [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
-2. Heavy rewrite → also load `references/patterns.md` + `vocabulary.md` + `phrases-and-structures.md`.
-3. Chat-shaped answers → Defaults + `density.md` only; full catalog optional.
+2. **STE pass** → `references/ste100.md` + `references/technical-names.md` (20-word steps, 25-word descriptions, active voice).
+3. Heavy rewrite → also load `references/patterns.md` + `vocabulary.md` + `phrases-and-structures.md`.
+4. Chat-shaped answers → STE defaults + `density.md` only; full catalog optional.
 
 ## Do not
 

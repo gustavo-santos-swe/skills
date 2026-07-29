@@ -33,7 +33,7 @@
 > Run `npm install jsonwebtoken@latest`, then edit `src/auth.ts:42`.
 >
 > 1. Open `src/auth.ts`
-> 2. Replace `verifyToken` (lines 42–58) with the snippet below
+> 2. Replace `verifyToken` (lines 42-58) with the snippet below
 > 3. Run `npm test -- auth.spec.ts`
 >
 > Next: paste the first failing line if a test fails.

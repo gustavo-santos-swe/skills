@@ -61,7 +61,7 @@ ask
   → git-practices → pr-raise → pr-review ⇄ pr-iterate
 ```
 
-- **Always-on voice:** **write-like-goose** for tickets, plans, commits, PRs, review comments, and code comments (see [`AGENTS.md`](AGENTS.md)).
+- **Always-on voice:** **write-like-goose** (**ASD-STE100** + anti-AI) for tickets, plans, commits, PRs, review comments, code comments, and skill bodies (see [`AGENTS.md`](AGENTS.md)).
 - **Stack packs** (under `implement/`): load the whole pack for the stack you’re touching — `database`, `dotnet`, `react-native` (stubs), `frontend` (stubs).
 - **Never merge to main** from the agent; humans merge.
 
@@ -115,7 +115,7 @@ Each `SKILL.md` has `metadata.area` matching its folder.
 | [`pr-raise`](skills/goose/pr-raise/) | Open PR (never merge) |
 | [`pr-review`](skills/goose/pr-review/) | Review open PR |
 | [`pr-iterate`](skills/goose/pr-iterate/) | Author feedback loop |
-| [`write-like-goose`](skills/goose/write-like-goose/) | House voice |
+| [`write-like-goose`](skills/goose/write-like-goose/) | House voice (ASD-STE100) |
 | [`codebase-design`](skills/goose/codebase-design/) | Deep-module vocabulary |
 
 ### meta

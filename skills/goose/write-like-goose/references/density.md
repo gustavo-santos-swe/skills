@@ -30,6 +30,8 @@ More than one step → numbered list. One bounded action per step. No step with 
 
 One thing doable in under two minutes. Not "hope this helps."
 
+Rule 3 is an **action** ("Next: paste the first failing line if a test fails"). Rule 10's forbidden closers are **pleasantries with no action** ("Hope this helps", "Let me know if you need anything else"). A line naming a specific next step satisfies rule 3 and is not a rule-10 violation, even if it comes last.
+
 ### 4. Suppress tangents
 
 Finish the main issue. Side topics: one optional question at the end.

@@ -12,6 +12,8 @@ metadata:
 ---
 A skill exists to wrangle determinism out of a stochastic system. **Predictability** — the agent taking the same _process_ every run, not producing the same output — is the root virtue; every lever below serves it.
 
+**Prose in skill bodies** follows **ASD-STE100** via **`write-like-goose`** ([`ste100.md`](../../goose/write-like-goose/references/ste100.md)): short sentences (20 words for steps, 25 for descriptions), active voice, one topic per sentence. Apply after drafting; do not let STE block a clear completion criterion.
+
 **Bold terms** are defined in [`GLOSSARY.md`](GLOSSARY.md); look them up there for the full meaning.
 
 ## Invocation

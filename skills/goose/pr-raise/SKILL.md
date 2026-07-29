@@ -37,7 +37,7 @@ Keep short - **code speaks; prose orients**. Details: [`references/pr-body.md`](
 
 | Section | Job |
 |---------|-----|
-| **Briefing** | 1-3 sentences: what + why |
+| **Briefing** | 1-3 sentences: what + why. Descriptive STE shape, ≤25 words/sentence ([`ste100.md`](../write-like-goose/references/ste100.md)) |
 | **References** | Ticket / issue / ADR links |
 | **Changes** | Short human bullets; screenshots for UI if needed |
 | **Notes** | Env, flags, migrations, rollout - omit if empty |

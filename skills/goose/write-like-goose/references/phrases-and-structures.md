@@ -18,15 +18,13 @@ Delete: Full stop. / Period. / Let that sink in. / This matters because / Make n
 
 ## Business jargon
 
+Word-level swaps (`landscape`, `unpack`, `deep dive`, `leverage`, `utilize`, …) live in [vocabulary.md](vocabulary.md) — that is the single source for those. This table covers **phrase-level** jargon vocabulary.md does not:
+
 | Avoid | Prefer |
 |-------|--------|
 | Navigate (challenges) | Handle, address |
-| Unpack | Explain, examine |
 | Lean into | Accept, do |
-| Landscape (abstract) | Situation, field |
-| Game-changer | Say what changed |
 | Double down | Commit, increase |
-| Deep dive | Analysis |
 | Take a step back | Reconsider |
 | Moving forward | Next |
 | Circle back | Return to |

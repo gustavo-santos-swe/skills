@@ -20,7 +20,7 @@ survey inspirations → decide need → grill questionnaire → distill Goose sk
 3. **Grill before draft.** One question per message; multiple choice when options are real; always give a recommendation + why. Same energy as product brainstorm, scoped to skill design.
 4. **Freeze the what.** Established so far (purpose, non-goals, approach, ownership). Explicit OK before writing files.
 5. **Distill self-contained Goose skills.** Body has no “see Matt/obra for the real process.” Metadata may list `inspired_by`. `disable-model-invocation: true` for lifecycle / meta process skills unless there’s a clear auto-trigger need.
-6. **Craft + voice.** `writing-great-skills` for predictability; `write-like-goose` for durable prose.
+6. **Craft + voice.** `writing-great-skills` for predictability; `write-like-goose` for durable prose (**ASD-STE100** + anti-AI + density).
 7. **Wire the map.** Root README + area README + `goose/ask` (if routing changes). Dead links are bugs.
 8. **Ship.** Feature branch → conventional commit → PR. User says **ship** / **merge** before landing on `main`. Agent does not merge by default (`pr-raise`).
 
@@ -39,7 +39,7 @@ inventory → triage (remove / absorb / keep / fill later) → fix ownership →
 
 | Concern | Owner |
 |---------|--------|
-| House voice | `write-like-goose` (+ AGENTS / Cursor rule) |
+| House voice | `write-like-goose` — **ASD-STE100** + anti-AI + density (+ AGENTS / Cursor rule) |
 | Branch + commit messages | `git-practices` |
 | PR title/body/open | `pr-raise` |
 | PR review | `pr-review` |
