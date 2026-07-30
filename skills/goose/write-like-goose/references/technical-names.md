@@ -16,6 +16,7 @@ ASD-STE100 lets you use **technical names** for domain terms not in the STE dict
 | plan | roadmap (when meaning implementation plan) |
 | ADR | architecture decision record (define once, then ADR) |
 | brainstorm | ideation session |
+| Briefing | PR/ticket/plan opening section: what + why (1-3 sentences, descriptive STE shape) |
 
 ## Code and stack
 

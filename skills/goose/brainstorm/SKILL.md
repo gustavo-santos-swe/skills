@@ -13,13 +13,13 @@ metadata:
 
 Turn a fuzzy idea into **shared understanding** (the *what*). Not the implementation plan (*how*) - that is **`planning`**.
 
-Voice for durable prose: **`write-like-goose`**.
+Voice for durable prose: **`write-like-goose`** (ASD-STE100).
 
 ## Hard gate
 
-Do **not** write production code, scaffold apps, open PRs, or run **`implement`** / **`create-tickets`** until the user confirms shared understanding.
+Do **not** write production code, scaffold apps, or open pull requests. Do **not** run **`implement`** or **`create-tickets`** until the user confirms shared understanding.
 
-A tiny design is fine. Skipping the freeze is not - “too simple” is where silent assumptions hurt most. If the user and **`ask`** already treated the change as trivial, you may confirm in one short breath (purpose + approach + done-when) and exit - still get an explicit OK.
+A tiny design is fine. Skipping the freeze is not. "Too simple" is where silent assumptions hurt most. If the user and **`ask`** already treated the change as trivial, confirm in one short breath (purpose, approach, done-when) and exit. Still get an explicit OK.
 
 ## When to use
 
@@ -73,7 +73,7 @@ Always propose **2-3 approaches** with trade-offs before locking the shape - eve
 
 ### 4. Design freeze
 
-Present a compact design (scale to complexity - a few sentences or short sections). Cover what matters: shape, boundaries, data/flow if relevant, failure modes worth deciding now. When the work is module shape / seams / testability, use **`codebase-design`** vocabulary (depth, seam, adapter — not “service/API/boundary”). Ask if it looks right; revise if not.
+Present a compact design. Scale to complexity: a few sentences or short sections. Cover shape, boundaries, data flow, and failure modes worth deciding now. For module shape or seams, use **`codebase-design`** vocabulary (depth, seam, adapter; not "service/API/boundary"). Ask if it looks right. Revise if not.
 
 End with an **Established so far** block (Goose voice): purpose, non-goals, chosen approach, key decisions, open questions (if any).
 
@@ -93,7 +93,7 @@ Update **inline** when a term is resolved (don’t batch until the end). Keep de
 
 Challenge conflicts with the existing language immediately. Sharpen overloaded words (“account” → Customer vs User).
 
-When domain relationships are in play, stress-test them with **concrete scenarios** that force boundaries (partial cancel? two owners? clock skew?). When the user states how something works, **check the code** — if it contradicts, surface it and resolve which is right before freezing language.
+When domain relationships are in play, stress-test them with **concrete scenarios** that force boundaries (partial cancel? two owners? clock skew?). When the user states how something works, **check the code**. If the code contradicts the user, surface it and resolve which is right before you freeze language.
 
 ### 6. ADR handoff (sparingly)
 

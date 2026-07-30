@@ -10,7 +10,7 @@ metadata:
 Part of the `pr-*` family: **pr-raise** → **pr-review** → **pr-iterate**.
 
 Owns **PR title, body, template merge, push, and create/update**.  
-Branch names + commit messages → **`git-practices`**. Voice → **`write-like-goose`**.
+Branch names + commit messages → **`git-practices`**. Voice → **`write-like-goose`** (ASD-STE100).
 
 | Concern | Skill |
 |---------|--------|
@@ -61,10 +61,10 @@ Substance (conventional title, short Changes, real Notes) follows Goose. Shape f
 
 ### 1. Preflight
 
-1. Self-review the branch diff if that wasn't done at the end of **implement**.
-2. Load **`git-practices`** - branch + commits must comply (ask before rewriting published history).
-3. Discover PR template (above); draft **title** + **body**.
-4. Voice pass: **`write-like-goose`**.
+1. Self-review the branch diff if **implement** did not do it at the end of the build.
+2. Load **`git-practices`**. Branch and commits must comply. Ask before you rewrite published history.
+3. Discover the pull request template (above). Draft **title** and **body**.
+4. Run a voice pass with **`write-like-goose`**.
 
 ### 2. Push
 

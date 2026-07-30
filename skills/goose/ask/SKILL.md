@@ -70,13 +70,14 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 
 ## Always-on / anytime (not lifecycle steps)
 
-- **`write-like-goose`** — durable Goose prose (also root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
-- **`codebase-design`** — deep-module vocabulary when shaping seams/interfaces (also used by `engineering/improve-codebase-architecture`).
+- **`write-like-goose`**: durable prose on ASD-STE100 (root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
+- **`codebase-design`**: deep-module vocabulary when you shape seams and interfaces (also used by `engineering/improve-codebase-architecture`).
 
 ## Crossing sessions
 
-- When the window is full: write a short durable brief in the target repo (or paste a compact summary for the next chat), then start fresh with that file.
-- Built-in **compact** only at intentional phase breaks - not mid-brainstorm or mid-implement slice.
+When the window is full, write a short durable brief in the target repository. You can also paste a compact summary for the next chat. Then start fresh with that file.
+
+Built-in **compact** only at intentional phase breaks. Do not use it mid-brainstorm or mid-implement slice.
 
 ## Related (outside goose)
 
