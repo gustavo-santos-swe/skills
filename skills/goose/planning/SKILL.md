@@ -9,7 +9,7 @@ metadata:
 
 Goose handbook for the **how** after the **what** is settled (**brainstorm** / research / clear spec).
 
-Voice: **`write-like-goose`**.
+Voice: **`write-like-goose`** (ASD-STE100).
 
 ## When to use
 
@@ -26,7 +26,7 @@ Voice: **`write-like-goose`**.
 
 ## Hard rule
 
-**Plan file only.** Read and explore the repo as needed. Write **only** the plan markdown - no feature implementation, no “quick start” commits, no drive-by refactors.
+**Plan file only.** Read and explore the repository as needed. Write **only** the plan markdown. Do not write feature code. Do not make "quick start" commits. Do not do drive-by refactors.
 
 ## Depth
 

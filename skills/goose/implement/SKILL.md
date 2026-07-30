@@ -9,7 +9,7 @@ metadata:
 
 Goose handbook for **building** after planning/tickets (or a small clear change).
 
-Voice: **`write-like-goose`**.
+Voice: **`write-like-goose`** (ASD-STE100).
 
 ## When to use
 
@@ -27,12 +27,12 @@ Voice: **`write-like-goose`**.
 
 ## Hard rules
 
-1. **Name the batch at start.** Soft default: one unblocked ticket/slice. Larger batches only if the engineer lists them.
-2. **Feature branch before edits.** If on `main`/`master`, create/switch to a conventional branch (**git-practices** naming).
-3. **Dirty tree until local review (canonical).** No commits during the build. At the done bar, pause and ask for local review. **Commit/push only after the engineer OKs.** Then offer **git-practices** (commit) and later **pr-raise**. Other skills that build mid-PR (**pr-iterate**) follow this same rule.
-4. **Source of truth is a hard gate.** Re-read the cited contract/brief (or “open - frozen here”). If missing/unclear, stop and ask. On drift mid-build, follow **create-tickets** grounding (ask: update SoT | drift log | addendum) - do not invent a fourth option.
+1. **Name the batch at start.** Soft default: one unblocked ticket or slice. Use a larger batch only if the engineer lists it.
+2. **Create a feature branch before edits.** If you are on `main` or `master`, create or switch to a conventional branch (**git-practices** naming).
+3. **Keep a dirty tree until local review.** Do not commit during the build. At the done bar, pause and ask for local review. Commit and push only after the engineer OKs. Then offer **git-practices** and later **pr-raise**. **pr-iterate** follows this same rule.
+4. **Source of truth is a hard gate.** Re-read the cited contract or brief (or "open - frozen here"). If it is missing or unclear, stop and ask. On drift mid-build, follow **create-tickets** grounding (ask: update SoT, drift log, or addendum). Do not invent a fourth option.
 5. **Load the whole active stack pack** before coding (see [Stack packs](#stack-packs)).
-6. **Stay in this skill for the build.** Open a PR only via **pr-raise** after review OK.
+6. **Stay in this skill for the build.** Open a pull request only via **pr-raise** after review OK.
 
 ## Stack packs
 
@@ -55,7 +55,7 @@ If a new concern appears mid-slice that belongs to another pack, load that pack 
 
 1. At batch start, list seams under test (public boundaries: HTTP contract, domain API, UI behaviour, etc.).
 2. Confirm with the engineer if unclear. No tests at unconfirmed seams.
-3. Loop: one failing test → minimal code to pass → next test. Prefer behaviour through public interfaces (not private guts) — interface = test surface (**codebase-design**).
+3. Loop: one failing test, then minimal code to pass, then the next test. Prefer behaviour through public interfaces, not private guts. The interface is the test surface (**codebase-design**).
 4. Skip TDD only for glue both sides call out (rename, pure wiring, generated stubs). Say so explicitly.
 
 Work vertical slices inside the batch (one test → code → next), not “all tests then all code.”
