@@ -17,7 +17,7 @@ A **flow** is a path through the skills. Most work rides one **main flow**; **on
 
 ```
 research → brainstorm → [documentation:adr?] → planning → create-tickets → implement
-  → [documentation:ship-docs?] → [security-check?] → git-practices
+  → verify (gate) → [documentation:ship-docs?] → [security-check?] → git-practices
   → pr-raise → pr-review ⇄ pr-iterate
 ```
 
@@ -29,6 +29,7 @@ research → brainstorm → [documentation:adr?] → planning → create-tickets
 | Plan the build | **`planning`** | Ready for an implementation plan |
 | Split into tickets | **`create-tickets`** | Multi-slice work; tracer bullets + blockers |
 | Build | **`implement`** | Ticket or small plan in hand - load the active stack pack (README + every `SKILL.md` in that pack) before coding |
+| Check pack conformance | **`verify`** | Gate before the review pause, a `pr-review` guidelines pass, or a full audit of an existing repo |
 | Ship docs | **`documentation`** → branch **`ship-docs`** | Post-build user/ops docs |
 | Trust boundary? | **`security-check`** | Auth, secrets, tenancy, uploads, public APIs - optional gate |
 | Branch / commits | **`git-practices`** | Conventional Branch + Commits |
@@ -36,7 +37,7 @@ research → brainstorm → [documentation:adr?] → planning → create-tickets
 | Review PR | **`pr-review`** | Review an existing PR |
 | Address feedback | **`pr-iterate`** | Author loop: fix, push, re-request |
 
-Self-check of the branch diff lives inside **`implement`** or **`pr-raise`** - not a separate skill.
+Rule-by-rule pack conformance lives in **`verify`** (`implement` calls it as a gate; `pr-review` calls it as the Guidelines axis). Diff self-check for correctness/spec/security stays inside **`implement`** or **`pr-raise`**.
 
 ### Shortcuts
 
@@ -83,6 +84,3 @@ Built-in **compact** only at intentional phase breaks. Do not use it mid-brainst
 
 Optional complements under `engineering/` (architecture / review helpers) and `workflow/doc-coauthoring`. Prefer **goose** for Goose lifecycle.
 
-## Later
-
-Not stubbed yet: **`verify`** / done gate after implement.

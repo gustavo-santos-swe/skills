@@ -79,9 +79,9 @@ Short form: preserve behaviour and tests; match repo conventions; clarity over c
 9. **Done bar** (before review ask):
    - Batch AC satisfied
    - Ticket/plan verify steps run (or note why N/A)
-   - Self-check against loaded pack skills + source of truth
+   - Run **`verify`** (gate) against loaded pack skills + source of truth. Drift blocks this step until you and the engineer decide (fix now / accept and log / ticket)
    - Goose voice on new/changed comments (`write-like-goose`)
-10. **Pause for local engineer review** - show what changed (diff summary / paths). Wait for OK before any commit/push.
+10. **Pause for local engineer review** - show what changed (diff summary / paths) plus the `verify` verdict. Wait for OK before any commit/push.
 11. **After they approve** - ask before **git-practices** (commit) then **pr-raise**. If they want changes, stay in implement (still dirty tree) until the next pause.
 
 Stop when blocked, tests won’t go green after honest attempts, or scope shifts. Ask; don’t guess.
@@ -93,11 +93,10 @@ Stop when blocked, tests won’t go green after honest attempts, or scope shifts
 Before the review pause, skim the branch diff:
 
 - Matches batch AC and source of truth?
-- Pack rules respected?
 - No drive-by refactors outside the batch?
 - Comments are why-only, Goose voice?
 
-Deeper PR review stays in **pr-review** after open.
+Rule-by-rule pack conformance is **`verify`**'s job, not a skim - run it, don't eyeball it. Deeper PR review stays in **pr-review** after open.
 
 ## References
 
@@ -108,6 +107,7 @@ Deeper PR review stays in **pr-review** after open.
 
 - Split work → **create-tickets** (owns grounding / drift)
 - Plan only → **planning**
+- Pack conformance gate → **verify** (part of the done bar, not optional)
 - After approve → **git-practices** → **pr-raise**
 - Trust boundary gate → **security-check** (optional)
 - Module shape → **codebase-design**
