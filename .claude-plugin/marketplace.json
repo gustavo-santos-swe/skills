@@ -13,7 +13,7 @@
     {
       "name": "gustavo-santos-skills",
       "source": "./",
-      "description": "All Goose skills (areas under skills/) plus MCP config.",
+      "description": "All Goose skills (areas under skills/).",
       "version": "1.0.0",
       "author": { "name": "Gustavo Santos" },
       "homepage": "https://github.com/gustavo-santos-swe/skills",
