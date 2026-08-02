@@ -14,6 +14,5 @@
     "./skills/product",
     "./skills/goose",
     "./skills/workflow"
-  ],
-  "mcpServers": "./.mcp.json"
+  ]
 }

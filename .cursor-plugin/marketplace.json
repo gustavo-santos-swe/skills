@@ -11,7 +11,7 @@
     {
       "name": "gustavo-santos-skills",
       "source": ".",
-      "description": "All Goose skills (areas under skills/) plus MCP config."
+      "description": "All Goose skills (areas under skills/)."
     }
   ]
 }
