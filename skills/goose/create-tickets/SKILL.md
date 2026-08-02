@@ -18,6 +18,7 @@ This skill owns **grounding / drift** for the lifecycle. **implement** and **pr-
 - Plan is multi-slice, multi-session, or parallelizable
 - Need tracker issues (or an ordered slice list on the plan) before **implement**
 - User says “break into tickets”, “make Linear issues”, “tracer bullets”
+- **verify** (full audit) produced a Drift/Gap report to turn into a fixable backlog
 
 ## When not to
 
@@ -49,6 +50,16 @@ Target shape: **Epic → Feature → Issues**, with **blocking edges** between i
 At quiz time, **propose Features** - engineer merges/splits/skips. Soft default: skip Feature when there is only one workstream (Epic → Issues). Don’t invent empty Features.
 
 If the tracker isn’t Linear, map as close as you can (GitHub: parent issue / sub-issues or linked issues + labels). Same content, different buttons.
+
+## Input: a verify report
+
+A **verify** full-audit report is a valid plan input, but it is rows, not slices - one row per rule by design (verify's own hard rule). Turning it into a backlog needs one extra pass this skill owns and verify does not:
+
+1. **Dedup by root cause, not by row.** Many Drift rows across different skills point at the same fix (e.g. "domain entities returned raw" shows up under `application-layer`, `db-integration`, `endpoint-conventions`, and `serialization` as four rows - it is one slice, not four). Group rows whose evidence converges on the same file/handler/pattern; list every `skill: rule` the slice closes so traceability back to the report survives.
+2. **Source of truth is the pack rule + the report row, not a fresh preflight search.** Skip the generic grounding preflight for this input type - the SoT is already the cited `SKILL.md` rule plus the report's `path:line` evidence. Cite both on the slice.
+3. **Order by severity tier, not skill alphabetical order or row count.** Auth-bypass / secrets-in-logs / IDOR first, then data-integrity (missing FKs, no transaction boundary, no concurrency control), then convention drift (naming, layering, missing DTOs), then test coverage. A slice with 15 rows behind it is not automatically higher priority than a 1-row auth bug.
+4. **AC = the row goes green on the next gate.** Acceptance criteria for a verify-sourced slice is concrete by construction: "rows `X, Y, Z` read Followed (not Drift) when **verify** (gate) re-runs against this diff." No separate AC invention needed.
+5. **Gap rows are backlog, not urgency.** Per verify's own classification, Gap ≠ Drift. Don't fold Gap rows into the same slice or priority tier as Drift unless the engineer asks for the work anyway.
 
 ## Grounding (required)
 
@@ -120,4 +131,5 @@ Do not close or rewrite a parent plan/issue unless asked.
 - Plan the how → **planning**
 - Build a slice → **implement**
 - Check PR vs source of truth → **pr-review**
+- Drift/Gap backlog source → **verify** (full audit)
 - Voice → **write-like-goose**

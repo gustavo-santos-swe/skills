@@ -19,7 +19,8 @@ Use before asking the engineer to read the diff. Still **no commit / push**.
 - [ ] Seams agreed; TDD loop used (or glue exception stated)
 - [ ] Acceptance criteria for the batch pass
 - [ ] Verify steps from ticket/plan run (or N/A with reason)
-- [ ] Active pack(s): every `SKILL.md` was loaded before coding; self-check against those rules
+- [ ] Active pack(s): every `SKILL.md` was loaded before coding
+- [ ] **`verify`** (gate) run against those packs; no unresolved Drift (fixed, accepted and logged, or ticketed)
 - [ ] `write-like-goose` on comments / durable notes added
 
 ## Hand-off lines (chat)

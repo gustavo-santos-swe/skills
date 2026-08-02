@@ -11,7 +11,7 @@ Goose handbook for **reviewing an open pull request**. Part of `pr-*`: **pr-rais
 
 Voice: **`write-like-goose`**.
 
-Local pre-PR self-check stays in **implement** / **pr-raise**. Deep AppSec → offer **security-check**. Author loop on feedback → **pr-iterate**.
+Local pre-PR self-check stays in **implement** / **pr-raise**. Guidelines axis runs **verify** rather than eyeballing pack conformance. Deep AppSec → offer **security-check**. Author loop on feedback → **pr-iterate**.
 
 ## When to use
 
@@ -105,5 +105,6 @@ Only after explicit go-ahead. One review submission with summary + inline commen
 
 - Open PR → **pr-raise**
 - Address feedback → **pr-iterate**
+- Guidelines axis, rule by rule → **verify**
 - Trust-boundary deep pass → **security-check**
 - Module shape / seams → **codebase-design**

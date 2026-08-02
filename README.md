@@ -47,6 +47,7 @@ Full map + when-table: [`skills/goose/README.md`](skills/goose/README.md).
 | Have a fuzzy idea | **brainstorm** (research first if you need facts) |
 | Have an agreed design | **planning** → **create-tickets** → **implement** |
 | Have a clear small change / ticket | **implement** |
+| Finished a build, check it against the packs | **verify** |
 | Something is broken | **diagnose** |
 | Ready to open a PR | **git-practices** → **pr-raise** |
 | Reviewing a PR | **pr-review** |
@@ -57,8 +58,8 @@ Full map + when-table: [`skills/goose/README.md`](skills/goose/README.md).
 ```
 ask
   → research? → brainstorm → [documentation:adr?] → planning → create-tickets
-  → implement (+ stack packs) → [documentation:ship-docs?] → [security-check?]
-  → git-practices → pr-raise → pr-review ⇄ pr-iterate
+  → implement (+ stack packs) → verify (gate) → [documentation:ship-docs?] → [security-check?]
+  → git-practices → pr-raise → pr-review (verify + other axes) ⇄ pr-iterate
 ```
 
 - **Always-on voice:** **write-like-goose** (**ASD-STE100** + anti-AI) for tickets, plans, commits, PRs, review comments, code comments, and skill bodies (see [`AGENTS.md`](AGENTS.md)).
@@ -110,6 +111,7 @@ Each `SKILL.md` has `metadata.area` matching its folder.
 | [`create-tickets`](skills/goose/create-tickets/) | Tracer-bullet issues + blockers |
 | [`diagnose`](skills/goose/diagnose/) | Failure → root cause → fix → lock |
 | [`implement`](skills/goose/implement/) | Build (+ [`database`](skills/goose/implement/database/), [`dotnet`](skills/goose/implement/dotnet/), [`react-native`](skills/goose/implement/react-native/), [`frontend`](skills/goose/implement/frontend/)) |
+| [`verify`](skills/goose/verify/) | Gate or full audit: code vs active pack skills, rule by rule |
 | [`security-check`](skills/goose/security-check/) | Optional trust-boundary gate |
 | [`git-practices`](skills/goose/git-practices/) | Branch names + commits |
 | [`pr-raise`](skills/goose/pr-raise/) | Open PR (never merge) |

@@ -32,9 +32,9 @@ Every `pr-review` run covers these axes. Skip empty axes in the report (omit the
 
 **Sources:** repo `CONTRIBUTING` / coding standards, Goose pack skills relevant to the stack, ADRs in the touched area, plus the [`smell-baseline.md`](smell-baseline.md) (judgement calls only).
 
-**Report:** violations that cause real pain (wrong layer, captive DI, API convention breaks, etc.); named smells from the baseline when they show up in the diff.
+**Report:** run **`verify`** (gate mode, diff scope) for rule-by-rule pack conformance; fold its Drift rows into this axis. Add named smells from the baseline when they show up in the diff, and violations `verify` doesn't cover (wrong layer, captive DI, API convention breaks).
 
-**Skip:** anything CI/analyzers already enforce; pure naming bikesheds; smells the repo standard endorses.
+**Skip:** anything CI/analyzers already enforce; pure naming bikesheds; smells the repo standard endorses; `verify` Gap rows (backlog, not a PR blocker by default).
 
 ## Ship risk + CI
 

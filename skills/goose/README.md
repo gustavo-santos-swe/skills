@@ -24,6 +24,7 @@ House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` onl
 | Multi-slice work with blockers | **create-tickets** |
 | Something broken / flaky / red | **diagnose** |
 | Build a ticket or clear small change | **implement** (+ stack pack) |
+| Check code against the active pack skills | **verify** |
 | Trust boundary before ship | **security-check** |
 | Branch / commit messages | **git-practices** |
 | Open a PR (never merge) | **pr-raise** |
@@ -43,8 +44,8 @@ House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` onl
 
 ```
 research? → brainstorm → [documentation:adr?] → planning → create-tickets
-  → implement (+ packs) → [documentation:ship-docs?] → [security-check?]
-  → git-practices → pr-raise → pr-review ⇄ pr-iterate
+  → implement (+ packs) → verify (gate) → [documentation:ship-docs?] → [security-check?]
+  → git-practices → pr-raise → pr-review (verify + other axes) ⇄ pr-iterate
 ```
 
 On-ramp: **diagnose** → fix + lock → git-practices → pr-raise.
@@ -61,6 +62,7 @@ On-ramp: **diagnose** → fix + lock → git-practices → pr-raise.
 | [create-tickets](./create-tickets/) | Tracer bullets + blockers |
 | [diagnose](./diagnose/) | Evidence → fix → lock |
 | [implement](./implement/) | Build (+ [database](./implement/database/), [dotnet](./implement/dotnet/), [react-native](./implement/react-native/), [frontend](./implement/frontend/)) |
+| [verify](./verify/) | Gate (diff) or full audit: code vs active pack skills, rule by rule |
 | [security-check](./security-check/) | Optional trust-boundary gate |
 | [git-practices](./git-practices/) | Branch + commits |
 | [pr-raise](./pr-raise/) | Open PR |
