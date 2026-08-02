@@ -20,6 +20,7 @@ Concrete numbers (N req/min) live per service in the target repo — this skill 
 - Public or sensitive endpoints need throttles
 - Per-user / per-IP / per-endpoint quotas
 - **`implement`** loading this pack
+- Greenfield API with anonymous auth/search — prefer shipping a baseline limiter early (**`greenfield-decision-surface`** reminder), not after the first abuse spike
 
 ## Where limits live
 
