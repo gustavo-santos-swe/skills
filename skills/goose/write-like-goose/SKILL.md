@@ -9,6 +9,7 @@ metadata:
     - conorbronsdon/avoid-ai-writing
     - stop-slop (this repo / MIT)
     - ayghri/i-have-adhd (MIT)
+    - s-anand.net "Simple writing hurts thinking" (2026)
 ---
 
 # Write Like Goose
@@ -99,6 +100,7 @@ Voice samples: **TODO**. Until then use [Defaults](#defaults).
 3. PR/ADR first line = substance (not a shell command theater opener).
 4. STE governs structure and word choice; density governs chat shape. Both apply.
 5. **Precedence when layers conflict:** `git-practices` / `pr-raise` format wins for commit and PR-title shape. STE wins on word choice and sentence length elsewhere. Density wins on first-line and closer shape for chat. Never let STE block a required field or a skill's completion criterion (same escape `writing-great-skills` uses).
+6. **Voice pass on final prose only.** Do not put STE constraints on reasoning or research. Think and draft at full complexity first, then rewrite. Constrained generation lowers reasoning quality.
 
 ## For other Goose skills / always-on
 

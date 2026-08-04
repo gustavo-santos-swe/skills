@@ -96,6 +96,7 @@ Prefer a subject doing something when it clarifies. "X was created" → who crea
 
 ## Rhythm
 
+- Vary sentence length under the STE caps (rule lives in [ste100.md](ste100.md))
 - Prefer two items over padded threes
 - Vary paragraph endings (not every line a punchline)
 - No em/en dashes
