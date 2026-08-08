@@ -149,7 +149,7 @@
 
 <nav>
   <div class="logo">skills<span>/</span></div>
-  <div class="tagline">Agent Skills · served over MCP</div>
+  <div class="tagline">Agent Skills · plugin marketplaces</div>
   <h4>Project</h4>
   <a href="#overview">Overview</a>
   <a href="#architecture">Architecture</a>
@@ -169,7 +169,7 @@
 
 <section id="overview">
   <h1>skills</h1>
-  <p class="lead">Central repository of personal Agent Skills — markdown playbooks that teach AI coding agents how to execute specific workflows. Served live to any MCP client via <a href="https://skillsovermcp.com/">Skills Over MCP</a>: push to <code>main</code> and every connected agent sees the new version.</p>
+  <p class="lead">Central repository of personal Agent Skills — markdown playbooks that teach AI coding agents how to execute specific workflows. Install via the Claude Code or Cursor plugin marketplaces, or clone the repo and point your agent at <code>skills/</code>.</p>
 
   <div class="cards">
     <div class="card"><div class="num">25</div><div class="label">Skills</div></div>
@@ -189,20 +189,21 @@
 
 <section id="architecture">
   <h2><span class="hash">#</span>Architecture</h2>
-  <p>The delivery model is intentionally simple — a public GitHub repo acting as the source of truth, with an MCP gateway in front:</p>
-  <pre><code>┌──────────────────────────┐      push to main      ┌─────────────────────────────┐
-│  github.com/             │ ─────────────────────▶ │  mcp.skillsovermcp.com      │
-│  gustavo-santos-swe/     │                        │  /mcp/gustavo-santos-swe/   │
-│  skills  (public)        │                        │  skills  (streamable-http)  │
-└──────────────────────────┘                        └──────────────┬──────────────┘
-                                                                   │ tools = skills
-                                                    ┌──────────────▼──────────────┐
-                                                    │  MCP clients                │
-                                                    │  Cursor · Claude Code ·     │
-                                                    │  Codex · any MCP client     │
-                                                    └─────────────────────────────┘</code></pre>
+  <p>The delivery model is intentionally simple — a public GitHub repo as the source of truth, installed via plugin marketplaces or a local clone:</p>
+  <pre><code>┌──────────────────────────┐
+│  github.com/             │
+│  gustavo-santos-swe/     │
+│  skills  (public)        │
+└────────────┬─────────────┘
+             │ plugin marketplace / clone
+             ▼
+┌─────────────────────────────┐
+│  Agent hosts                │
+│  Cursor · Claude Code ·     │
+│  local skills/ path         │
+└─────────────────────────────┘</code></pre>
   <ul>
-    <li><strong>Distribution:</strong> each skill is exposed as an MCP tool. Agents read the <code>description</code> frontmatter to decide <em>when</em> to load a skill, then read the full body and follow it.</li>
+    <li><strong>Distribution:</strong> install the plugin from the Claude Code or Cursor marketplace, or clone and point the agent at <code>skills/</code>. Agents read the <code>description</code> frontmatter to decide <em>when</em> to load a skill, then read the full body and follow it.</li>
     <li><strong>Versioning:</strong> git is the only version control. There are no releases — <code>main</code> is production.</li>
     <li><strong>Provenance:</strong> most skills are synced from upstream repos (<code>obra/superpowers</code>, <code>anthropics/skills</code>, <code>mattpocock/skills</code>, etc.) and carry <code>metadata.upstream</code> frontmatter with repo, path, pinned commit SHA, and sync date. Custom skills (<code>ship-feature</code>) are marked as such.</li>
   </ul>
@@ -358,8 +359,8 @@
       <td>Commits are pinned in metadata, but sync always pulls <em>latest</em>; no diff review is enforced by tooling. Mitigated by the documented manual-review workflow.</td>
     </tr>
     <tr>
-      <td>This repo → MCP consumers</td>
-      <td>Push to <code>main</code> = instant deployment to every connected agent. Anyone who can write to the repo can steer agent behavior on all consumer machines. The <code>using-superpowers</code> skill instructs agents that skill use is "not negotiable", amplifying whatever the skills say.</td>
+      <td>This repo → plugin / clone consumers</td>
+      <td>Anyone who can write to the repo can change playbooks that agents load after install or update. The <code>using-superpowers</code> skill instructs agents that skill use is "not negotiable", amplifying whatever the skills say.</td>
       <td>Single-owner repo, single contributor. The instruction-priority section explicitly caps skills <em>below</em> user instructions — a good guardrail.</td>
     </tr>
     <tr>
@@ -412,17 +413,17 @@
     <tr>
       <td><strong>A07</strong> Identification &amp; Authentication Failures</td>
       <td><span class="badge b-info">INFO</span></td>
-      <td>No auth exists anywhere by design: the MCP endpoint is intentionally public (documented), and the local server trusts anything that can reach its socket. Consolidated with A01; no separate failure beyond that.</td>
+      <td>No auth exists anywhere by design: the repo is public and the local brainstorm server trusts anything that can reach its socket. Consolidated with A01; no separate failure beyond that.</td>
     </tr>
     <tr>
       <td><strong>A08</strong> Software &amp; Data Integrity Failures</td>
       <td><span class="badge b-high">HIGH</span></td>
-      <td>The most significant category for this project. (1) <code>sync-skill.py</code> downloads upstream files and writes them verbatim with no checksum/signature and no enforced diff review — a compromised upstream becomes instructions agents will execute. (2) Push-to-main is instant, review-gate-free deployment to all MCP consumers. (3) <code>raw.githubusercontent.com</code> fetches use the latest commit rather than the reviewed, pinned SHA.</td>
+      <td>The most significant category for this project. (1) <code>sync-skill.py</code> downloads upstream files and writes them verbatim with no checksum/signature and no enforced diff review — a compromised upstream becomes instructions agents will execute. (2) Merges to <code>main</code> become the next install/update for plugin and clone consumers. (3) <code>raw.githubusercontent.com</code> fetches use the latest commit rather than the reviewed, pinned SHA.</td>
     </tr>
     <tr>
       <td><strong>A09</strong> Security Logging &amp; Monitoring Failures</td>
       <td><span class="badge b-low">LOW</span></td>
-      <td>Proportional to the tool: the server logs structured JSON lifecycle and user events to stdout/log file; sync scripts report per-skill status. No sensitive data is logged. No monitoring of who consumes the MCP endpoint — acceptable for a personal repo.</td>
+      <td>Proportional to the tool: the server logs structured JSON lifecycle and user events to stdout/log file; sync scripts report per-skill status. No sensitive data is logged. No monitoring of who installs the plugin — acceptable for a personal repo.</td>
     </tr>
     <tr>
       <td><strong>A10</strong> Server-Side Request Forgery</td>
@@ -437,7 +438,7 @@
 
   <div class="finding">
     <header><span class="badge b-high">HIGH</span><span class="code">F-01 · A08</span><h3>Unverified upstream sync = prompt-injection supply chain</h3></header>
-    <p><code>sync-skill.py</code> resolves the <em>latest</em> upstream commit, downloads every file under the skill path, and overwrites local content byte-for-byte. Skills are instructions that agents on every connected machine will obey (reinforced by <code>using-superpowers</code>' "not negotiable" framing). A compromised or hostile upstream commit flows: upstream → local repo → push → MCP → all agents.</p>
+    <p><code>sync-skill.py</code> resolves the <em>latest</em> upstream commit, downloads every file under the skill path, and overwrites local content byte-for-byte. Skills are instructions that agents will obey after install or update (reinforced by <code>using-superpowers</code>' "not negotiable" framing). A compromised or hostile upstream commit flows: upstream → local repo → merge to <code>main</code> → plugin/clone consumers.</p>
     <p><span class="label">Recommendation</span> — always run sync on a branch, review the full diff before merging (make this a hard rule in the skill), and consider verifying downloaded content against the GitHub tree API blob SHAs for the pinned commit.</p>
   </div>
 
