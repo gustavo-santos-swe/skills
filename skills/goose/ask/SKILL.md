@@ -11,7 +11,7 @@ You don't remember every skill, so ask.
 
 A **flow** is a path through the skills. Most work rides one **main flow**; **on-ramps** merge onto it. **Stack packs** load under **`implement`**. **Anytime** skills sit beside the flow (voice), not as steps.
 
-**Lifecycle skills are filled.** Pack stubs remain under `implement/react-native/` and `implement/frontend/` - route by intent; open the skill and follow what body exists. Full map: [`../README.md`](../README.md).
+**Lifecycle skills are filled.** `implement/react-native/*` is still stubs. `implement/frontend/*` is **partially filled** (`project-structure`, `styling`; other skills stubs). Route by intent; open the skill and follow what body exists. Full map: [`../README.md`](../README.md).
 
 ## The main flow: idea → ship
 
@@ -60,14 +60,14 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 | **`database`** | Schema, integrity, indexes, isolation, expand/contract (language-agnostic) | [`../implement/database/`](../implement/database/README.md) |
 | **`dotnet/*`** | C# / ASP.NET / EF adapter (`db-integration`), APIs, workers | [`../implement/dotnet/`](../implement/dotnet/README.md) |
 | **`react-native/*`** | Expo / RN screens, navigation, device APIs (stubs) | [`../implement/react-native/`](../implement/react-native/README.md) |
-| **`frontend/*`** | Next.js App Router web tier (stubs) | [`../implement/frontend/`](../implement/frontend/README.md) |
+| **`frontend/*`** | Next.js App Router web tier (partial: structure + styling filled) | [`../implement/frontend/`](../implement/frontend/README.md) |
 
 ### Quick pack routing
 
 - **Tables / SQL / migrations as data decisions** → `database` (+ `dotnet` pack when EF/.NET).
 - **Backend .NET behavior** → `dotnet` pack.
 - **Mobile UI / device** → `react-native` pack; deep technique may also use [`../../mobile/`](../../mobile/).
-- **Next.js web** → `frontend` pack; visual craft may also use [`../../design/`](../../design/).
+- **Next.js web** → `frontend` pack; visual craft may also use [`../../design/`](../../design/) plus install-upstream Taste / Impeccable (see frontend pack README).
 
 ## Always-on / anytime (not lifecycle steps)
 

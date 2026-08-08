@@ -55,7 +55,7 @@ ask
 ```
 
 - **Always-on voice:** **write-like-goose** (**ASD-STE100** + anti-AI) for tickets, plans, commits, PRs, review comments, code comments, and skill bodies (see [`AGENTS.md`](AGENTS.md)).
-- **Stack packs** (under `implement/`): load the whole pack for the stack you’re touching — `database`, `dotnet`, `react-native` (stubs), `frontend` (stubs).
+- **Stack packs** (under `implement/`): load the whole pack for the stack you are touching: `database`, `dotnet`, `react-native` (stubs), `frontend` (partial: structure + styling filled).
 - **Never merge to main** from the agent; humans merge.
 
 ### Anytime (beside the flow)

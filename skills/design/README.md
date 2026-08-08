@@ -10,6 +10,8 @@ Production-grade UI/UX, anti-slop visual design.
 
 ## Favorite upstream skills (install — do not vendor)
 
+Goose frontend pack **assumes** Taste + Impeccable (+ vendored `frontend-design`) for craft. Structure and reuse live in [`../goose/implement/frontend/`](../goose/implement/frontend/).
+
 Install commands and update flow live in the root [README](../../README.md#favorite-frontend--design-skills-install-upstream--do-not-vendor).
 
 Quick install:
