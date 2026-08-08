@@ -17,11 +17,12 @@ Gap pitches only: **`suggesting-skills`** (optional helper inside garden).
 
 - New topic / stack / area (“I have inspirations for web…”)
 - “Evolve skills”, “garden the repo”, “what should we prune”
-- End of a session that changed how we work on skills - capture the lesson
+- Session changed the *ritual* itself (update the playbook)
 - Before teaching the agent the ritual again from scratch
 
 ## When not to
 
+- Session lessons / review corrections to absorb into existing skills → **`skill-retro`**
 - Writing one skill’s prose craft only → **`writing-great-skills`**
 - Product feature SDLC in an app repo → **`goose/ask`** and lifecycle
 - Blind import of upstream trees without distill + grill
@@ -80,6 +81,7 @@ Update [`references/playbook.md`](references/playbook.md) when this session **ch
 
 ## Related
 
+- Session absorb loop → **`skill-retro`**
 - Craft → **`writing-great-skills`**
 - Gap audit → **`suggesting-skills`**
 - Lifecycle map → **`goose/ask`** / [`goose/README`](../../goose/README.md)

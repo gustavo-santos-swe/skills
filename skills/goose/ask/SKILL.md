@@ -73,6 +73,7 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 
 - **`write-like-goose`**: durable prose on ASD-STE100 (root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
 - **`codebase-design`**: deep-module vocabulary when you shape seams and interfaces (also used by `engineering/improve-codebase-architecture`).
+- **`skill-retro`**: session lesson or repeated correction → absorb into the best skill (or hand to **`evolve-goose-skills`**). Offer once; wait for OK before writing skill files.
 
 ## Crossing sessions
 
