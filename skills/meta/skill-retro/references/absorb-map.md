@@ -2,6 +2,8 @@
 
 Guess an owner, then open that skill and confirm. Prefer one owner. If two claim it, stop and ask (or garden via evolve).
 
+First ask: **Goose-wide** or **this product only**? Product-only → **local** ([local-skills.md](./local-skills.md)), not this map’s Goose paths.
+
 ## Goose lifecycle
 
 | Lesson about… | Try first |
@@ -19,7 +21,7 @@ Guess an owner, then open that skill and confirm. Prefer one owner. If two claim
 | Durable prose voice | `goose/write-like-goose` |
 | Deep modules / seams | `goose/codebase-design` |
 
-## Stack packs
+## Stack packs (Goose-wide only)
 
 | Lesson about… | Try first |
 |---------------|-----------|
@@ -29,6 +31,7 @@ Guess an owner, then open that skill and confirm. Prefer one owner. If two claim
 | Next folders / kit vs feature | `implement/frontend/project-structure` |
 | Other Next concerns | matching `implement/frontend/*` stub or filled skill |
 | RN / Expo | matching `implement/react-native/*` or `mobile/*` |
+| Outbound HTTP (Goose default) | `implement/dotnet/http-clients` |
 
 ## Meta / craft
 
@@ -41,6 +44,7 @@ Guess an owner, then open that skill and confirm. Prefer one owner. If two claim
 
 ## When absorb fails
 
-- No clear owner → **evolve** (new skill or area)
+- Product-only / brownfield delta → **local** (not Goose absorb)
+- No clear Goose owner → **evolve** (new skill or area)
 - Owner exists but rule conflicts with playbook ownership table → ask user; do not dual-write
-- Target repo-only convention (not Goose-wide) → put in that repo `AGENTS.md`; **drop** or **defer** for Goose skills
+- One-line path tip with no steps → product `AGENTS.md` / `CLAUDE.md`; **drop** or **defer** for skills
