@@ -2,7 +2,8 @@
 
 House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` only). Prefer `disable-model-invocation: true`; invoke via **`ask`** or by name.
 
-**Still stubs:** `implement/react-native/*` and `implement/frontend/*`.  
+**Still stubs:** `implement/react-native/*`.  
+`implement/frontend/*` is **partially filled** (`project-structure`, `styling`; rest stubs).  
 `database` + `dotnet` packs are filled.
 
 ## How to use
