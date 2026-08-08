@@ -51,7 +51,7 @@ inventory → triage (remove / absorb / keep / fill later) → fix ownership →
 | Deep-module vocabulary | `codebase-design` |
 | Skill craft (predictability) | `writing-great-skills` |
 | Skill-repo evolution ritual | **this skill** (`evolve-goose-skills`) |
-| Session lessons → absorb / hand off | `skill-retro` |
+| Session lessons → absorb / local product skill / hand off | `skill-retro` |
 | Web UI reuse ladder + `DESIGN.md` gate | `implement/frontend/styling` (placement → `project-structure`; craft → upstream Taste / Impeccable / `frontend-design`) |
 
 If two skills claim the same concern, garden until one owns it.
