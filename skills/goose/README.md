@@ -10,7 +10,7 @@ House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` onl
 
 1. Unsure which skill → **`ask`**
 2. Follow the main flow (or an on-ramp) below
-3. Durable prose/comments always → **`write-like-goose`** (**ASD-STE100**; also root `AGENTS.md` + Cursor rule)
+3. Durable prose, chat, and questions always → **`write-like-goose`** (also root `AGENTS.md` + Cursor rule)
 
 ## When to use which
 
@@ -33,7 +33,7 @@ House lifecycle for Goose — idea → ship. No upstream sync (`inspired_by` onl
 | Address review feedback | **pr-iterate** |
 | Post-build user/ops docs | **documentation** → `ship-docs` |
 | Module seams / depth language | **codebase-design** |
-| Goose voice on durable text | **write-like-goose** (ASD-STE100) |
+| Goose voice on chat, questions, durable text | **write-like-goose** |
 
 ### Shortcuts
 

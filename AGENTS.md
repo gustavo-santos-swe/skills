@@ -2,11 +2,11 @@
 
 ## Voice (always)
 
-Durable prose uses **`write-like-goose`** on **ASD-STE100** (Simplified Technical English). Load [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) before emitting tickets, plans, ADRs, commits, PR text, review comments, code comments, or skill bodies that stay in the tree.
+Durable prose, chat, and questions use **`write-like-goose`**. Load [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) before emitting tickets, plans, ADRs, commits, PR text, review comments, code comments, skill bodies, or grill questions.
 
-- STE rules: [`skills/goose/write-like-goose/references/ste100.md`](skills/goose/write-like-goose/references/ste100.md). Domain terms: [`technical-names.md`](skills/goose/write-like-goose/references/technical-names.md).
-- Do not stack other humanizer skills on the same pass — `write-like-goose` alone.
-- Chat one-liners: STE defaults + density is enough; pull the full catalog only for heavy rewrites.
+- Answer first. Short prose with a stance. Fully answers. How-tos: numbered steps, one action each, first line is a doable action. Questions state the decision, each option's consequence, and a recommendation.
+- Examples: [`skills/goose/write-like-goose/references/examples.md`](skills/goose/write-like-goose/references/examples.md).
+- Do not stack other humanizer skills on the same pass. `write-like-goose` alone.
 - Enforced in Cursor via [`.cursor/rules/write-like-goose.mdc`](.cursor/rules/write-like-goose.mdc) (`alwaysApply`).
 
 ## Lifecycle (goose/)

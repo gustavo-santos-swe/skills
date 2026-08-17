@@ -13,7 +13,7 @@ metadata:
 
 Turn a fuzzy idea into **shared understanding** (the *what*). Not the implementation plan (*how*) - that is **`planning`**.
 
-Voice for durable prose: **`write-like-goose`** (ASD-STE100).
+Voice for durable prose and grill questions: **`write-like-goose`**. Question wording → that skill's **Question surface**.
 
 ## Hard gate
 
@@ -62,8 +62,8 @@ orient → grill (1Q at a time) → always 2-3 approaches → design freeze
 ### 2. Grill
 
 - **One question per message.** Prefer multiple choice when options are real; open-ended when the answer is narrative.
+- Word every ask per **`write-like-goose` Question surface**: what is being decided, what each option changes, recommendation + why. Use the harness question form when the choice is real. Do not ask a label plus "Which?".
 - Walk the decision tree; resolve dependencies one by one.
-- On each question: give **your recommended answer** and why, then wait.
 - **Facts** → look up (repo, tools). **Decisions** → the human.
 - Focus: purpose, constraints, success criteria, non-goals, who it serves.
 
@@ -215,7 +215,7 @@ Do **not** jump to **`implement`**.
 ## Guardrails
 
 1. Freeze the **what** only - no feature code or scaffolding this run.
-2. One question at a time (with a recommendation); prefer repo answers over asking the human for facts already in tree.
+2. One question at a time, worded so the user can answer it (`write-like-goose` Question surface). Prefer repo answers over asking the human for facts already in tree.
 3. `CONTEXT.md` = terms/glossary, not implementation detail. Skip the long interview when a one-breath confirm is enough and the user OK’d that shortcut.
 4. **greenfield:** do not skip Shape; do not exit with empty platform statuses; do not grill pack-owned style; do not invent a desktop pack or web/mobile SOTA beyond stubs; do not force greenfield on a mature local convention unless asked.
 

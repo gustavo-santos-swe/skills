@@ -71,7 +71,7 @@ Canonical load rules live in **`implement`**. Summary: pick the pack(s) for the 
 
 ## Always-on / anytime (not lifecycle steps)
 
-- **`write-like-goose`**: durable prose on ASD-STE100 (root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
+- **`write-like-goose`**: chat, questions, and durable prose (root **AGENTS.md** / `.cursor/rules/write-like-goose.mdc`).
 - **`codebase-design`**: deep-module vocabulary when you shape seams and interfaces (also used by `engineering/improve-codebase-architecture`).
 - **`skill-retro`**: session lesson or repeated correction → absorb into Goose, write a product **local** skill (`.claude/skills/`), or hand to **`evolve-goose-skills`**. Offer once; wait for OK before writing skill files.
 

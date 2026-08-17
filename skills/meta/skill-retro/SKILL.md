@@ -9,7 +9,7 @@ metadata:
 
 Turn session lessons into skill updates. Prefer **absorb** into an existing Goose skill when the rule is house-wide. Use **local** for product-repo rules (brownfield deltas, team conventions). Hand big new Goose areas to **`evolve-goose-skills`**.
 
-Voice: **`write-like-goose`** (**ASD-STE100**).  
+Voice: **`write-like-goose`**.  
 Craft when drafting patches: **`writing-great-skills`**.
 
 ## When to use
