@@ -9,7 +9,7 @@ metadata:
 
 Goose handbook for the **how** after the **what** is settled (**brainstorm** / research / clear spec).
 
-Voice: **`write-like-goose`** (ASD-STE100).
+Voice: **`write-like-goose`**.
 
 ## When to use
 
