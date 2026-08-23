@@ -2,6 +2,21 @@
 
 Examples only. Prefer the target repo tree when it already disagrees.
 
+## Polyglot monorepo (Goose default with .NET)
+
+```
+src/
+  frontend/              # this package
+    package.json
+    src/
+      app/
+      components/ui/
+      lib/
+  backend/               # see solution-structure
+```
+
+Not root `web/` beside a backend-only `src/`.
+
 ## Small app (route colocation)
 
 ```

@@ -14,3 +14,6 @@
 | Don't reverse the dependency rule "just this once" | architecture-test | Don't — same `AppLayerTests` suite |
 | Don't put Stripe/email ports in Domain | verify | Don't |
 | Don't create a SharedKernel project on day one | verify | Don't |
+| Greenfield polyglot layout is `src/backend` + `src/frontend` (+ `src/mobile` when needed), not root `tests/` or root `web/` | verify | Polyglot monorepo |
+| .NET test projects colocate under `src/backend/` next to production projects | verify | Tests |
+| `Directory.Packages.props` / `Directory.Build.props` live under the backend solution folder (`src/backend/`) unless the whole monorepo intentionally shares one CPM | verify | Build mechanics |

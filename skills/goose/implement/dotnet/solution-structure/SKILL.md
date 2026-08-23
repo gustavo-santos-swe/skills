@@ -55,10 +55,27 @@ Infrastructure → Domain (+ Application ports it implements)
 **Projects:** `{Product}.{Vertical}.{Layer}`  
 Examples: `Monetis.App.Domain`, `Monetis.Admin.Api`.
 
-**On disk:**
+### Polyglot monorepo (default)
+
+Calibrated against Monetis. Surfaces live **under `src/`**, not as siblings of `src/`:
+
+```
+src/
+  backend/     # all .NET projects + test projects + Directory.*.props
+  frontend/    # Next.js (when Web is in)
+  mobile/      # Expo / RN (when Mobile is in)
+  admin/       # optional extra web surfaces
+```
+
+- **Don’t** put the Next app at repo-root `web/` while `.NET` alone occupies `src/`.
+- **Don’t** put test projects in a repo-root `tests/` folder.
+- `TestResults/` is runner output — gitignore it; never treat it as layout.
+
+### On disk (.NET)
 
 - One vertical → `src/backend/{Product}.{Vertical}.{Layer}/` is fine (flat Monetis style).
 - **Two+ verticals** → prefer `src/backend/{Vertical}/…` so App and Admin don’t mix.
+- Test projects colocate under **`src/backend/`** (same folder as production projects).
 
 ### Inside Application (feature slices)
 
@@ -118,13 +135,13 @@ Prefer duplication until it hurts (third copy or ownership fight). Then extract 
 
 ## Tests
 
-| Project | Role |
-|---------|------|
-| `*.Tests.Unit` | Fast, no I/O |
-| `*.Tests.Integration` | Real DB/containers as needed |
-| `*.Architecture.Tests` | Dependency rule + layer rules |
+| Project | Role | Location |
+|---------|------|----------|
+| `*.Tests.Unit` | Fast, no I/O | `src/backend/` (next to production) |
+| `*.Tests.Integration` | Real DB/containers as needed | `src/backend/` |
+| `*.Architecture.Tests` | Dependency rule + layer rules | `src/backend/` |
 
-Architecture tests are required for the ports-only rule.
+Architecture tests are required for the ports-only rule. Do **not** invent a repo-root `tests/` tree for greenfield .NET.
 
 ## Build mechanics
 
@@ -146,6 +163,8 @@ Monetis **App** today still has Application → Infrastructure / Persistence ref
 - Don’t put Stripe/email ports in Domain
 - Don’t create SharedKernel on day one
 - Don’t use Application type-bucket folders (`Handlers/`, `Commands/`) as the primary layout
+- Don’t scaffold `src/` = backend-only with root `tests/` and root `web/` — use `src/backend` + `src/frontend` (+ `src/mobile` when needed)
+- Don’t put `Directory.Packages.props` / `Directory.Build.props` at repo root unless every .NET project in the monorepo should share them (unusual)
 
 ## References
 
