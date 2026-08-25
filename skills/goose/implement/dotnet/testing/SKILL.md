@@ -39,7 +39,7 @@ Ban EF **InMemory** for anything beyond throwaway smoke (**`db-integration`**). 
 | **Unit** | `*.Tests.Unit` | Domain, pure Application logic with substituted ports |
 | **Integration** | `*.Tests.Integration` | Handlers + real DB; host wiring / critical HTTP via `WebApplicationFactory` when needed |
 | **Architecture** | `*.Architecture.Tests` | Dependency rule, no forbidden references — run on CI |
-| **Mutation** | Stryker vs Unit suite | Kills weak asserts — **CI gate** on PRs (see below) |
+| **Mutation** | Stryker vs Unit suite | Kills weak asserts. Pipeline gate (or on request). Not a default local run |
 
 Prefer **DAMP** over clever shared hierarchies. Shared builders/fixtures are fine when they reduce noise without hiding the scenario.
 
@@ -62,13 +62,15 @@ Do **not** leave Integration/Mutation as “we’ll add when we have time” on 
 
 ## Mutation testing
 
-**Scope:** mutate production code covered by **`*.Tests.Unit`** (Domain **and** Application unit tests) — not Domain-only.
+**Scope:** mutate production code covered by **`*.Tests.Unit`** (Domain **and** Application unit tests). Not Domain-only.
 
-**CI:** run on PRs; **fail** below a mutation-score threshold configured in the target repo (Stryker `thresholds.break` / `--break-at`). Put config next to the Unit project (`stryker-config.json`); install the tool via `dotnet-tools.json`. Point `"solution"` at a classic **`.sln`** — Stryker does not accept `.slnx` yet. For **TUnit** (MTP-only), set `"test-runner": "mtp"` (Stryker ≥ 4.13 preview) — default VsTest finds zero tests.
+**When to run:** in the pipeline, or when a human asks. Mutation is slow. Do not run it in the local implement/verify loop by default.
+
+**CI:** run on PRs that touch that code. **Fail** below a mutation-score threshold configured in the target repo (Stryker `thresholds.break` / `--break-at`). Put config next to the Unit project (`stryker-config.json`); install the tool via `dotnet-tools.json`. Point `"solution"` at a classic **`.sln`** — Stryker does not accept `.slnx` yet. For **TUnit** (MTP-only), set `"test-runner": "mtp"` (Stryker ≥ 4.13 preview) — default VsTest finds zero tests.
 
 **Out of mutation fan-out:** Integration / Testcontainers suites (too slow/flaky for mutant runs). Integration still runs as its own PR gate (table above).
 
-Mutation is a protection layer on top of the pyramid — it does not replace Integration or Architecture tests.
+Mutation is a protection layer on top of the pyramid. It does not replace Integration or Architecture tests.
 
 ## Naming and layout (Monetis-shaped)
 
@@ -131,7 +133,8 @@ Deep audit catalogs stay in the Cursor **`dotnet-test`** plugins (`test-anti-pat
 - Don’t use production databases for tests
 - Don’t invent a second naming style next to `Should_When`
 - Don’t skip Architecture tests on CI “to go faster”
-- Don’t skip mutation on Unit just because Integration is green
+- Don’t drop the Unit mutation CI gate just because Integration is green
+- Don’t run mutation locally unless a human asks (leave it to the pipeline)
 - Don’t force 100% mock coverage of trivial code
 - Don’t point Stryker at the full Integration suite on every PR
 - Don’t sleep to “wait for” async work
