@@ -47,7 +47,7 @@ Recommend **later** on a thin POC unless they already care about deploy/abuse/op
 |---------|-------|-------------------|--------------------|
 | Health / ready | [`health-and-readiness`](../health-and-readiness/) | `/alive` + `/health` | Exposure of detailed `/health`; which dependencies |
 | Observability | [`observability`](../observability/) | OTEL + MEL | Where traces/metrics go; PII rules |
-| Rate limiting | [`rate-limiting`](../rate-limiting/) | ASP.NET rate limiter | Key (user/IP); public vs authenticated surface |
+| Rate limiting | [`rate-limiting`](../rate-limiting/) | ASP.NET rate limiter | Key (user/IP); public vs authenticated surface. Prefer **in** once the API has anonymous auth/search surfaces — cheap and often skipped until abuse. |
 
 One breath each. Do not nest how-to.
 
@@ -96,7 +96,7 @@ Assumed **in** with Goose defaults unless the user overrides:
 | Validation | [`validation`](../validation/) | FluentValidation at boundary |
 | Config / secrets | [`configuration`](../configuration/) | appsettings + env; secrets not in git |
 | API contracts | [`api-contracts`](../api-contracts/) | `/api/v1` + OpenAPI |
-| Testing | [`testing`](../testing/) | TUnit + seam tests |
+| Testing (+ CI gates) | [`testing`](../testing/) | TUnit + Unit/Architecture/Integration/Mutation **PR CI gates** (see testing “Greenfield CI gates”) |
 | Schema evolution ritual | [`migrations-and-compat`](../migrations-and-compat/) | Expand/contract when shipping schema (follows Data **in**) |
 | Code style | [`code-style`](../code-style/) | Pack conventions |
 | Async | [`async`](../async/) | Pack traps / rules |

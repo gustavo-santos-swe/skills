@@ -1,16 +1,17 @@
 ---
-description: Durable Goose prose always uses write-like-goose (commits, PRs, comments, tickets)
+description: Goose voice always uses write-like-goose (chat, questions, commits, PRs, comments, tickets)
 alwaysApply: true
 ---
 
 # Write Like Goose (always)
 
-House voice for **all durable prose** in this repo and Goose lifecycle work. Prose standard: **ASD-STE100** (Simplified Technical English) via `write-like-goose`.
+House voice for **chat, questions, and durable prose** in this repo and Goose lifecycle work. Load `write-like-goose`. Do not apply old STE word caps.
 
 ## When it applies
 
 Before emitting any of:
 
+- chat answers and grill questions
 - tickets, plans, ADRs, ship docs
 - commit subjects/bodies
 - PR titles/bodies, review comments
@@ -21,14 +22,14 @@ Before emitting any of:
 ## What to do
 
 1. **Load** [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
-2. **STE pass** → `references/ste100.md` + `references/technical-names.md` (20-word steps, 25-word descriptions, active voice).
-3. Heavy rewrite → also load `references/patterns.md` + `vocabulary.md` + `phrases-and-structures.md`.
-4. Chat-shaped answers → STE defaults + `density.md` only; full catalog optional.
+2. Answer first. Short prose with a stance. Fully answers. How-tos use numbered steps (one action each, first line is a doable action). A question states the decision, each option's consequence, and a recommendation. Do not prefix every paragraph with `→`. Do not print slot headings (`**What.**` / `**Why.**` / `**How.**`).
+3. Unclear surface or pasted rewrite → [`references/examples.md`](../../skills/goose/write-like-goose/references/examples.md).
 
 ## Do not
 
-- Skip because the change is “small” or “just a commit”
-- Stack other humanizer skills on the same pass — `write-like-goose` alone
-- Paste the full pattern catalog into this rule or into AGENTS.md — **load the skill**
+- Skip because the change is "small" or "just a commit"
+- Stack other humanizer skills on the same pass. `write-like-goose` alone
+- Count words as a law. Taste is short sentences, not a 20/25 cap
+- Paste the skill body into this rule or into AGENTS.md. **Load the skill**
 
 Shape/format for branches and commits → `git-practices`. PR open → `pr-raise`. Voice → **this skill**.

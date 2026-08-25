@@ -3,7 +3,9 @@
 | Architecture tests are required for the ports-only rule (dependency direction, no forbidden references), and run on CI | architecture-test | Pyramid / Architecture tests — `AppLayerTests`, `DomainPurityTests`, `ApplicationPurityTests` |
 | Ban EF InMemory for anything beyond throwaway smoke; ban mocking `DbSet` / EF internals | architecture-test | Stack — assembly-dependency ban on `Microsoft.EntityFrameworkCore.InMemory` in test projects |
 | `dotnet format` (or IDE equivalent) clean on CI | editorconfig | Naming and layout — IDE0055, see `code-style` skill |
-| Mutation testing runs in CI on PRs that touch Unit-tested code (Domain + Application); CI fails below the mutation-score threshold. Do not run mutation locally unless a human asks | verify | Mutation testing |
+| Mutation testing runs in CI on PRs that touch Unit-tested code (Domain + Application); CI fails below the mutation-score threshold (`thresholds.break`). TUnit projects set `test-runner: mtp` and point at a classic `.sln`. Do not run mutation locally unless a human asks | ci-gate | Mutation testing |
+| Greenfield CI includes format + unit + architecture + integration (when Data in) + mutation as PR-blocking gates | ci-gate | Greenfield CI gates |
+| `*.Tests.Integration` exists with Testcontainers when persistence is in scope; strategy documented in-repo | verify | Integration tests / Pyramid |
 | Test classes named `{Sut}Tests` or `{Feature}{Scenario}Tests`; methods `{UnitUnderTest}_Should_{Expected}_When_{Scenario}` | verify | Naming and layout |
 | Unit tests substitute ports and external boundaries — not the database | verify | Unit tests |
 | Integration tests use one documented container/scope strategy; don't point tests at a shared production/staging database | verify | Integration tests |

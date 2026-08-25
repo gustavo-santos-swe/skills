@@ -9,7 +9,7 @@ metadata:
 
 Goose handbook for **building** after planning/tickets (or a small clear change).
 
-Voice: **`write-like-goose`** (ASD-STE100).
+Voice: **`write-like-goose`**.
 
 ## When to use
 

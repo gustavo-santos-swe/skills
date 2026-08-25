@@ -45,19 +45,36 @@ Prefer **DAMP** over clever shared hierarchies. Shared builders/fixtures are fin
 
 Don’t ship I/O-heavy features with only happy-path unit tests.
 
+## Greenfield CI gates
+
+Ship these in the **first** CI workflow for a Goose .NET API (pack-owned — not optional “later”):
+
+| Gate | Required on PR? | Notes |
+|------|-----------------|-------|
+| Restore + build | Yes | |
+| `dotnet format --verify-no-changes` | Yes | **`code-style`** |
+| Unit (`*.Tests.Unit`) | Yes | |
+| Architecture (`*.Architecture.Tests`) | Yes | Ports-only / purity |
+| Integration (`*.Tests.Integration` + Testcontainers) | Yes when Data **in** | Needs Docker on the runner |
+| Mutation (Stryker vs Unit, Domain **and** Application) | Yes | Fail below repo `break` threshold |
+
+Do **not** leave Integration/Mutation as “we’ll add when we have time” on greenfield — that is how Olfeau-style gaps ship. Prefer a separate CI job for mutation (slow) that still **blocks** the PR.
+
 ## Mutation testing
 
 **Scope:** mutate production code covered by **`*.Tests.Unit`** (Domain **and** Application unit tests). Not Domain-only.
 
 **When to run:** in the pipeline, or when a human asks. Mutation is slow. Do not run it in the local implement/verify loop by default.
 
-**CI:** run on PRs that touch that code. **Fail** below a mutation-score threshold configured in the target repo (Stryker config / pipeline).
+**CI:** run on PRs that touch that code. **Fail** below a mutation-score threshold configured in the target repo (Stryker `thresholds.break` / `--break-at`). Put config next to the Unit project (`stryker-config.json`); install the tool via `dotnet-tools.json`. Point `"solution"` at a classic **`.sln`** — Stryker does not accept `.slnx` yet. For **TUnit** (MTP-only), set `"test-runner": "mtp"` (Stryker ≥ 4.13 preview) — default VsTest finds zero tests.
 
-**Out of PR gate by default:** Integration / Testcontainers suites (too slow and flaky for mutant fan-out). Optional slower lane (nightly) later if a critical path has almost no unit coverage.
+**Out of mutation fan-out:** Integration / Testcontainers suites (too slow/flaky for mutant runs). Integration still runs as its own PR gate (table above).
 
 Mutation is a protection layer on top of the pyramid. It does not replace Integration or Architecture tests.
 
 ## Naming and layout (Monetis-shaped)
+
+**On disk:** colocate `*.Tests.Unit` / `*.Tests.Integration` / `*.Architecture.Tests` under **`src/backend/`** next to production projects — not a repo-root `tests/` folder (**`solution-structure`**).
 
 **Folders:** mirror production areas under the test project (`Domain/Entities/`, `Application/CreditCards/`, …).
 
