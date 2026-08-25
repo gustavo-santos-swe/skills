@@ -25,12 +25,26 @@ Voice: **`write-like-goose`**. Target-repo `AGENTS.md` may override paths and na
 - RSC vs client choice alone → **`server-and-client`**
 - Route segment behavior alone → **`routing-and-layouts`**
 
-## Default tree
+## Monorepo placement
 
-Prefer `src/` when the repo already uses it. Otherwise keep the same root the project uses.
+When the product also has a .NET (or other) backend — Monetis / Goose default:
+
+| Surface | Path |
+|---------|------|
+| Next.js web | **`src/frontend/`** |
+| .NET API | `src/backend/` (see **`solution-structure`**) |
+| Expo / RN | `src/mobile/` when Mobile is in |
+
+Do **not** put the Next app at repo-root `web/` beside a backend-only `src/`. Inside `src/frontend/`, use the app tree below (`src/frontend/src/app/…` when the package already uses a nested `src/`).
+
+Standalone Next-only repos may keep the app at the package root; target repo wins.
+
+## Default tree (inside the Next package)
+
+Prefer a nested `src/` when the package already uses it. Otherwise keep the same root the package uses.
 
 ```
-src/
+src/                   # inside src/frontend/ (or the Next package root)
   app/                 # routes, layouts, route handlers
   components/
     ui/                # shared kit primitives (Button, Input, …)
@@ -78,6 +92,7 @@ Small apps may skip `features/` and colocate under `app/`. Do not put kit primit
 - Do not hide a new kit role only under one feature folder
 - Do not import server-only modules into client components
 - Do not invent a monorepo package for one shared button
+- Do not scaffold polyglot greenfield as root `web/` + backend-only `src/` — use `src/frontend/`
 
 ## References
 

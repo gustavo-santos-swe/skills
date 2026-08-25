@@ -72,6 +72,8 @@ Mutation is a protection layer on top of the pyramid — it does not replace Int
 
 ## Naming and layout (Monetis-shaped)
 
+**On disk:** colocate `*.Tests.Unit` / `*.Tests.Integration` / `*.Architecture.Tests` under **`src/backend/`** next to production projects — not a repo-root `tests/` folder (**`solution-structure`**).
+
 **Folders:** mirror production areas under the test project (`Domain/Entities/`, `Application/CreditCards/`, …).
 
 **Classes:** `{Sut}Tests` or `{Feature}{Scenario}Tests`  
