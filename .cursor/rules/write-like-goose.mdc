@@ -22,7 +22,7 @@ Before emitting any of:
 ## What to do
 
 1. **Load** [`skills/goose/write-like-goose/SKILL.md`](skills/goose/write-like-goose/SKILL.md) and follow it (embedded mode: final prose only).
-2. Answer first. Short prose with a stance. Fully answers. How-tos use numbered steps (one action each, first line is a doable action). A question states the decision, each option's consequence, and a recommendation. Do not prefix every paragraph with `→`. Do not print slot headings (`**What.**` / `**Why.**` / `**How.**`).
+2. Answer first, then teach the why. Shape from the job (prose, list, table, steps). How-tos: numbered steps, one action each. A question states the decision, each option's consequence, and a recommendation. A review states the risk, then asks. Do not prefix every paragraph with `→`. Do not print slot headings (`**What.**` / `**Why.**` / `**How.**`).
 3. Unclear surface or pasted rewrite → [`references/examples.md`](../../skills/goose/write-like-goose/references/examples.md).
 
 ## Do not

@@ -12,7 +12,7 @@ metadata:
 ---
 A skill exists to wrangle determinism out of a stochastic system. **Predictability** — the agent taking the same _process_ every run, not producing the same output — is the root virtue; every lever below serves it.
 
-**Prose in skill bodies** follows **`write-like-goose`**: short, active, one idea per sentence. Lists only when items are parallel. Apply after drafting. Do not let voice block a clear completion criterion.
+**Prose in skill bodies** follows **`write-like-goose`**: answer first, then teach. Shape from the job. Apply after drafting. Do not let voice block a clear completion criterion.
 
 **Bold terms** are defined in [`GLOSSARY.md`](GLOSSARY.md); look them up there for the full meaning.
 
