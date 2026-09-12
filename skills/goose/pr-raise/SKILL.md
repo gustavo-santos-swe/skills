@@ -37,7 +37,7 @@ Keep short - **code speaks; prose orients**. Details: [`references/pr-body.md`](
 
 | Section | Job |
 |---------|-----|
-| **Briefing** | 1-3 sentences: what + why. Voice: **`write-like-goose`** (answer first, prose) |
+| **Briefing** | 1-3 sentences: what + why. Voice: **`write-like-goose`** (answer first, then teach) |
 | **References** | Ticket / issue / ADR links |
 | **Changes** | Short human bullets; screenshots for UI if needed |
 | **Notes** | Env, flags, migrations, rollout - omit if empty |

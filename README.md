@@ -54,7 +54,7 @@ ask
   → git-practices → pr-raise → pr-review (verify + other axes) ⇄ pr-iterate
 ```
 
-- **Always-on voice:** **write-like-goose** (answer-first prose, fully answers) for chat, questions, tickets, plans, commits, PRs, review comments, code comments, and skill bodies (see [`AGENTS.md`](AGENTS.md)).
+- **Always-on voice:** **write-like-goose** (answer first, then teach; shape from the job) for chat, questions, tickets, plans, commits, PRs, review comments, code comments, and skill bodies (see [`AGENTS.md`](AGENTS.md)).
 - **Stack packs** (under `implement/`): load the whole pack for the stack you are touching: `database`, `dotnet`, `react-native` (stubs), `frontend` (partial: structure + styling filled).
 - **Never merge to main** from the agent; humans merge.
 
@@ -109,7 +109,7 @@ Each `SKILL.md` has `metadata.area` matching its folder.
 | [`pr-raise`](skills/goose/pr-raise/) | Open PR (never merge) |
 | [`pr-review`](skills/goose/pr-review/) | Review open PR |
 | [`pr-iterate`](skills/goose/pr-iterate/) | Author feedback loop |
-| [`write-like-goose`](skills/goose/write-like-goose/) | House voice (answer-first prose) |
+| [`write-like-goose`](skills/goose/write-like-goose/) | House voice (answer first, then teach) |
 | [`codebase-design`](skills/goose/codebase-design/) | Deep-module vocabulary |
 
 ### meta
