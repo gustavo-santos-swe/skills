@@ -70,6 +70,8 @@ public async Task Application_Should_NotReference_Infrastructure()
 
 Point Stryker at Domain / Application projects exercised by `*.Tests.Unit`. Set `thresholds.break` (or `--break-at`) to the repo’s minimum score in CI so PRs fail when too many mutants survive.
 
+Run in the pipeline, or when a human asks. Do not run mutation in the default local verify loop. It is slow.
+
 ```bash
 dotnet tool restore
 dotnet tool run dotnet-stryker --config-file stryker-config.json

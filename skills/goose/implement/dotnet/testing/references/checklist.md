@@ -3,7 +3,7 @@
 | Architecture tests are required for the ports-only rule (dependency direction, no forbidden references), and run on CI | architecture-test | Pyramid / Architecture tests — `AppLayerTests`, `DomainPurityTests`, `ApplicationPurityTests` |
 | Ban EF InMemory for anything beyond throwaway smoke; ban mocking `DbSet` / EF internals | architecture-test | Stack — assembly-dependency ban on `Microsoft.EntityFrameworkCore.InMemory` in test projects |
 | `dotnet format` (or IDE equivalent) clean on CI | editorconfig | Naming and layout — IDE0055, see `code-style` skill |
-| Mutation testing runs on PRs (Domain + Application via Unit suite); CI fails below the configured mutation-score threshold (`thresholds.break`); TUnit projects set `test-runner: mtp` and point at a classic `.sln` | ci-gate | Mutation testing / Greenfield CI gates |
+| Mutation testing runs in CI on PRs that touch Unit-tested code (Domain + Application); CI fails below the mutation-score threshold (`thresholds.break`). TUnit projects set `test-runner: mtp` and point at a classic `.sln`. Do not run mutation locally unless a human asks | ci-gate | Mutation testing |
 | Greenfield CI includes format + unit + architecture + integration (when Data in) + mutation as PR-blocking gates | ci-gate | Greenfield CI gates |
 | `*.Tests.Integration` exists with Testcontainers when persistence is in scope; strategy documented in-repo | verify | Integration tests / Pyramid |
 | Test classes named `{Sut}Tests` or `{Feature}{Scenario}Tests`; methods `{UnitUnderTest}_Should_{Expected}_When_{Scenario}` | verify | Naming and layout |
@@ -14,5 +14,6 @@
 | Assert the observable outcome that would fail if broken — no assert-less or tautological asserts | verify | Quality traps |
 | Don't invent a second naming style next to `Should_When` | verify | Don't |
 | Don't skip Architecture tests on CI "to go faster" | verify | Don't |
-| Don't skip mutation on Unit just because Integration is green | verify | Don't |
+| Don't drop the Unit mutation CI gate just because Integration is green | verify | Don't |
+| Don't run mutation locally unless a human asks (leave it to the pipeline) | verify | Don't |
 | Don't let wall-clock time make tests flake | verify | Don't |
