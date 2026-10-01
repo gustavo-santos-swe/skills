@@ -2,7 +2,7 @@
 
 Central repository for [Agent Skills](https://agentskills.io/) — playbooks that teach the agent how to run specific tasks.
 
-Install via the Claude Code or Cursor plugin marketplaces below, or clone the repo and point your agent at `skills/`.
+Install via the Claude Code or Cursor plugin marketplaces or the OpenCode plugin below, or clone the repo and point your agent at `skills/`.
 
 ## Claude Code plugin marketplace
 
@@ -22,6 +22,21 @@ Manifest: [`.cursor-plugin/marketplace.json`](.cursor-plugin/marketplace.json).
 **Team / Enterprise:** Dashboard → Plugins → Team Marketplaces → Add Marketplace → Import from Repo → `https://github.com/gustavo-santos-swe/skills`. Then install **gustavo-santos-skills**.
 
 **Local (no Team plan):** symlink/copy to `~/.cursor/plugins/local/gustavo-santos-skills`, then Reload Window.
+
+## OpenCode plugin
+
+Entry: [`.opencode/plugins/gustavo-santos-skills.js`](.opencode/plugins/gustavo-santos-skills.js). It adds this repo's `skills/` folder to OpenCode's skill paths, so every skill loads with no copying.
+
+Add it to `opencode.json` (project) or `~/.config/opencode/opencode.json` (global):
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["gustavo-santos-skills@git+https://github.com/gustavo-santos-swe/skills.git"]
+}
+```
+
+Restart OpenCode. To pin a release, append a tag: `...skills.git#v1.1.0`.
 
 ---
 
