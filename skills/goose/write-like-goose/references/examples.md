@@ -228,6 +228,29 @@ Put that whole ask in the harness question form when the choice is real.
 
 > If the process dies after `SaveChanges`, the payment exists and the outbox does not. Want to move the insert into the same transaction?
 
+## Review reply (author side)
+
+Reviewer: "A caller who sends `ChannelAddress=` gets every channel released, not the 400 the doc promises. Query binding turns the empty string into null."
+
+**Before (status report):**
+
+> Confirmed. `?ChannelAddress=` bound to null and released the whole tier. Fixed in b3256d73.
+>
+> - `DisplayFormat(ConvertEmptyStringToNull = false)` on the V2 property.
+> - Spec `Release_Should_Return400_When_ChannelAddressIsBlank` sends `ChannelAddress=`.
+
+**Before (praise opener):**
+
+> Good catch, you're right! Thanks for checking binding rather than the validator.
+
+**After:**
+
+> The empty string was turning into null during binding, so the validator never saw it and the request fell into the release-everything path. I added `DisplayFormat(ConvertEmptyStringToNull = false)` to the property so a blank reaches the validator and gets a 400, and there's a behavioral test hitting the endpoint with `ChannelAddress=` now.
+>
+> ChannelAddress was also never meant to work for phone, that was a mistake on my side. The validator rejects it now when Email isn't in the request and the phone strategy doesn't look at it anymore.
+
+Agreement is in the fix. The SHA is in the commit list. A test name earns its place only when it helps the reviewer check.
+
 ## Code comment
 
 **Before (chat format leaked):**

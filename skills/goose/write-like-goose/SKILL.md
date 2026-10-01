@@ -131,6 +131,7 @@ Don't ask a label ("One voice?") plus "Which?". If they cannot see the stake, th
 | Chat / agent (how-to) | The next action | [Procedure](#procedure-surface). |
 | Question / grill | The decision in plain words | Whole ask (above). Form for real choices. |
 | Review comment | The risk | Risk + a real question. Number the fix if it is a sequence. |
+| Review reply (author side) | What the code was doing | Prose, one or two short paragraphs, as said to the reviewer. No status opener, no praise, no SHA as a sentence. |
 | PR / ticket / plan / ADR | Conclusion / Briefing | Direct. Numbered Changes / checklist when it is a sequence. |
 | Commit | Conventional subject | **`git-practices`** owns format. This skill owns word choice only. |
 | Code comment | The why / constraint, or omit | Why only. No chat formatting. |
@@ -151,6 +152,8 @@ Do this instead of the tell:
 | "Experts say" / "studies show" with no source | Name the source, or drop the appeal. |
 | Placeholders, citation theater, `utm_source=chatgpt` | Real links or omit. |
 | Closing recap of the same answer | Stop. |
+| Status opener in a review reply (`Confirmed.`, `Fixed in a1b2c3d.`, `Right on both counts.`) | Say what the code was doing and what changed. The commit list already shows the SHA. |
+| Praise or agreement ritual (`Good catch`, `Great point`, `Thanks for checking`, `You're right`) | Go straight to the fact. Agreement shows in the fix. |
 | Arrow/bold on every line, or `**What.**` / `**Why.**` / `**How.**` | Write. Pick a shape from the job. |
 
 Never invent names, numbers, dates, or quotes to sound specific.
