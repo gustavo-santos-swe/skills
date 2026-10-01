@@ -28,7 +28,7 @@ Voice: **`write-like-goose`**.
 1. **Triage before code.** Read every open thread. No edits until each item is **apply** / **ask** / **decline**. If anything is unclear, clarify those items before implementing the rest.
 2. **Dirty tree until local review.** Same rule as **implement**: apply the agreed batch uncommitted → pause for engineer look → only then commit, push, reply, re-request.
 3. **Size split for coding.** Small/mechanical fixes stay here. Larger than ~one vertical slice or new product behaviour → hand the named batch to **implement**, then return here for push/replies.
-4. **Technical replies only.** Restate, fix, or reasoned decline - no performative agreement (“great point”, thanks, “you’re right”).
+4. **Technical replies only.** What was happening, what changed, or the reason for not changing. No praise, no agreement ritual, no status opener. Shape in [Reply shape](#reply-shape).
 5. **Human merges.** Re-request review; do not merge the PR from this skill.
 
 ## Steps
@@ -91,25 +91,27 @@ Back to **pr-review** (or human merge when approved). If new comments arrive, ru
 
 ## Reply shape
 
-Keep short. Same facts in chat and on GitHub.
+Write the reply the way you would say it to the reviewer at your desk. Prose, one or two short paragraphs. Same facts in chat and on GitHub.
+
+Open with what was actually happening in the code, in plain words. Then what you changed and why that closes it. Name a test or a file when it helps the reviewer verify, not as proof of work. GitHub already shows the commits, so a SHA is not a sentence.
 
 **Applied:**
 
-```text
-Fixed: <what>. <path or test name if useful>.
-```
+> The empty string was turning into null during binding, so the validator never saw it and the request fell into the release-everything path. I added `DisplayFormat(ConvertEmptyStringToNull = false)` to the property so a blank reaches the validator and gets a 400. There's a behavioral test hitting the endpoint with `ChannelAddress=` now.
 
 **Declined:**
 
-```text
-Not applying: <reason for this codebase>. <alternative if any>.
-```
+> I'd keep the retry on the worker. The webhook is already idempotent on `providerPaymentId`, and a webhook retry can capture twice when the provider marked it paid in between. If you'd rather have it on the webhook, I can add the unique index first.
 
 **Ask:**
 
-```text
-Need clarify before changing: <question>.
-```
+> Before I change this: do you want blank and omitted to mean the same thing here? Today omitted releases every email channel on the tier. If blank should do that too, the validator rule goes away and the docs change.
+
+**Partly open:**
+
+> Fixed the DELETE side: the detaching tier unlinks its own sub-account and it goes into retention when that was its last channel. What I couldn't solve here is the teardown, since the cron works off channels and this sub-account has none. That needs a sub-account sweep.
+
+Not in a reply: status openers (`Confirmed.`, `Fixed.`, `Right on both counts.`), praise (`good catch`, `great point`, `thanks for checking`), agreement rituals (`you're right`), bullets, a SHA as the subject of a sentence. Agreement shows in the fix.
 
 When you push the apply set, reply on declined threads too so nothing stays silent.
 

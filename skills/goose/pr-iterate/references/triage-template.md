@@ -24,13 +24,15 @@ Wait for engineer confirmation before editing.
 2. Reply on threads  
 3. Re-request review  
 
-## Reply one-liners
+## Replies
 
-| Plan | Reply |
-|------|--------|
-| apply | `Fixed: <what>. <where>.` |
-| decline | `Not applying: <technical reason>.` |
-| ask | `Need clarify before changing: <question>.` |
-| already done | `Already covered by <path/commit> - no further change.` |
+One or two short paragraphs each, written as you'd say it to the reviewer. What was happening in the code, then what changed (or why not). Examples in the skill's [Reply shape](../SKILL.md#reply-shape).
 
-No thanks, no “great point”, no “you’re right.”
+| Plan | First sentence carries |
+|------|------------------------|
+| apply | what the code was doing wrong |
+| decline | the reason it stays, for this codebase |
+| ask | the decision the reviewer has to make, with the stake |
+| already done | where it is already covered |
+
+No `Fixed:` / `Confirmed.` openers, no SHA as a sentence, no praise, no bullets.
